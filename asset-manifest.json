@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/btccalculator-src/static/css/main.d667d41b.chunk.css",
-    "main.js": "/btccalculator-src/static/js/main.6dfcc52d.chunk.js",
-    "main.js.map": "/btccalculator-src/static/js/main.6dfcc52d.chunk.js.map",
-    "runtime-main.js": "/btccalculator-src/static/js/runtime-main.703d53b7.js",
-    "runtime-main.js.map": "/btccalculator-src/static/js/runtime-main.703d53b7.js.map",
-    "static/js/2.cde061cb.chunk.js": "/btccalculator-src/static/js/2.cde061cb.chunk.js",
-    "static/js/2.cde061cb.chunk.js.map": "/btccalculator-src/static/js/2.cde061cb.chunk.js.map",
-    "static/js/3.1cb6f3aa.chunk.js": "/btccalculator-src/static/js/3.1cb6f3aa.chunk.js",
-    "static/js/3.1cb6f3aa.chunk.js.map": "/btccalculator-src/static/js/3.1cb6f3aa.chunk.js.map",
-    "index.html": "/btccalculator-src/index.html",
-    "static/css/main.d667d41b.chunk.css.map": "/btccalculator-src/static/css/main.d667d41b.chunk.css.map",
-    "static/js/2.cde061cb.chunk.js.LICENSE.txt": "/btccalculator-src/static/js/2.cde061cb.chunk.js.LICENSE.txt",
-    "static/media/general.scss": "/btccalculator-src/static/media/texgyreadventor-regular.d0110fa5.otf"
+    "main.css": "/cryptoCalculatorBuild/static/css/main.0f4cfd49.chunk.css",
+    "main.js": "/cryptoCalculatorBuild/static/js/main.6dfcc52d.chunk.js",
+    "main.js.map": "/cryptoCalculatorBuild/static/js/main.6dfcc52d.chunk.js.map",
+    "runtime-main.js": "/cryptoCalculatorBuild/static/js/runtime-main.2748060f.js",
+    "runtime-main.js.map": "/cryptoCalculatorBuild/static/js/runtime-main.2748060f.js.map",
+    "static/js/2.cde061cb.chunk.js": "/cryptoCalculatorBuild/static/js/2.cde061cb.chunk.js",
+    "static/js/2.cde061cb.chunk.js.map": "/cryptoCalculatorBuild/static/js/2.cde061cb.chunk.js.map",
+    "static/js/3.1cb6f3aa.chunk.js": "/cryptoCalculatorBuild/static/js/3.1cb6f3aa.chunk.js",
+    "static/js/3.1cb6f3aa.chunk.js.map": "/cryptoCalculatorBuild/static/js/3.1cb6f3aa.chunk.js.map",
+    "index.html": "/cryptoCalculatorBuild/index.html",
+    "static/css/main.0f4cfd49.chunk.css.map": "/cryptoCalculatorBuild/static/css/main.0f4cfd49.chunk.css.map",
+    "static/js/2.cde061cb.chunk.js.LICENSE.txt": "/cryptoCalculatorBuild/static/js/2.cde061cb.chunk.js.LICENSE.txt",
+    "static/media/general.scss": "/cryptoCalculatorBuild/static/media/texgyreadventor-regular.d0110fa5.otf"
   },
   "entrypoints": [
-    "static/js/runtime-main.703d53b7.js",
+    "static/js/runtime-main.2748060f.js",
     "static/js/2.cde061cb.chunk.js",
-    "static/css/main.d667d41b.chunk.css",
+    "static/css/main.0f4cfd49.chunk.css",
     "static/js/main.6dfcc52d.chunk.js"
   ]
 }
