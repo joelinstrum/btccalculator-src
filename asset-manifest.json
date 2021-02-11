@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/btccalculator-src/static/css/main.d667d41b.chunk.css",
-    "main.js": "/btccalculator-src/static/js/main.6f4dd468.chunk.js",
-    "main.js.map": "/btccalculator-src/static/js/main.6f4dd468.chunk.js.map",
+    "main.css": "/btccalculator-src/static/css/main.ed9c863b.chunk.css",
+    "main.js": "/btccalculator-src/static/js/main.852582b9.chunk.js",
+    "main.js.map": "/btccalculator-src/static/js/main.852582b9.chunk.js.map",
     "runtime-main.js": "/btccalculator-src/static/js/runtime-main.703d53b7.js",
     "runtime-main.js.map": "/btccalculator-src/static/js/runtime-main.703d53b7.js.map",
     "static/js/2.cde061cb.chunk.js": "/btccalculator-src/static/js/2.cde061cb.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.1cb6f3aa.chunk.js": "/btccalculator-src/static/js/3.1cb6f3aa.chunk.js",
     "static/js/3.1cb6f3aa.chunk.js.map": "/btccalculator-src/static/js/3.1cb6f3aa.chunk.js.map",
     "index.html": "/btccalculator-src/index.html",
-    "static/css/main.d667d41b.chunk.css.map": "/btccalculator-src/static/css/main.d667d41b.chunk.css.map",
+    "static/css/main.ed9c863b.chunk.css.map": "/btccalculator-src/static/css/main.ed9c863b.chunk.css.map",
     "static/js/2.cde061cb.chunk.js.LICENSE.txt": "/btccalculator-src/static/js/2.cde061cb.chunk.js.LICENSE.txt",
     "static/media/general.scss": "/btccalculator-src/static/media/texgyreadventor-regular.d0110fa5.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.703d53b7.js",
     "static/js/2.cde061cb.chunk.js",
-    "static/css/main.d667d41b.chunk.css",
-    "static/js/main.6f4dd468.chunk.js"
+    "static/css/main.ed9c863b.chunk.css",
+    "static/js/main.852582b9.chunk.js"
   ]
 }
