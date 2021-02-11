@@ -80,7 +80,7 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
 
       <div className="flex-row div-spacing-10">
           <div className="left-label">Crypto: </div>
-          <div>
+          <div className="input-container">
             <input 
               type="text" 
               placeholder="optional"
@@ -92,7 +92,7 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
         
         <div className="flex-row div-spacing-10">
           <div className="left-label">Current price: </div>
-          <div className="input-container">
+          <div className="input-container-with-dropdown">
             <input 
               type="text" 
               placeholder="cost per coin" 
@@ -108,7 +108,7 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
 
         <div className="flex-row div-spacing-10">
           <div className="left-label">Total Investment: </div>
-          <div>
+          <div className="input-container">
             <input 
               type="text" 
               placeholder="ie 25000"
@@ -119,7 +119,7 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
 
         <div className="flex-row div-spacing-10">
           <div className="left-label">Expected future price/coin: </div>
-          <div>
+          <div className="input-container">
             <input 
               type="text" 
               placeholder="ie 10000" 

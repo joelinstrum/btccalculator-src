@@ -26,9 +26,11 @@ const Home = () => {
                                                   closeClick={closeClick} 
                                                 />)
             }
+            <div class="button-container">
             <button onClick={ () => {
               setChildCalculators(childCalculators => [...childCalculators, {id:childCalculators.length }])
             }}>Compare +</button>
+            </div>
           </div>)
 }
 
