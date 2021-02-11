@@ -1,10 +1,14 @@
-import React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CryptoCalculator } from '../../components/elements/CryptoCalculator';
 
 const initialCalculatorList = [];
 
 const Home = () => {
   const [childCalculators, setChildCalculators] = useState(initialCalculatorList);
+
+  useEffect( () => {
+    document.title = "Crypto Calculator ROI"
+  });
 
   const closeClick = (id) => {
     const filtered = childCalculators.filter( item => item.id !== id);
