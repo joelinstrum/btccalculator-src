@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/joelinstrum/cryptoCalculatorBuild.git/static/css/main.ef4057b2.chunk.css",
-    "main.js": "/joelinstrum/cryptoCalculatorBuild.git/static/js/main.6dfcc52d.chunk.js",
-    "main.js.map": "/joelinstrum/cryptoCalculatorBuild.git/static/js/main.6dfcc52d.chunk.js.map",
-    "runtime-main.js": "/joelinstrum/cryptoCalculatorBuild.git/static/js/runtime-main.ac27f352.js",
-    "runtime-main.js.map": "/joelinstrum/cryptoCalculatorBuild.git/static/js/runtime-main.ac27f352.js.map",
-    "static/js/2.cde061cb.chunk.js": "/joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js",
-    "static/js/2.cde061cb.chunk.js.map": "/joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js.map",
-    "static/js/3.1cb6f3aa.chunk.js": "/joelinstrum/cryptoCalculatorBuild.git/static/js/3.1cb6f3aa.chunk.js",
-    "static/js/3.1cb6f3aa.chunk.js.map": "/joelinstrum/cryptoCalculatorBuild.git/static/js/3.1cb6f3aa.chunk.js.map",
-    "index.html": "/joelinstrum/cryptoCalculatorBuild.git/index.html",
-    "static/css/main.ef4057b2.chunk.css.map": "/joelinstrum/cryptoCalculatorBuild.git/static/css/main.ef4057b2.chunk.css.map",
-    "static/js/2.cde061cb.chunk.js.LICENSE.txt": "/joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js.LICENSE.txt",
-    "static/media/general.scss": "/joelinstrum/cryptoCalculatorBuild.git/static/media/texgyreadventor-regular.d0110fa5.otf"
+    "main.css": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/css/main.dc671e43.chunk.css",
+    "main.js": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/main.6dfcc52d.chunk.js",
+    "main.js.map": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/main.6dfcc52d.chunk.js.map",
+    "runtime-main.js": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/runtime-main.3c250d50.js",
+    "runtime-main.js.map": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/runtime-main.3c250d50.js.map",
+    "static/js/2.cde061cb.chunk.js": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js",
+    "static/js/2.cde061cb.chunk.js.map": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js.map",
+    "static/js/3.1cb6f3aa.chunk.js": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/3.1cb6f3aa.chunk.js",
+    "static/js/3.1cb6f3aa.chunk.js.map": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/3.1cb6f3aa.chunk.js.map",
+    "index.html": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/index.html",
+    "static/css/main.dc671e43.chunk.css.map": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/css/main.dc671e43.chunk.css.map",
+    "static/js/2.cde061cb.chunk.js.LICENSE.txt": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/js/2.cde061cb.chunk.js.LICENSE.txt",
+    "static/media/general.scss": "/git@github.com:joelinstrum/cryptoCalculatorBuild.git/static/media/texgyreadventor-regular.d0110fa5.otf"
   },
   "entrypoints": [
-    "static/js/runtime-main.ac27f352.js",
+    "static/js/runtime-main.3c250d50.js",
     "static/js/2.cde061cb.chunk.js",
-    "static/css/main.ef4057b2.chunk.css",
+    "static/css/main.dc671e43.chunk.css",
     "static/js/main.6dfcc52d.chunk.js"
   ]
 }
