@@ -1,6 +1,6 @@
 {
   "name": "btccaclulator",
-  "homepage": "https://joelinstrum.github.io/btccalculator-src/",
+  "homepage": "https://joelinstrum.github.io/btccalculator-src",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
