@@ -131,6 +131,9 @@ a {
   display: flex;
   position: relative;
   z-index: 100;
+  & input {
+    width: 175px;
+  }
 }
 
 .arrow-container {

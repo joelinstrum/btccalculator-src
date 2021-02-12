@@ -12,7 +12,7 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
   const [formattedReturn, setFormattedReturn] = useState();
   const [formattedProfit, setFormattedProfit] = useState();
   const [showDropdown, setDropdown] = useState();
-  const [crypto, setCrypto] = useState('Crypto');
+  const [crypto, setCrypto] = useState('');
 
   useEffect( () => {
     let n;
@@ -80,29 +80,30 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
 
       <div className="flex-row div-spacing-10">
           <div className="left-label">Crypto: </div>
-          <div className="input-container">
+          <div className="input-container-with-dropdown">
             <input 
               type="text" 
-              placeholder="optional"
+              placeholder="Choose cryptocurrency"
               onChange={ e => setCrypto(e.target.value)}
               value={crypto}
             />
+            <div className="arrow-container" onClick={ () => setDropdown(!showDropdown)}>
+              <span>&#9662;</span>
+            </div>
+            { showDropdown && <CryptoList click={ onClickCurrent }/> }
           </div>
         </div>
         
         <div className="flex-row div-spacing-10">
           <div className="left-label">Current price: </div>
-          <div className="input-container-with-dropdown">
+          <div className="input-container">
             <input 
               type="text" 
               placeholder="cost per coin" 
               onChange={ e => setCostPerCoin(e.target.value)}  
               value={ costPerCoin }
             />
-            <div className="arrow-container" onClick={ () => setDropdown(!showDropdown)}>
-              <span>&#9662;</span>
-            </div>
-            { showDropdown && <CryptoList click={ onClickCurrent }/> }
+            
           </div>
         </div>
 
