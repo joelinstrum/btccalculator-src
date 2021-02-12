@@ -13,6 +13,17 @@ body {
   color: $body-font-color;  
 }
 
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link-light {
+  color: $link-color;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -141,6 +152,13 @@ body {
   }
 }
 
+.blurb {
+  width: 800px;
+  font-size: 14px;
+  margin-left:25px;
+  margin-top: 50px;
+}
+
 .dropdown-list {
   position: absolute;
   top: 100%;
@@ -200,7 +218,7 @@ body {
   .flex-row {
     flex-direction: column;
     display: flex;
-    border: 1px solid seageen;
+    width: 100%;
   }
   .left-label {
     width: 100%;
@@ -257,5 +275,12 @@ body {
     font-size: 20px;
     height: 40px;
     margin-bottom: 40px;
+  }
+  .blurb {
+    width: 100%;
+    margin-top: 15px;
+  }
+  .card-container {
+    width: 100%;
   }
 }
