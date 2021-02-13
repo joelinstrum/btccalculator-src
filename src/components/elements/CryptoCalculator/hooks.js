@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 
+export function useSetInvestment(investment) {
+  const [totalInvestment, setTotalInvestment] = useState(investment);
+  useEffect(() => {
+    setTotalInvestment(totalInvestment);
+  }, [totalInvestment]);
+  return [totalInvestment, setTotalInvestment];
+}
+
 export function useCoinUpdate(costPerCoin, totalInvestment) {
   const [numberOfCoins, setNumberOfCoins] = useState(0);
 
@@ -12,6 +20,8 @@ export function useCoinUpdate(costPerCoin, totalInvestment) {
           costPerCoinStr.replace(/[^0-9.]/g, "")
       ).toFixed(6);
       setNumberOfCoins(n);
+    } else {
+      setNumberOfCoins(0);
     }
   }, [costPerCoin, totalInvestment]);
   return numberOfCoins;
@@ -68,6 +78,8 @@ export function useSetFormattedProfit(totalReturn, profit) {
           currency: "USD",
         }).format(totalReturn.replace(/[^0-9.]/, ""))
       );
+    } else {
+      setFormattedReturn(0);
     }
     if (profit) {
       let formatted = new Intl.NumberFormat("en-US", {
@@ -79,6 +91,8 @@ export function useSetFormattedProfit(totalReturn, profit) {
       } else {
         setFormattedProfit(`${formatted}`);
       }
+    } else {
+      setFormattedProfit(0);
     }
   }, [totalReturn, profit]);
   return [formattedProfit, formattedReturn];

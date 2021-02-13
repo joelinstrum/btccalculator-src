@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
+  useSetInvestment,
   useCoinUpdate,
   useTotalReturn,
   useSetProfit,
@@ -8,10 +9,11 @@ import {
 
 import CryptoInput from "./inputs/CryptoInput";
 import ValueInput from "./inputs/ValueInput";
+import Roi from "./Roi";
 
 const CryptoCalculator = ({ closeable, id, closeClick }) => {
   const [costPerCoin, setCostPerCoin] = useState(0);
-  const [totalInvestment, setTotalInvestment] = useState(0);
+  const [totalInvestment, setTotalInvestment] = useSetInvestment(0);
   const [futureCost, setFutureCost] = useState(0);
   const [crypto, setCrypto] = useState("");
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
@@ -69,30 +71,13 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
         />
       </div>
 
-      <div className="card-container card-2">
-        <div>
-          <span className="title-medium-label">ROI:&nbsp;</span>
-          <span className="title-medium-value">{crypto}</span>
-        </div>
-        <div>
-          Number of coins:{" "}
-          <span className="span-100 result-1">
-            {numberOfCoins && parseFloat(numberOfCoins).toFixed(2)}
-          </span>
-        </div>
-        <div>
-          Total Return:{" "}
-          <span className="span-100 result-1">
-            {totalReturn && `${formattedReturn}`}
-          </span>
-        </div>
-        <div>
-          Profit:{" "}
-          <span className="span-100 result-2">
-            {profit && `${formattedProfit}`}
-          </span>
-        </div>
-      </div>
+      <Roi
+        crypto={crypto}
+        numberOfCoins={numberOfCoins}
+        formattedProfit={formattedProfit}
+        formattedReturn={formattedReturn}
+        profit={profit}
+      />
     </div>
   );
 };
