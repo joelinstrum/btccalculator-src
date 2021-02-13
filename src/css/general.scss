@@ -61,7 +61,8 @@ a {
 .card-container {
   border-radius: 5px;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0px 25px 5px;
+  width: 100%;
 
   &--title {
     font-size: 24px;
@@ -71,7 +72,8 @@ a {
 }
 
 .heading-container {
-  padding-top:5px;
+  padding-top:10px;
+  padding-left:0;
   color: $heading-color;
   width: 50%;
   display: flex;
@@ -97,6 +99,7 @@ a {
   color: $large-title-color;
   font-family: texBold;
   font-size: 24px;
+  margin-left: 5px;
 }
 
 .title-medium-label {
@@ -130,9 +133,16 @@ a {
 }
 
 .left-label {
-  width: 300px;
+  width: 250px;
   display: flex;
   justify-content: flex-end;
+}
+
+.input-container {
+  width: 200px;
+  input {
+    width: 190px;
+  }
 }
 
 .input-container-with-dropdown {
@@ -140,7 +150,7 @@ a {
   position: relative;
   z-index: 100;
   & input {
-    width: 175px;
+    width: 165px;
   }
 }
 

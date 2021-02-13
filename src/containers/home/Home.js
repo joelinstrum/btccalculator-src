@@ -33,7 +33,7 @@ const Home = () => {
           closeClick={closeClick}
         />
       ))}
-      <div class="button-container">
+      <div className="button-container">
         <button
           onClick={() => {
             setChildCalculators((childCalculators) => [

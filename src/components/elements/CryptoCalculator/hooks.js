@@ -1,0 +1,85 @@
+import { useState, useEffect } from "react";
+
+export function useCoinUpdate(costPerCoin, totalInvestment) {
+  const [numberOfCoins, setNumberOfCoins] = useState(0);
+
+  useEffect(() => {
+    let n;
+    if (costPerCoin && totalInvestment) {
+      let costPerCoinStr = costPerCoin.toString();
+      n = parseFloat(
+        totalInvestment.replace(/[^0-9.]/g, "") /
+          costPerCoinStr.replace(/[^0-9.]/g, "")
+      ).toFixed(6);
+      setNumberOfCoins(n);
+    }
+  }, [costPerCoin, totalInvestment]);
+  return numberOfCoins;
+}
+
+export function useTotalReturn(
+  costPerCoin,
+  totalInvestment,
+  futureCost,
+  numberOfCoins
+) {
+  const [totalReturn, setTotalReturn] = useState(0);
+  useEffect(() => {
+    if (costPerCoin && totalInvestment && futureCost && numberOfCoins) {
+      const returnValue = parseFloat(
+        numberOfCoins.replace(/[^0-9.]/, "") *
+          futureCost.replace(/[^0-9.]/g, "")
+      ).toFixed(2);
+      setTotalReturn(returnValue);
+    } else if (costPerCoin && totalInvestment) {
+      setTotalReturn(totalInvestment.replace(/[^0-9.]/g, ""));
+    } else {
+      setTotalReturn(0);
+    }
+  }, [costPerCoin, totalInvestment, futureCost, numberOfCoins]);
+  return totalReturn;
+}
+
+export function useSetProfit(totalReturn, totalInvestment, futureCost) {
+  const [profit, setProfit] = useState(0);
+  useEffect(() => {
+    if (futureCost && totalInvestment && totalReturn) {
+      const returnValue = parseFloat(
+        totalReturn.replace(/[^0-9.]/g, "") -
+          totalInvestment.replace(/[^0-9.]/g, "")
+      ).toFixed(2);
+      setProfit(returnValue);
+    } else {
+      setProfit(0);
+    }
+  }, [totalReturn, totalInvestment, futureCost]);
+  return profit;
+}
+
+export function useSetFormattedProfit(totalReturn, profit) {
+  const [formattedProfit, setFormattedProfit] = useState(0);
+  const [formattedReturn, setFormattedReturn] = useState(0);
+
+  useEffect(() => {
+    if (totalReturn) {
+      setFormattedReturn(
+        new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(totalReturn.replace(/[^0-9.]/, ""))
+      );
+    }
+    if (profit) {
+      let formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(profit.replace(/[^0-9.-]/, ""));
+      if (profit < 0) {
+        setFormattedProfit(`-${formatted.replace(/-/, "")}`);
+      } else {
+        setFormattedProfit(`${formatted}`);
+      }
+    }
+  }, [totalReturn, profit]);
+  return [formattedProfit, formattedReturn];
+}
