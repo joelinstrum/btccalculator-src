@@ -27,6 +27,7 @@ const CryptoList = ({ click }) => {
         </li>
         <li onClick={() => click(ltc, "Litecoin", "ltc")}>Litecoin: {ltc}</li>
         <li onClick={() => click(bnb, "Binance", "bnb")}>Binance: {bnb}</li>
+        <li onClick={() => click(null, "Custom")}>Custom</li>
       </ul>
     </div>
   );

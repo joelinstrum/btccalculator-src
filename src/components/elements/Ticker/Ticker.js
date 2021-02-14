@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { AppContext } from "../";
 
 export default () => {
+  console.log("Update");
   const [eth, setETH] = useState("...");
   const [btc, setBTC] = useState("...");
   const [bch, setBCH] = useState("...");
