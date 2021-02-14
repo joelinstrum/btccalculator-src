@@ -10,7 +10,6 @@ const CryptoList = ({ click }) => {
   const [ticker] = useContext(AppContext);
 
   useEffect(() => {
-    console.log(ticker);
     setETH(ticker.eth);
     setBTC(ticker.btc);
     setBCH(ticker.bch);
@@ -21,11 +20,13 @@ const CryptoList = ({ click }) => {
   return (
     <div className="dropdown-list">
       <ul>
-        <li onClick={() => click(btc, "Bitcoin")}>Bitcoin: {btc}</li>
-        <li onClick={() => click(eth, "Ethereum")}>Ethereum: {eth}</li>
-        <li onClick={() => click(bch, "Bitcoin Cash")}>Bitcoin cash: {bch}</li>
-        <li onClick={() => click(ltc, "Litecoin")}>Litecoin: {ltc}</li>
-        <li onClick={() => click(bnb, "Binance")}>Binance: {bnb}</li>
+        <li onClick={() => click(btc, "Bitcoin", "btc")}>Bitcoin: {btc}</li>
+        <li onClick={() => click(eth, "Ethereum", "eth")}>Ethereum: {eth}</li>
+        <li onClick={() => click(bch, "Bitcoin Cash", "bch")}>
+          Bitcoin cash: {bch}
+        </li>
+        <li onClick={() => click(ltc, "Litecoin", "ltc")}>Litecoin: {ltc}</li>
+        <li onClick={() => click(bnb, "Binance", "bnb")}>Binance: {bnb}</li>
       </ul>
     </div>
   );

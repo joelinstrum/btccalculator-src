@@ -13,7 +13,6 @@ export default () => {
   const countRef = useRef(count);
 
   useEffect(() => {
-    console.log(count);
     const endpoint = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC,BCH,LTC,BNB&tsyms=USD&extraParams=CryptoCalculator`;
     const headers = {
       "Content-Type": "application-json",

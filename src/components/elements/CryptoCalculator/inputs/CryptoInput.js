@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CryptoList from "./CryptoList";
+import { AppContext } from "../../../elements/AppContext";
 
 export default ({ onClickCurrent, setCrypto, crypto }) => {
   const [showDropdown, setDropdown] = useState();
+  const [ticker] = useContext(AppContext);
+  const [currentSymbol, setCurrentSymbol] = useState("");
+  const [cryptoPrice, setCryptoPrice] = useState(0);
 
-  const clickHandler = (price, cryptoPrice) => {
+  const clickHandler = (price, cryptoName, symbol) => {
     setDropdown(false);
-    onClickCurrent(price, cryptoPrice);
+    onClickCurrent(price, cryptoName);
+    setCurrentSymbol(symbol);
+    setCryptoPrice(price);
   };
+
+  useEffect(() => {
+    if (ticker[currentSymbol] !== cryptoPrice && cryptoPrice !== 0) {
+      setCryptoPrice(ticker[currentSymbol]);
+      onClickCurrent(ticker[currentSymbol]);
+    }
+  }, [ticker, currentSymbol, cryptoPrice]);
+
   return (
     <div className="flex-row div-spacing-10">
       <div className="left-label">Crypto: </div>

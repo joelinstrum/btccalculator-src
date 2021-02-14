@@ -35,9 +35,13 @@ const CryptoCalculator = ({
     profit
   );
 
-  const onClickCurrent = (price, cryptoType) => {
-    setCostPerCoin(price);
-    setCrypto(cryptoType);
+  const onClickCurrent = (price, cryptoName) => {
+    if (price) {
+      setCostPerCoin(price);
+    }
+    if (cryptoName) {
+      setCrypto(cryptoName);
+    }
   };
 
   const investmentHandler = (investment) => {
