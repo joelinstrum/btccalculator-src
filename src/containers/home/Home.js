@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CryptoCalculator } from "../../components/elements/CryptoCalculator";
+import { CryptoCalculator, Ticker } from "../../components/elements";
 
 const initialCalculatorList = [];
 
@@ -30,6 +30,7 @@ const Home = () => {
         <div className="heading-container heading">bitcoinprojection.com</div>
       </div>
 
+      <Ticker />
       <CryptoCalculator updateInvestment={updateInvestmentHandler} />
       {childCalculators.map((item, n) => (
         <CryptoCalculator

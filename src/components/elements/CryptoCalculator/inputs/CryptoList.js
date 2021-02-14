@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "../../../elements/AppContext";
 
 const CryptoList = ({ click }) => {
   const [eth, setETH] = useState("...");
@@ -6,22 +7,16 @@ const CryptoList = ({ click }) => {
   const [bch, setBCH] = useState("...");
   const [ltc, setLTC] = useState("...");
   const [bnb, setBNB] = useState("...");
+  const [ticker] = useContext(AppContext);
 
   useEffect(() => {
-    const endpoint = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC,BCH,LTC,BNB&tsyms=USD&extraParams=CryptoCalculator`;
-    const headers = {
-      "Content-Type": "application-json",
-    };
-    fetch(endpoint, headers)
-      .then((response) => response.json())
-      .then((data) => {
-        setETH(data.ETH.USD);
-        setBTC(data.BTC.USD);
-        setBCH(data.BCH.USD);
-        setLTC(data.LTC.USD);
-        setBNB(data.BNB.USD);
-      });
-  }, []);
+    console.log(ticker);
+    setETH(ticker.eth);
+    setBTC(ticker.btc);
+    setBCH(ticker.bch);
+    setLTC(ticker.ltc);
+    setBNB(ticker.bnb);
+  }, [ticker]);
 
   return (
     <div className="dropdown-list">

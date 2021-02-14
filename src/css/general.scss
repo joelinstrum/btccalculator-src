@@ -20,6 +20,23 @@ a {
   }
 }
 
+// margin: top right bottom left
+.ticker {
+  &-container {
+    margin: 5px;
+  }
+  &-label {
+    color: $ticker-label-color;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  &-value {
+    color: $ticker-value-color;
+    font-size: 12px;
+    margin-right: 20px;
+  }
+}
+
 .link-light {
   color: $link-color;
 }
