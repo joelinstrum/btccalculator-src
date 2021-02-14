@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   useSetInvestment,
   useCoinUpdate,
@@ -11,9 +11,15 @@ import CryptoInput from "./inputs/CryptoInput";
 import ValueInput from "./inputs/ValueInput";
 import Roi from "./Roi";
 
-const CryptoCalculator = ({ closeable, id, closeClick }) => {
+const CryptoCalculator = ({
+  closeable,
+  id,
+  closeClick,
+  investment,
+  updateInvestment,
+}) => {
   const [costPerCoin, setCostPerCoin] = useState(0);
-  const [totalInvestment, setTotalInvestment] = useSetInvestment(0);
+  const [totalInvestment, setTotalInvestment] = useSetInvestment(investment);
   const [futureCost, setFutureCost] = useState(0);
   const [crypto, setCrypto] = useState("");
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
@@ -33,6 +39,17 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
     setCostPerCoin(price);
     setCrypto(cryptoType);
   };
+
+  const investmentHandler = (investment) => {
+    setTotalInvestment(investment);
+    if (updateInvestment) {
+      updateInvestment(investment);
+    }
+  };
+
+  useEffect(() => {
+    setTotalInvestment(investment);
+  }, [investment]);
 
   return (
     <div className="flex-row">
@@ -58,8 +75,9 @@ const CryptoCalculator = ({ closeable, id, closeClick }) => {
 
         <ValueInput
           label="Total Investment"
-          onChangeHandler={setTotalInvestment}
-          value={totalInvestment}
+          onChangeHandler={investmentHandler}
+          value={closeable ? investment : totalInvestment}
+          disabled={closeable ? true : false}
           placeholder={"ie $25,000"}
         />
 

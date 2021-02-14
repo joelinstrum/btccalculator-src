@@ -8,6 +8,8 @@ const Home = () => {
     initialCalculatorList
   );
 
+  const [investment, setInvestment] = useState(0);
+
   useEffect(() => {
     document.title = "Crypto Calculator ROI";
   });
@@ -17,6 +19,10 @@ const Home = () => {
     setChildCalculators(filtered);
   };
 
+  const updateInvestmentHandler = (investment) => {
+    setInvestment(investment);
+  };
+
   return (
     <div>
       <div className="flex-row">
@@ -24,13 +30,14 @@ const Home = () => {
         <div className="heading-container heading">bitcoinprojection.com</div>
       </div>
 
-      <CryptoCalculator />
+      <CryptoCalculator updateInvestment={updateInvestmentHandler} />
       {childCalculators.map((item, n) => (
         <CryptoCalculator
           key={n}
           closeable={true}
           id={n}
           closeClick={closeClick}
+          investment={investment}
         />
       ))}
       <div className="button-container">
