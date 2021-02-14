@@ -1,6 +1,12 @@
 import React from "react";
 
-export default ({ label, onChangeHandler, value, placeholder, disabled }) => (
+export default ({
+  label,
+  onChangeHandler,
+  value = "",
+  placeholder,
+  disabled,
+}) => (
   <div className="flex-row div-spacing-10">
     <div className="left-label">{label}: </div>
     <div className="input-container">
