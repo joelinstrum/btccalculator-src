@@ -56,9 +56,9 @@ const Home = () => {
       <div className="blurb">
         
         <br />
-        <a href="https://twitter.com/JoeL42737181" className="link-light">
-          Find me on Twitter 
-        </a>
+        <a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet">
+Tweet</a>
         <br />
       </div>
     </div>
