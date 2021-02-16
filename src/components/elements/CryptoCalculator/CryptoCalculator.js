@@ -22,6 +22,7 @@ const CryptoCalculator = ({
   const [totalInvestment, setTotalInvestment] = useSetInvestment(investment);
   const [futureCost, setFutureCost] = useState(0);
   const [crypto, setCrypto] = useState("");
+  const [symbol, setSymbol] = useState("");
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
   const totalReturn = useTotalReturn(
     costPerCoin,
@@ -35,7 +36,7 @@ const CryptoCalculator = ({
     profit
   );
 
-  const onClickCurrent = (price, cryptoName) => {
+  const onClickCurrent = (price, cryptoName, symbol) => {
     if (price) {
       setCostPerCoin(price);
     }

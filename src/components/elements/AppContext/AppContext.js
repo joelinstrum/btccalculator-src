@@ -5,17 +5,18 @@ export const AppContext = createContext();
 export const AppContextProvider = (props) => {
   const initialValue = {
     ticker: {
-      btc: 40000,
-      bch: 500,
-      eth: 1800,
-      ltc: 450,
-      bnb: 400,
+      btc: 0,
+      bch: 0,
+      eth: 0,
+      ltc: 0,
+      bnb: 0,
     },
   };
   const [ticker, setTicker] = useState(initialValue.ticker);
+  const [tickerNow, setTickerNow] = useState(initialValue.ticker);
 
   return (
-    <AppContext.Provider value={[ticker, setTicker]}>
+    <AppContext.Provider value={[ticker, setTicker, tickerNow, setTickerNow]}>
       {props.children}
     </AppContext.Provider>
   );

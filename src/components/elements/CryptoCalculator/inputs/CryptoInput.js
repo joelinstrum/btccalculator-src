@@ -10,7 +10,7 @@ export default ({ onClickCurrent, setCrypto, crypto }) => {
 
   const clickHandler = (price, cryptoName, symbol) => {
     setDropdown(false);
-    onClickCurrent(price, cryptoName);
+    onClickCurrent(price, cryptoName, symbol);
     setCurrentSymbol(symbol);
     setCryptoPrice(price);
   };

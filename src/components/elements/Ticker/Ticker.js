@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useApiFetch, useToggleDisplayDate, useHistorical } from "./hooks";
+import { useApiFetch, useToggleDisplayDate } from "./hooks";
 import { dateFormatter } from "./utils";
 
 export default () => {
@@ -9,7 +9,6 @@ export default () => {
   const [startDate, setStartDate] = useState(new Date());
   const { eth, btc, bnb, ltc, bch } = useApiFetch(startDate);
   const historicalText = useToggleDisplayDate(startDate);
-  const isUsingHistorical = useHistorical(startDate);
 
   const formatter = (price) => {
     if (price && !isNaN(price)) {

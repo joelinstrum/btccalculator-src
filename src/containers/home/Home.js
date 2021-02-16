@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex-row">
+      <div className="flex-row marginTop30">
         <div className="title-large">Crypto ROI Calculator</div>
         <div className="heading-container heading">bitcoinprojection.com</div>
       </div>

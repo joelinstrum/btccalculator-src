@@ -175,7 +175,7 @@ a {
 }
 
 .input-container {
-  width: 200px;
+  width: 200px; 
   input {
     width: 195px;
   }
@@ -269,6 +269,26 @@ a {
   justify-content: center;
 }
 
+/* margins & padding */
+.marginLeft10 {
+  margin-left: 10px;
+}
+
+.marginTop20 {
+  margin-top: 20px;
+}
+
+.marginTop30 {
+  margin-top: 30px;
+}
+
+.react-datepicker {
+  z-index: 5000;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 @media screen and (max-width: 900px) {
   .flex-row {
     flex-direction: column;
@@ -338,16 +358,11 @@ a {
   .card-container {
     width: 100%;
   }
+  .marginTop20 {
+    margin-top: 5px;
+  }
+  .marginTop30 {
+    margin-top: 7px;
+  }
 }
 
-/* margins & padding */
-.marginLeft10 {
-  margin-left: 10px;
-}
-
-.react-datepicker {
-  z-index: 5000;
-  position: absolute;
-  left: 0;
-  top: 0;
-}

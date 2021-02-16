@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useContext, useMemo } from "react";
 import { AppContext } from "../";
+import { isDateHistorical } from "./utils";
 
 const api = "https://min-api.cryptocompare.com/data";
 
@@ -13,7 +14,7 @@ export function useHistorical(date) {
 
 export function useApiFetch(date) {
   let timer;
-  const [ticker, setTicker] = useContext(AppContext);
+  const [ticker, setTicker, tickerNow, setTickerNow] = useContext(AppContext);
   const [eth, setETH] = useState("...");
   const [btc, setBTC] = useState("...");
   const [bch, setBCH] = useState("...");
@@ -55,18 +56,20 @@ export function useApiFetch(date) {
   }, [date]);
 
   const setData = (data) => {
-    setETH(data ? data.ETH.USD : "...");
-    setBTC(data ? data.BTC.USD : "...");
-    setBCH(data ? data.BCH.USD : "...");
-    setLTC(data ? data.LTC.USD : "...");
-    setBNB(data ? data.BNB.USD : "...");
-    setTicker({
+    let dataObject = {
       eth: data ? data.ETH.USD : "...",
       btc: data ? data.BTC.USD : "...",
       bch: data ? data.BCH.USD : "...",
       ltc: data ? data.LTC.USD : "...",
       bnb: data ? data.BNB.USD : "...",
-    });
+    };
+    setETH(dataObject.eth);
+    setBTC(dataObject.btc);
+    setBCH(dataObject.bch);
+    setLTC(dataObject.ltc);
+    setBNB(dataObject.bnb);
+    setTicker(dataObject);
+    return dataObject;
   };
 
   useEffect(() => {
@@ -77,7 +80,8 @@ export function useApiFetch(date) {
     fetch(endpoint, headers)
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
+        const dataObject = setData(data);
+        setTickerNow(dataObject);
       });
   }, [count]);
 
@@ -97,12 +101,6 @@ export function useToggleDisplayDate(date = new Date(Date.now())) {
 
   return historicalText;
 }
-
-const isDateHistorical = (date) => {
-  const today = new Date(Date.now()).toLocaleString().split(",")[0];
-  const selectedDate = new Date(date).toLocaleString().split(",")[0];
-  return today !== selectedDate;
-};
 
 const getTickersFromDate = (strDate) => {
   return new Promise(async (success) => {
