@@ -1,20 +1,11 @@
-import { useState, useRef, useEffect, useContext, useMemo } from "react";
+import { useState, useRef, useEffect, useContext, useCallback } from "react";
 import { AppContext } from "../";
 import { isDateHistorical } from "./utils";
 
 const api = "https://min-api.cryptocompare.com/data";
 
-export function useHistorical(date) {
-  const [isUsingHistorical, setIsUsingHistorical] = useState();
-  useEffect((date) => {
-    setIsUsingHistorical(isDateHistorical(date));
-  });
-  return isUsingHistorical;
-}
-
 export function useApiFetch(date) {
-  let timer;
-  const [ticker, setTicker, tickerNow, setTickerNow] = useContext(AppContext);
+  const {setTicker, setTickerNow} = useContext(AppContext);
   const [eth, setETH] = useState("...");
   const [btc, setBTC] = useState("...");
   const [bch, setBCH] = useState("...");
@@ -22,17 +13,19 @@ export function useApiFetch(date) {
   const [bnb, setBNB] = useState("...");
   const [count, setTimercount] = useState(0);
   const countRef = useRef(count);
+  const [timer] = useState();
+  const timerRef = useRef(timer);
 
-  const updateTickerData = () => {
-    timer = setTimeout(() => {
+  const updateTickerData = useCallback(() => {
+    timerRef.current = setTimeout(() => {
       if (isDateHistorical(selectedDate)) {
-        clearTimeout(timer);
+        clearTimeout(timerRef.current);
       } else {
         setTimercount(countRef.current++);
         updateTickerData();
       }
     }, 10000);
-  };
+  }, [timerRef, countRef]);
 
   useEffect(() => {
     setSelectedDate(date);
@@ -43,19 +36,9 @@ export function useApiFetch(date) {
     } else {
       clearTimeout(timer);
     }
-  }, [date]);
+  }, [date, timer, updateTickerData]);
 
-  useEffect(async () => {
-    const today = new Date(Date.now()).toLocaleString().split(",")[0];
-    const selectedDate = new Date(date).toLocaleString().split(",")[0];
-    if (selectedDate !== today) {
-      setData();
-      const data = await getTickersFromDate(selectedDate);
-      setData(data);
-    }
-  }, [date]);
-
-  const setData = (data) => {
+  const setData = useCallback((data) => {
     let dataObject = {
       eth: data ? data.ETH.USD : "...",
       btc: data ? data.BTC.USD : "...",
@@ -70,7 +53,22 @@ export function useApiFetch(date) {
     setBNB(dataObject.bnb);
     setTicker(dataObject);
     return dataObject;
-  };
+  }, [setTicker]);
+
+  useEffect( () => {
+    const _updateData = async (date) => {
+      const today = new Date(Date.now()).toLocaleString().split(",")[0];
+      const selectedDate = new Date(date).toLocaleString().split(",")[0];
+      if (selectedDate !== today) {
+        setData();
+        const data = await getTickersFromDate(selectedDate);
+        setData(data);
+      }
+    }
+    _updateData(date);
+  }, [date, timer, setData]);
+
+  
 
   useEffect(() => {
     const endpoint = `${api}/pricemulti?fsyms=ETH,BTC,BCH,LTC,BNB&tsyms=USD&extraParams=CryptoCalculator&ts=1605549600`;
@@ -83,21 +81,24 @@ export function useApiFetch(date) {
         const dataObject = setData(data);
         setTickerNow(dataObject);
       });
-  }, [count]);
+  }, [count, setData, setTickerNow]);
 
   return { eth, btc, bch, ltc, bnb };
 }
 
 export function useToggleDisplayDate(date = new Date(Date.now())) {
   const [historicalText, setHistoricalText] = useState("");
+  const { setDataIsHistorical } = useContext(AppContext);
   useEffect(() => {
     const selectDate = new Date(date).toLocaleString().split(",")[0];
     if (isDateHistorical(selectDate)) {
       setHistoricalText("Select a different date");
+      setDataIsHistorical(true);
     } else {
       setHistoricalText("Use data from a previous date");
+      setDataIsHistorical(false);
     }
-  }, [date]);
+  }, [date, setDataIsHistorical]);
 
   return historicalText;
 }

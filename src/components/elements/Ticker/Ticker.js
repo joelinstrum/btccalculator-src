@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useApiFetch, useToggleDisplayDate } from "./hooks";
 import { dateFormatter } from "./utils";
 
-export default () => {
+const Ticker = () => {
   const [showHistorical, toggleShowHistorical] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const { eth, btc, bnb, ltc, bch } = useApiFetch(startDate);
@@ -66,3 +66,5 @@ export default () => {
     </div>
   );
 };
+
+export default Ticker;

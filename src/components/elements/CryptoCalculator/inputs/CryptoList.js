@@ -7,7 +7,7 @@ const CryptoList = ({ click }) => {
   const [bch, setBCH] = useState("...");
   const [ltc, setLTC] = useState("...");
   const [bnb, setBNB] = useState("...");
-  const [ticker] = useContext(AppContext);
+  const {ticker} = useContext(AppContext);
 
   useEffect(() => {
     setETH(ticker.eth);

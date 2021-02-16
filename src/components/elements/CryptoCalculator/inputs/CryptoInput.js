@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import CryptoList from "./CryptoList";
 import { AppContext } from "../../../elements/AppContext";
 
-export default ({ onClickCurrent, setCrypto, crypto }) => {
+const CryptoInput = ({ onClickCurrent, setCrypto, crypto }) => {
   const [showDropdown, setDropdown] = useState();
-  const [ticker] = useContext(AppContext);
+  const {ticker} = useContext(AppContext);
   const [currentSymbol, setCurrentSymbol] = useState("");
   const [cryptoPrice, setCryptoPrice] = useState(0);
 
@@ -20,7 +20,7 @@ export default ({ onClickCurrent, setCrypto, crypto }) => {
       setCryptoPrice(ticker[currentSymbol]);
       onClickCurrent(ticker[currentSymbol]);
     }
-  }, [ticker, currentSymbol, cryptoPrice]);
+  }, [ticker, currentSymbol, cryptoPrice, onClickCurrent]);
 
   return (
     <div className="flex-row div-spacing-10">
@@ -43,3 +43,5 @@ export default ({ onClickCurrent, setCrypto, crypto }) => {
     </div>
   );
 };
+
+export default CryptoInput;

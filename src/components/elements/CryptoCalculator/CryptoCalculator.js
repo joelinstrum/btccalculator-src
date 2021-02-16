@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   useSetInvestment,
   useCoinUpdate,
   useTotalReturn,
   useSetProfit,
   useSetFormattedProfit,
+  useSetPriceNow
 } from "./hooks";
 
 import CryptoInput from "./inputs/CryptoInput";
 import ValueInput from "./inputs/ValueInput";
 import Roi from "./Roi";
+import { AppContext } from "../AppContext";
+
 
 const CryptoCalculator = ({
   closeable,
@@ -22,8 +25,8 @@ const CryptoCalculator = ({
   const [totalInvestment, setTotalInvestment] = useSetInvestment(investment);
   const [futureCost, setFutureCost] = useState(0);
   const [crypto, setCrypto] = useState("");
-  const [symbol, setSymbol] = useState("");
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
+  const [currentSymbol, setCurrentSymbol] = useState();
   const totalReturn = useTotalReturn(
     costPerCoin,
     totalInvestment,
@@ -35,6 +38,7 @@ const CryptoCalculator = ({
     totalReturn,
     profit
   );
+  useSetPriceNow(currentSymbol, futureCost, setFutureCost);
 
   const onClickCurrent = (price, cryptoName, symbol) => {
     if (price) {
@@ -42,6 +46,9 @@ const CryptoCalculator = ({
     }
     if (cryptoName) {
       setCrypto(cryptoName);
+    }
+    if (symbol) {
+      setCurrentSymbol(symbol);
     }
   };
 
@@ -54,8 +61,9 @@ const CryptoCalculator = ({
 
   useEffect(() => {
     setTotalInvestment(investment);
-  }, [investment]);
+  }, [investment, setTotalInvestment]);
 
+  
   return (
     <div className="flex-row">
       <div className="card-container card-1">

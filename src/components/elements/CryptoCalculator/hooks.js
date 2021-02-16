@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../AppContext";
 
 export function useSetInvestment(investment) {
   const [totalInvestment, setTotalInvestment] = useState(investment);
@@ -37,8 +38,8 @@ export function useTotalReturn(
   useEffect(() => {
     if (costPerCoin && totalInvestment && futureCost && numberOfCoins) {
       const returnValue = parseFloat(
-        numberOfCoins.replace(/[^0-9.]/, "") *
-          futureCost.replace(/[^0-9.]/g, "")
+        numberOfCoins.toString().replace(/[^0-9.]/, "") *
+          futureCost.toString().replace(/[^0-9.]/g, "")
       ).toFixed(2);
       setTotalReturn(returnValue);
     } else if (costPerCoin && totalInvestment) {
@@ -96,4 +97,14 @@ export function useSetFormattedProfit(totalReturn, profit) {
     }
   }, [totalReturn, profit]);
   return [formattedProfit, formattedReturn];
+}
+
+export function useSetPriceNow(currentSymbol, futureCost, setFutureCost ){
+  const { dataIsHistorical, tickerNow } = useContext(AppContext);
+  useEffect(() => {
+    if(dataIsHistorical){
+      setFutureCost(tickerNow[currentSymbol])
+    }
+    
+  }, [currentSymbol, dataIsHistorical, tickerNow, futureCost, setFutureCost]);
 }

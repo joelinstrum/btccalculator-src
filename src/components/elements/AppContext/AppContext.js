@@ -11,12 +11,26 @@ export const AppContextProvider = (props) => {
       ltc: 0,
       bnb: 0,
     },
+    currentSybmol: "",
   };
   const [ticker, setTicker] = useState(initialValue.ticker);
   const [tickerNow, setTickerNow] = useState(initialValue.ticker);
+  const [currentSymbol, setCurrentSymbol] = useState(initialValue.currentSybmol);
+  const [dataIsHistorical, setDataIsHistorical] = useState(false);
+
+  const value = {
+    ticker, 
+    setTicker,
+    tickerNow,
+    setTickerNow,
+    currentSymbol,
+    setCurrentSymbol,
+    dataIsHistorical,
+    setDataIsHistorical
+  };
 
   return (
-    <AppContext.Provider value={[ticker, setTicker, tickerNow, setTickerNow]}>
+    <AppContext.Provider value={value}>
       {props.children}
     </AppContext.Provider>
   );
