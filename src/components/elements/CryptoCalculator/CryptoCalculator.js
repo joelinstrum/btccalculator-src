@@ -71,10 +71,10 @@ const CryptoCalculator = ({
         />
 
         <ValueInput
-          label="Current price"
+          label="Purchase price"
           onChangeHandler={setCostPerCoin}
           value={costPerCoin}
-          placeholder={"cost per coin"}
+          placeholder={"cost p/coin when purchased"}
         />
 
         <ValueInput
@@ -86,7 +86,7 @@ const CryptoCalculator = ({
         />
 
         <ValueInput
-          label="Future price"
+          label="Price after purchase"
           onChangeHandler={setFutureCost}
           value={futureCost}
           placeholder={"expected future price $"}
