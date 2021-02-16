@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.fa341d0e.chunk.css",
+    "main.css": "/static/css/main.fc6cd7d8.chunk.css",
     "main.js": "/static/js/main.b52b0088.chunk.js",
     "main.js.map": "/static/js/main.b52b0088.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f2bf56e6.js",
@@ -12,7 +12,7 @@
     "static/js/3.a5957cef.chunk.js.map": "/static/js/3.a5957cef.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.00850458.chunk.css.map": "/static/css/2.00850458.chunk.css.map",
-    "static/css/main.fa341d0e.chunk.css.map": "/static/css/main.fa341d0e.chunk.css.map",
+    "static/css/main.fc6cd7d8.chunk.css.map": "/static/css/main.fc6cd7d8.chunk.css.map",
     "static/js/2.400b83b5.chunk.js.LICENSE.txt": "/static/js/2.400b83b5.chunk.js.LICENSE.txt",
     "static/media/general.scss": "/static/media/texgyreadventor-regular.d0110fa5.otf"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.f2bf56e6.js",
     "static/css/2.00850458.chunk.css",
     "static/js/2.400b83b5.chunk.js",
-    "static/css/main.fa341d0e.chunk.css",
+    "static/css/main.fc6cd7d8.chunk.css",
     "static/js/main.b52b0088.chunk.js"
   ]
 }
