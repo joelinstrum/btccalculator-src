@@ -60,6 +60,14 @@ const CryptoCalculator = ({
     }
   };
 
+  const lockInHandler = () => {
+    if(costPerCoin){
+      setLockInPrice(!lockInPrice)
+    } else {
+      alert("You cannot lock in price that is empty")
+    }
+  }
+
   useEffect(() => {
     setTotalInvestment(investment);
   }, [investment, setTotalInvestment]);
@@ -92,7 +100,7 @@ const CryptoCalculator = ({
           <div className="left-label left-label-undercopy">
             <input type="checkbox" 
                 checked={lockInPrice} 
-                onChange={ () => setLockInPrice(!lockInPrice)}
+                onChange={ () => lockInHandler()}
               />
             <label>lock in price</label>
           </div>
