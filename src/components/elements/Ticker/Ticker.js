@@ -25,7 +25,7 @@ const Ticker = () => {
     toggleShowHistorical(!showHistorical);
   };
 
-  const onDateSelect = (date) => {
+  const onDateSelect = () => {
     toggleShowHistorical(false);
   };
 

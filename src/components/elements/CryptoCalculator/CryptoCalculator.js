@@ -27,6 +27,7 @@ const CryptoCalculator = ({
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
   const [currentSymbol, setCurrentSymbol] = useState();
   const [lockInPrice, setLockInPrice] = useState(false);
+  const [costFocus, setCostFocus] = useState(false);
   const totalReturn = useTotalReturn(
     costPerCoin,
     totalInvestment,
@@ -42,7 +43,7 @@ const CryptoCalculator = ({
   useSetPriceNow(currentSymbol, futureCost, setFutureCost, useCurrentPrice);
 
   const onClickCurrent = (price, cryptoName, symbol) => {
-    if (price && !lockInPrice) {
+    if (price && !lockInPrice && !costFocus) {
       setCostPerCoin(price);
     }
     if (cryptoName) {
@@ -66,6 +67,10 @@ const CryptoCalculator = ({
     } else {
       alert("You cannot lock in price that is empty")
     }
+  }
+
+  const costFocusHandler = (focused) => {
+    setCostFocus(focused);
   }
 
   useEffect(() => {
@@ -94,6 +99,7 @@ const CryptoCalculator = ({
           value={costPerCoin}
           placeholder={"cost p/coin when purchased"}
           disabled={lockInPrice}
+          onFocus={costFocusHandler}
         />
 
         <div className="flex-row">

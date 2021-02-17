@@ -6,6 +6,7 @@ const ValueInput = ({
   value = "",
   placeholder,
   disabled,
+  onFocus
 }) => (
   <div className="flex-row div-spacing-10">
     <div className="left-label">{label}: </div>
@@ -16,6 +17,8 @@ const ValueInput = ({
         onChange={(e) => onChangeHandler(e.target.value)}
         value={value !== 0 ? value : ""}
         disabled={disabled}
+        onFocus={() => onFocus && onFocus(true)}
+        onBlur={() => onFocus && onFocus(false)}
       />
     </div>
   </div>
