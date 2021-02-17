@@ -24,6 +24,7 @@ a {
 .ticker {
   &-container {
     margin: 5px;
+    align-items: center;
   }
   &-label {
     color: $ticker-label-color;
@@ -34,6 +35,11 @@ a {
     color: $ticker-value-color;
     font-size: 12px;
     margin-right: 20px;
+  }
+  &-row {
+    display: flex;
+    flex-direction: row;
+    min-height: 25px;
   }
 }
 
@@ -88,13 +94,17 @@ a {
   }
 }
 
-.heading-container {
-  padding-top:10px;
+.heading-left{
+  width: 50%;
+}
+
+.heading-right {
+  width: 50%;
   padding-left:0;
   color: $heading-color;
-  width: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .div-spacing-10 {
@@ -288,12 +298,8 @@ a {
 .marginTop30 {
   margin-top: 30px;
 }
-
-.react-datepicker {
-  z-index: 5000;
-  position: absolute;
-  left: 0;
-  top: 0;
+.marginBottom30 {
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 900px) {
@@ -301,6 +307,15 @@ a {
     flex-direction: column;
     display: flex;
     width: 100%;
+  }
+  .heading-left {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .heading-right {
+    width: 100%;
+    justify-content: center;
   }
   .left {
     &-label {
@@ -376,6 +391,49 @@ a {
   }
   .marginTop30 {
     margin-top: 7px;
+  }
+  .marginBottom30 {
+    margin-bottom: 7px;
+  }
+  .ticker {
+    &-container {
+      margin: 5px;
+    }
+    &-label {
+      color: $ticker-label-color;
+      font-size: 16px;
+      margin: 5px;
+      width: 50%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    &-value {
+      display: inline-block;
+      color: $ticker-value-color;
+      font-size: 16px;
+      width: 80%;
+    }
+    &-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  .date-from-left {
+    width: 50%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .date-from-right {
+    width: 50%;
+    margin-bottom: 11px;
+  }
+  .text-medium {
+    font-size: 12px;
+  }
+  .link {
+    font-size: 12px;
   }
 }
 

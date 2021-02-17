@@ -32,36 +32,49 @@ const Ticker = () => {
   return (
     <div>
       <div className="ticker-container flex-row">
-        <div className="text-medium">Data from {dateFormatter(startDate)} </div>
-        <div className="link marginLeft10" onClick={() => displayDatePicker()}>
-          {historicalText}
+        <div className="ticker-row">
+          <div className="text-medium date-from-left">Data from {dateFormatter(startDate)} </div>
+          <div className="link marginLeft10 date-from-right" onClick={() => displayDatePicker()}>
+            {historicalText}
+          </div>
         </div>
         <div className="text-medium marginLeft10">
-          {showHistorical && (
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              onSelect={onDateSelect}
-            />
-          )}
-        </div>
+            {showHistorical && (
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                onSelect={onDateSelect}
+              />
+            )}
+          </div>
       </div>
 
       <div className="ticker-container flex-row">
-        <div className="ticker-label">Bitcoin: </div>
-        <div className="ticker-value">{formatter(btc)}</div>
+        <div className="ticker-row">
+          <div className="ticker-label">Bitcoin: </div>
+          <div className="ticker-value">{formatter(btc)}</div>
+        </div>
 
-        <div className="ticker-label">Ethereum: </div>
-        <div className="ticker-value">{formatter(eth)}</div>
+        <div className="ticker-row">
+          <div className="ticker-label">Ethereum: </div>
+          <div className="ticker-value">{formatter(eth)}</div>
+        </div>
 
-        <div className="ticker-label">Bitcoin Cash: </div>
-        <div className="ticker-value">{formatter(bch)}</div>
+        <div className="ticker-row">
+          <div className="ticker-label">Bitcoin Cash: </div>
+          <div className="ticker-value">{formatter(bch)}</div>
+        </div>
 
-        <div className="ticker-label">Litecoin: </div>
-        <div className="ticker-value">{formatter(ltc)}</div>
+        <div className="ticker-row">
+          <div className="ticker-label">Litecoin: </div>
+          <div className="ticker-value">{formatter(ltc)}</div>
+        </div>
 
-        <div className="ticker-label">Binance: </div>
-        <div className="ticker-value">{formatter(bnb)}</div>
+        <div className="ticker-row">
+          <div className="ticker-label">Binance: </div>
+          <div className="ticker-value">{formatter(bnb)}</div>
+        </div>
+
       </div>
     </div>
   );
