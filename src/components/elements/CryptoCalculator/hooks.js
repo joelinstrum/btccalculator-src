@@ -99,12 +99,12 @@ export function useSetFormattedProfit(totalReturn, profit) {
   return [formattedProfit, formattedReturn];
 }
 
-export function useSetPriceNow(currentSymbol, futureCost, setFutureCost ){
-  const { dataIsHistorical, tickerNow } = useContext(AppContext);
+export function useSetPriceNow(currentSymbol, futureCost, setFutureCost, useCurrentPrice ){
+  const { tickerNow } = useContext(AppContext);
   useEffect(() => {
-    if(dataIsHistorical){
+    if(useCurrentPrice){
       setFutureCost(tickerNow[currentSymbol])
     }
     
-  }, [currentSymbol, dataIsHistorical, tickerNow, futureCost, setFutureCost]);
+  }, [currentSymbol, tickerNow, futureCost, setFutureCost, useCurrentPrice]);
 }

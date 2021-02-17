@@ -168,10 +168,17 @@ a {
   color: #555;
 }
 
-.left-label {
-  width: 250px;
-  display: flex;
-  justify-content: flex-end;
+.left {
+  &-label {
+    width: 250px;
+    display: flex;
+    justify-content: flex-end;
+    &-undercopy {
+      font-size: 11px;
+      margin-top: -10px;
+    }
+  }
+  
 }
 
 .input-container {
@@ -295,10 +302,16 @@ a {
     display: flex;
     width: 100%;
   }
-  .left-label {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .left {
+    &-label {
+      width: 100%;
+      display: flex;
+      justify-content: center; 
+    }
+    &-small {
+      font-size: 11px;
+      margin-top: 0px;
+    }
   }
   .input-container {
     width: 100%;

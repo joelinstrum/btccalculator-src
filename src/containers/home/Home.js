@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CryptoCalculator, Ticker } from "../../components/elements";
+import { TwitterShareButton, TwitterIcon, } from "react-share";
 
 const initialCalculatorList = [];
 
@@ -54,11 +55,12 @@ const Home = () => {
         </button>
       </div>
       <div className="blurb">
-        
-        <br />
-        <a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet">
-Tweet</a>
+        <TwitterShareButton 
+          title="Crypto ROI calculator"
+          via="JoeL42737181"
+          hashtags={["Cryptocurrency", "Bitcoin", "Ethereum"]}
+          url="https://bitcoinprojection.com"
+        ><TwitterIcon size={32} round={true} /></TwitterShareButton>
         <br />
       </div>
     </div>

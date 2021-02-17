@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({
+const ValueInput = ({
   label,
   onChangeHandler,
   value = "",
@@ -20,3 +20,5 @@ export default ({
     </div>
   </div>
 );
+
+export default ValueInput;

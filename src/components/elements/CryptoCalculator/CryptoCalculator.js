@@ -11,8 +11,6 @@ import {
 import CryptoInput from "./inputs/CryptoInput";
 import ValueInput from "./inputs/ValueInput";
 import Roi from "./Roi";
-import { AppContext } from "../AppContext";
-
 
 const CryptoCalculator = ({
   closeable,
@@ -21,6 +19,7 @@ const CryptoCalculator = ({
   investment,
   updateInvestment,
 }) => {
+  const [useCurrentPrice, setUseCurrentPrice] = useState(true);
   const [costPerCoin, setCostPerCoin] = useState(0);
   const [totalInvestment, setTotalInvestment] = useSetInvestment(investment);
   const [futureCost, setFutureCost] = useState(0);
@@ -38,7 +37,8 @@ const CryptoCalculator = ({
     totalReturn,
     profit
   );
-  useSetPriceNow(currentSymbol, futureCost, setFutureCost);
+
+  useSetPriceNow(currentSymbol, futureCost, setFutureCost, useCurrentPrice);
 
   const onClickCurrent = (price, cryptoName, symbol) => {
     if (price) {
@@ -90,16 +90,28 @@ const CryptoCalculator = ({
           label="Total Investment"
           onChangeHandler={investmentHandler}
           value={closeable ? investment : totalInvestment}
-          disabled={closeable ? true : false}
+          disabled={closeable}
           placeholder={"ie $25,000"}
         />
 
         <ValueInput
           label="Price after purchase"
           onChangeHandler={setFutureCost}
+          disabled={useCurrentPrice}
           value={futureCost}
           placeholder={"expected future price $"}
         />
+
+        <div className="flex-row">
+          <div className="left-label left-label-undercopy">
+            <input type="checkbox" 
+                checked={useCurrentPrice} 
+                onChange={ () => setUseCurrentPrice(!useCurrentPrice)}
+              />
+            <label>use current price</label>
+          </div>
+        </div>
+
       </div>
 
       <Roi
