@@ -26,6 +26,7 @@ const CryptoCalculator = ({
   const [crypto, setCrypto] = useState("");
   const numberOfCoins = useCoinUpdate(costPerCoin, totalInvestment);
   const [currentSymbol, setCurrentSymbol] = useState();
+  const [lockInPrice, setLockInPrice] = useState(false);
   const totalReturn = useTotalReturn(
     costPerCoin,
     totalInvestment,
@@ -41,7 +42,7 @@ const CryptoCalculator = ({
   useSetPriceNow(currentSymbol, futureCost, setFutureCost, useCurrentPrice);
 
   const onClickCurrent = (price, cryptoName, symbol) => {
-    if (price) {
+    if (price && !lockInPrice) {
       setCostPerCoin(price);
     }
     if (cryptoName) {
@@ -84,7 +85,18 @@ const CryptoCalculator = ({
           onChangeHandler={setCostPerCoin}
           value={costPerCoin}
           placeholder={"cost p/coin when purchased"}
+          disabled={lockInPrice}
         />
+
+        <div className="flex-row">
+          <div className="left-label left-label-undercopy">
+            <input type="checkbox" 
+                checked={lockInPrice} 
+                onChange={ () => setLockInPrice(!lockInPrice)}
+              />
+            <label>lock in price</label>
+          </div>
+        </div>
 
         <ValueInput
           label="Total Investment"
@@ -108,7 +120,7 @@ const CryptoCalculator = ({
                 checked={useCurrentPrice} 
                 onChange={ () => setUseCurrentPrice(!useCurrentPrice)}
               />
-            <label>use current price</label>
+            <label>update with latest price</label>
           </div>
         </div>
 
