@@ -1,14 +1,21 @@
-import { Home } from "./containers/home";
-import "./css/general.scss";
+import { Home, LookAndFeel } from "./containers";
+import "./css/style.scss";
 import { AppContextProvider } from "./components/elements/AppContext";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <AppContextProvider>
-      <div className="body-centered">
-        <Home />
-      </div>
-    </AppContextProvider>
+    <BrowserRouter>
+      <AppContextProvider>
+       <main>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/home" component={Home}  />
+          <Route path="/lookandfeel" component={LookAndFeel} />
+        </Switch>
+        </main>
+      </AppContextProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,67 @@
+@media only screen and (max-width: 900px) {
+  .flex-row {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .m-flex-row-10 {
+    margin-left: 10%;
+  }
+
+  .m-flex-row-15 {
+    margin-left: 15%;
+  }
+
+  .d-margin-left-15 {
+    margin-left: 0;
+  }
+  
+  .header-left {
+    width: 100%;
+    justify-self: center;
+  }
+  
+  .header-right {
+    display: none;
+  }
+
+  .logo-container {
+    margin-left: 0px;
+  }
+
+  .ticker {
+    &-text {
+      font-size: 16px;
+    }
+    &-date-label {
+      color: $fontColor100;
+      margin-right: 5px;
+      display: inline-block;
+    }
+    &-date-value {
+      display: inline-block;
+      color: $fontColor50;
+    }
+    &-label {
+      margin-right: 5px;
+    }
+    &-value {
+      color: $fontColorTickerValue;
+      margin-right: 15px;
+      min-width: 75px;
+    }
+    &-up {
+      color: green;
+    }
+    &-down {
+      color: red;
+    }
+  }
+
+  .calc-left {
+    width: auto;
+  }
+  .calc-right {
+    width: auto;
+  }
+}
