@@ -58,10 +58,17 @@
     }
   }
 
-  .calc-left {
-    width: auto;
+  .calc {
+    &-left {
+      width: auto;
+      font-size: 12px;
+    }
+    &-right {
+      width: auto;
+    }
+    &-button {
+      margin-left: 75px;
+    }
   }
-  .calc-right {
-    width: auto;
-  }
+
 }
