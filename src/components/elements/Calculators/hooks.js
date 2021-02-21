@@ -1,18 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import { AppContext } from "../AppContext";
-
-export function useSetInvestment(investment) {
-  const [totalInvestment, setTotalInvestment] = useState(investment);
-  useEffect(() => {
-    setTotalInvestment(totalInvestment);
-  }, [totalInvestment]);
-  return [totalInvestment, setTotalInvestment];
-}
+import {useEffect, useState } from "react";
 
 export function useCoinUpdate(costPerCoin, totalInvestment) {
   const [numberOfCoins, setNumberOfCoins] = useState(0);
 
   useEffect(() => {
+    console.log(costPerCoin, totalInvestment);
     let n;
     if (costPerCoin && totalInvestment) {
       let costPerCoinStr = costPerCoin.toString();
@@ -51,6 +43,14 @@ export function useTotalReturn(
   return totalReturn;
 }
 
+export function useIsProfit(profitOrLoss) {
+  const [isProfit, setIsProfit] = useState();
+  useEffect( () => {
+    setIsProfit(profitOrLoss > 0)
+  }, [profitOrLoss]);
+  return isProfit;
+}
+
 export function useSetProfit(totalReturn, totalInvestment, futureCost) {
   const [profit, setProfit] = useState(0);
   useEffect(() => {
@@ -67,44 +67,11 @@ export function useSetProfit(totalReturn, totalInvestment, futureCost) {
   return profit;
 }
 
-export function useSetFormattedProfit(totalReturn, profit) {
-  const [formattedProfit, setFormattedProfit] = useState(0);
-  const [formattedReturn, setFormattedReturn] = useState(0);
-
-  useEffect(() => {
-    if (totalReturn) {
-      setFormattedReturn(
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(totalReturn.replace(/[^0-9.]/, ""))
-      );
-    } else {
-      setFormattedReturn(0);
-    }
-    if (profit) {
-      let formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(profit.replace(/[^0-9.-]/, ""));
-      if (profit < 0) {
-        setFormattedProfit(`-${formatted.replace(/-/, "")}`);
-      } else {
-        setFormattedProfit(`${formatted}`);
-      }
-    } else {
-      setFormattedProfit(0);
-    }
-  }, [totalReturn, profit]);
-  return [formattedProfit, formattedReturn];
-}
-
-export function useSetPriceNow(currentSymbol, futureCost, setFutureCost, useCurrentPrice ){
-  const { tickerNow } = useContext(AppContext);
-  useEffect(() => {
-    if(useCurrentPrice){
-      setFutureCost(tickerNow[currentSymbol])
-    }
-    
-  }, [currentSymbol, tickerNow, futureCost, setFutureCost, useCurrentPrice]);
+export function formatCurrency(amount) {
+  if(amount) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount.replace(/[^0-9.]/, ""))
+  }
 }

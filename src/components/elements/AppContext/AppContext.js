@@ -1,39 +1,33 @@
-import React, { useState, createContext } from "react";
+import React, { createContext, useState, useReducer } from "react";
+import {useCurrentTicker } from "./AppHooks";
 
 export const AppContext = createContext();
 
-export const AppContextProvider = (props) => {
-  const initialValue = {
-    ticker: {
-      btc: 0,
-      bch: 0,
-      eth: 0,
-      ltc: 0,
-      bnb: 0,
-    },
-    currentSybmol: "",
-  };
-  const [ticker, setTicker] = useState(initialValue.ticker);
-  const [tickerNow, setTickerNow] = useState(initialValue.ticker);
-  const [currentSymbol, setCurrentSymbol] = useState(initialValue.currentSybmol);
-  const [dataIsHistorical, setDataIsHistorical] = useState(false);
+const historicalReducer = (prevState, updatedProperty) => ({
+  ...prevState,
+  ...updatedProperty
+});
+
+export const AppContextProvider = props => {
+
+  const currentTicker = useCurrentTicker();
+  const [historicalTickerDate, setHistoricalTickerDate] = useState();
+  const [historicalTicker, setHistoricalTicker] = useReducer(historicalReducer, {});
 
   const value = {
-    ticker, 
-    setTicker,
-    tickerNow,
-    setTickerNow,
-    currentSymbol,
-    setCurrentSymbol,
-    dataIsHistorical,
-    setDataIsHistorical
-  };
+    historicalTickerDate,
+    setHistoricalTickerDate,
+    currentTicker,
+    historicalTicker,
+    setHistoricalTicker
+  }
 
   return (
-    <AppContext.Provider value={value}>
+    <AppContext.Provider value={value} >
       {props.children}
     </AppContext.Provider>
-  );
-};
+  )
+}
 
 export default AppContext;
+

@@ -1,0 +1,35 @@
+$bg: #131217; 
+$bgColorGradient1: $bg;
+$bgColorGradient2:  #323138;
+$bodyFontColor: #fff;
+
+$colorMajor: #1baef7;
+$colorMajorLighter: #21b4fb;
+$colorMajorDarker: #126b97;
+$colorMajorDarkest: #043a54;
+$colorMinor: #ffe4a6;
+
+$fontColor100:rgba(255, 255, 255, 1);
+$fontColor80: rgba(255, 255, 255, .8);
+$fontColor50: rgba(255, 255, 255, .5);
+
+$cardBg: #3a3841;
+$cardBorderBg: rgba(255, 255, 255, .1);
+$headerBorder: rgba(255, 255, 255, .1);
+
+$fontColorTickerValue: $colorMajor; 
+$linkNormalColor: $colorMinor;
+
+$dropDownBg: #dedede;
+$dropDownBgHover: #ccc;
+$dropDownFont: #555;
+
+$cryptoTableDataFontColor: #333;
+$cryptoTableHoverFontColor: $colorMajorDarker;
+$cryptoTableBg: #bbb;
+$cryptoTableHeaderFontColor: #aaa;
+$cryptoTableHeaderBg: #555;
+
+$buttonBg: linear-gradient(180deg, $colorMajorDarker 0%, $colorMajorDarkest 100%);
+$buttonFontColor: #ccc;
+$buttonBorder: 1px solid $colorMajorDarkest;

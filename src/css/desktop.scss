@@ -1,0 +1,445 @@
+* {
+  box-sizing: border-box;
+  font-family: tex, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+html {
+  height: 100%;
+}
+body {
+  background-color: $bg;
+  background-image: linear-gradient(315deg, $bgColorGradient1 0%, $bgColorGradient2 74%);
+  color: $bodyFontColor;
+  margin: 0;
+  margin-top: 25px;
+}
+
+.font-full {
+  color: $fontColor100;
+}
+
+.font-80 {
+  color: $fontColor80;
+}
+
+.font-50 {
+  color: $fontColor50;
+}
+
+.body-centered {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  margin-left: -20px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-left {
+  width: 50%;
+}
+
+.header-right {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-divide {
+  width: 100%;
+  border-top: 1px solid $headerBorder;
+  height: 25px;
+  margin-top: 10px;
+}
+
+/* this will not be overwritten by mobile */
+.flex-row-all {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column-all {
+  display: flex;
+  flex-direction: column;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-content-h {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.centered-content-v {
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  &-container {
+    position: relative;
+    background: $cardBg;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+    margin: 10px 10px 10px 0px;
+    border-radius: 5px;
+    border-right: 1px solid $cardBorderBg;
+    border-bottom: 1px solid $cardBorderBg;
+    &-small {
+      width: 200px;
+      min-height: 200px;
+    }
+  }
+  &-header {
+    font-size: 16px;
+  }
+  &-text {
+    font-size: 14px;
+    color: $fontColor50;
+  }
+}
+
+// card form
+.form {
+  &-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: stretch;
+    & > div:first-child {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 5px;
+    }
+    & > div:nth-child(2) {
+      width: 200px;
+    }
+  }
+  &-label {
+    color: $fontColor80;
+    margin-top: -2px;
+    & > div {
+      text-align: right;
+    }
+    &-sub {
+      font-size: 12px;
+      margin-top: -5px;
+    }
+  }
+}
+
+.roi {
+  &-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-bottom: 5px;
+    & > div:first-child{
+      width: 120px;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 10px;
+    }
+    & > div:nth-child(2){
+      width: 120px;
+      display: flex;
+      justify-self: flex-start;
+    }
+  }
+  &-isProfit {
+    color: #17fc4c;
+  }
+  &-isLoss {
+    color: #ff6363;
+  }
+}
+
+.crypto {
+  &-table {
+    font-size: 12px;
+    min-width: 260px;
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    background: $cryptoTableBg;
+    border-collapse: collapse;
+    &-header {
+      color: $cryptoTableHeaderFontColor;
+      text-align: right;
+      background: $cryptoTableHeaderBg;
+    }
+    &-data {
+      color: $cryptoTableDataFontColor;
+      text-align: right;
+    }
+    &-link {
+      text-align: right;
+      cursor: pointer;
+      &:hover {
+        color: $cryptoTableHoverFontColor;
+      }
+    }
+    &-previous-info {
+
+    }
+  }
+}
+
+
+//links
+.link-normal {
+  cursor: pointer;
+  text-decoration: none;
+  color: $linkNormalColor;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+//margins, padding, font
+.margin-top {
+  &-5 { margin-top: 5px; }
+  &-10 { margin-top: 10px; }
+  &-20 { margin-top: 20px;}
+  &-30 { margin-top: 30px; }
+}
+.margin-right-5 {
+  margin-right: 5px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.padding-5 {
+  padding: 5px;
+}
+.padding-10 {
+  padding: 10px;
+}
+.full-width {
+  width: 100%;
+}
+.font-10 {
+  font-size: 10px;
+}
+.font-11 {
+  font-size: 11px;
+}
+.font-12 {
+  font-size: 12px;
+}
+
+
+.ticker {
+  &-text {
+    font-size: 13px;
+  }
+  &-date-label {
+    color: $fontColor100;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  &-date-value {
+    display: inline-block;
+    color: $fontColor50;
+  }
+  &-label {
+    margin-right: 5px;
+    text-align: right;
+    display: inline-block;
+  }
+  &-value {
+    color: $fontColorTickerValue;
+    margin-right: 10px;
+    min-width: 60px;
+    display: inline-block;
+  }
+  &-up {
+    color: green;
+    display: inline-block;
+  }
+  &-down {
+    color: red;
+    display: inline-block;
+  }
+  
+  &-triangle {
+
+    &-up {
+      color: green;
+      display: inline-flex;
+      transition: 2s ease-in-out;
+      transform: rotate(180deg);
+      height: 12px;
+      width: 12px;
+      transform-origin: 50% 50%;
+      align-items: center;
+    }
+    &-down {
+      color: red;
+      display: inline-flex;
+      transition: 2s ease-in-out;
+      transform: rotate(0deg);
+      height: 12px;
+      width: 12px;
+      transform-origin: 50% 50%;
+      align-items: center;
+    }
+  }
+}
+
+/* forms */
+.arrow {
+  &-container {
+    width: 23px;
+    height: 23px;
+    background: #fff;
+    border-radius: 2px;
+    color: #999;
+    margin-top:1px;
+    margin-left: 2px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    cursor: pointer;
+    
+  }
+  &-spinner {
+    
+  }
+  &-up {
+    transition: .25s ease-in-out;
+    transform: rotate(180deg);
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    transform-origin:center center;
+    position: relative;
+    & > span {
+      position: absolute;
+      top: -3px;
+      left: 6px;
+    }
+  }
+  &-down {
+    transition: .25s ease-in-out;
+    transform: rotate(0deg);
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    transform-origin:center center;
+    position: relative;
+    & > span {
+      position: absolute;
+      top: -2px;
+      left: 7px;
+    }
+  }
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  background: $dropDownBg;
+  color: $dropDownFont;
+  transition: .25s ease-in-out;
+  ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    cursor: pointer;
+  }
+  ul li {
+    padding: 5px;
+    font-size: 14px;
+    &:hover {
+      background: $dropDownBgHover;
+    }
+  }
+  &-closed {
+    overflow: hidden;
+    height: 0px;
+  }
+  &-expanded {
+    height: 200px;
+    overflow: auto;
+  }
+}
+
+.input-container-with-dropdown {
+  position: relative;
+}
+
+/* CALCULATOR */
+.calc {
+  &-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 17px;
+    height: 17px;
+    background: #9e2b2b;
+    border: 1px solid #471616;
+    border-radius: 2px;
+    color: #bbb;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+    }
+    & > div {
+      position: absolute;
+      top: -7px;
+      left: 3px;
+    }
+  }
+  &-button {
+    background: $buttonBg;
+    color: $buttonFontColor;
+    border: $buttonBorder;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+    }
+  }
+  &-left {
+    width: 60%;
+    margin-top: 15px;
+  }
+  &-right {
+    width: 40%;
+    margin-left: 10px;
+    margin-top: 15px;
+    &-content {
+      padding: 10px;
+    }
+  }
+  
+}
+
+
+
+.pct-container {
+  position: relative;
+  margin-left: 5px;
+}

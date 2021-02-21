@@ -1,83 +1,44 @@
-import React, { useState } from "react";
+import React, {useState, useEffect, useContext} from "react";
+import TickerCurrent from "./TickerCurrent";
+import TickerHistorical from "./TickerHistorical";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useApiFetch, useToggleDisplayDate } from "./hooks";
-import { dateFormatter } from "./utils";
+import { AppContext } from "../AppContext";
+import { dateFormatter } from "../../../utils";
 
 const Ticker = () => {
-  const [showHistorical, toggleShowHistorical] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const { eth, btc, bnb, ltc, bch } = useApiFetch(startDate);
-  const historicalText = useToggleDisplayDate(startDate);
 
-  const formatter = (price) => {
-    if (price && !isNaN(price)) {
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(price);
-    } else {
-      return price;
-    }
-  };
+  const [showDateSetter, setShowDateSetter] = useState();
+  const [startDate, setStartDate] = useState();
+  const { setHistoricalTickerDate } = useContext(AppContext);
 
-  const displayDatePicker = () => {
-    toggleShowHistorical(!showHistorical);
-  };
-
-  const onDateSelect = () => {
-    toggleShowHistorical(false);
-  };
+  useEffect(() => {
+    setHistoricalTickerDate(dateFormatter(startDate))
+    setShowDateSetter(false);
+  }, [startDate, setHistoricalTickerDate, setShowDateSetter])
 
   return (
-    <div>
-      <div className="ticker-container flex-row">
-        <div className="ticker-row">
-          <div className="text-medium date-from-left">Data from {dateFormatter(startDate)} </div>
-          <div className="link marginLeft10 date-from-right" onClick={() => displayDatePicker()}>
-            {historicalText}
-          </div>
+    <div className="body-centered">
+      <div className="body-centered ticker-text">
+        <div className="m-flex-row-10">
+          <span className="ticker-date-value">Current</span>
         </div>
-        <div className="text-medium marginLeft10">
-            {showHistorical && (
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                onSelect={onDateSelect}
-              />
-            )}
-          </div>
-      </div>
+        <TickerCurrent />
 
-      <div className="ticker-container flex-row">
-        <div className="ticker-row">
-          <div className="ticker-label">Bitcoin: </div>
-          <div className="ticker-value">{formatter(btc)}</div>
+        <div className="flex-row-m margin-top-10 m-flex-row-10">
+          <span className="link-normal margin-right-5" onClick={ () => setShowDateSetter(!showDateSetter)}>
+            { showDateSetter ? "Cancel" : <i>Compare with previous date</i>}
+          </span>
+          <span>{ 
+            showDateSetter && 
+            <DatePicker selected={startDate} onChange={ date => setStartDate(date)} /> 
+            }</span>
         </div>
-
-        <div className="ticker-row">
-          <div className="ticker-label">Ethereum: </div>
-          <div className="ticker-value">{formatter(eth)}</div>
-        </div>
-
-        <div className="ticker-row">
-          <div className="ticker-label">Bitcoin Cash: </div>
-          <div className="ticker-value">{formatter(bch)}</div>
-        </div>
-
-        <div className="ticker-row">
-          <div className="ticker-label">Litecoin: </div>
-          <div className="ticker-value">{formatter(ltc)}</div>
-        </div>
-
-        <div className="ticker-row">
-          <div className="ticker-label">Binance: </div>
-          <div className="ticker-value">{formatter(bnb)}</div>
-        </div>
-
+        { startDate && <TickerHistorical /> }
+        
       </div>
     </div>
-  );
-};
+    )
+}
 
 export default Ticker;
