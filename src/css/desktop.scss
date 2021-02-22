@@ -216,8 +216,13 @@ body {
   &-20 { margin-top: 20px;}
   &-30 { margin-top: 30px; }
 }
-.margin-right-5 {
-  margin-right: 5px;
+.margin-right {
+  &-5 {
+    margin-right: 5px;
+  }
+  &-10 {
+    margin-right: 10px;
+  }
 }
 .margin-left-10 {
   margin-left: 10px;
