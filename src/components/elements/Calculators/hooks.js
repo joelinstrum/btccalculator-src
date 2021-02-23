@@ -68,7 +68,8 @@ export function useSetProfit(totalReturn, totalInvestment, futureCost) {
 }
 
 export function formatCurrency(amount) {
-  if(amount) {
+  if(amount && typeof(amount) == "string") {
+    console.log("Amount: ", amount)
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",

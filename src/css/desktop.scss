@@ -450,3 +450,17 @@ body {
   position: relative;
   margin-left: 5px;
 }
+
+.profit-emoji {
+  transform: rotate(45deg);
+  color: #17fc4c;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.loss-emoji {
+  transform: rotate(45deg);
+  color: #ff6363;
+  margin-right: 5px;
+  display: inline-block;
+}

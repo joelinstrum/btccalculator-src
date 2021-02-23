@@ -2,6 +2,24 @@ import { useContext, useEffect, useState } from "react";
 import { CalculatorContext } from "./Calculator";
 import { useCoinUpdate, useTotalReturn, useSetProfit, formatCurrency, useIsProfit } from "./hooks";
 
+const ProfitLoss = ({isProfit, profitOrLoss}) => {
+  if(isProfit) {
+    return (
+      <div className="roi-row roi-label">
+        <div><span className="profit-emoji">:-)</span><span>Profit:</span></div> 
+        <div className="roi-isProfit">{ formatCurrency(profitOrLoss) }</div>
+      </div>
+    )
+  } else {
+    return (
+    <div className="roi-row roi-label">
+        <div><span className="loss-emoji">:-(</span><span>Loss</span></div> 
+        <div className="roi-isLoss">{ formatCurrency(profitOrLoss) }</div>
+      </div>
+    )
+  }
+}
+
 const CalculatorRoi = () => {
 
   const { purchasedPrice, investment, sellPrice, purchasedCryptoName } = useContext(CalculatorContext);
@@ -37,10 +55,7 @@ const CalculatorRoi = () => {
         <div>{ formatCurrency(totalReturn) }</div>
       </div>
 
-      <div className="roi-row roi-label">
-        <div>Profit/Loss:</div> 
-        <div className={ isProfit ? "roi-isProfit" : "roi-isLoss"}>{ formatCurrency(profitOrLoss) }</div>
-      </div>
+      <ProfitLoss isProfit={isProfit} profitOrLoss={profitOrLoss} />
       
     </div>)
 }
