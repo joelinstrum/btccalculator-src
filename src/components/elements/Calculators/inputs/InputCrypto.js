@@ -24,6 +24,11 @@ const InputCrypto = () => {
     }
     
   };
+
+  const dropdownClick = () => {
+    onclick="ga('send', 'event', 'Calculator Click', 'Crypto', 'Displays cryptos to select from')";
+    setDropdown(!showDropdown)
+  }
   return (
     <div className="form-row margin-bottom-10">
       <div>
@@ -38,7 +43,7 @@ const InputCrypto = () => {
           />
           <div
             className={`dropdown-list-container`}
-            onClick={() => setDropdown(!showDropdown)}
+            onClick={dropdownClick}
           >
             <div className="arrow-container">
               <div className={showDropdown ? "arrow-up" : "arrow-down"}>
