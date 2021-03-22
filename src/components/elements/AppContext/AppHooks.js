@@ -9,7 +9,7 @@ const tickerInit = {
   eth: "...",
   bch: "...",
   bnb: "...",
-  ltc: "..."
+  uni: "..."
 }
 
 const historicalTickerInit = {
@@ -17,7 +17,7 @@ const historicalTickerInit = {
   bch: { value: "...", diff: 0},
   eth: { value: "...", diff: 0},
   bnb: { value: "...", diff: 0},
-  ltc: { value: "...", diff: 0},
+  uni: { value: "...", diff: 0},
 }
 
 export const useCurrentTicker = () => {
@@ -66,7 +66,7 @@ export const useHistoricalTicker = (date) => {
 }
 
 const fetchTickerData = () => {
-  const endpoint = `${api}/pricemulti?fsyms=ETH,BTC,BCH,LTC,BNB&tsyms=USD&extraParams=CryptoCalculator&ts=1605549600`;
+  const endpoint = `${api}/pricemulti?fsyms=ETH,BTC,BCH,UNI,BNB&tsyms=USD&extraParams=CryptoCalculator&ts=1605549600`;
   const headers = {
     "Content-Type": "application-json",
   };
@@ -77,7 +77,7 @@ const fetchTickerData = () => {
         eth: data ? data.ETH.USD : "...",
         btc: data ? data.BTC.USD : "...",
         bch: data ? data.BCH.USD : "...",
-        ltc: data ? data.LTC.USD : "...",
+        uni: data ? data.UNI.USD : "...",
         bnb: data ? data.BNB.USD : "...",
       }
     });

@@ -31,8 +31,8 @@ const TickerHistorical = () => {
     </div>
 
     <div >
-      <span className="ticker-label">Litecoin:</span>
-      <span className="ticker-value">{ticker && toDollars(ticker.ltc.value)}</span>
+      <span className="ticker-label">Uniswap:</span>
+      <span className="ticker-value">{ticker && toDollars(ticker.uni.value)}</span>
     </div>
 
     <div >

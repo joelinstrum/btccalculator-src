@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState } from "react";
 import { AppContext } from "../AppContext";
 import { toDollars } from "../../../utils";
+import { tickerList } from "../../../config/config"
 
 const TickerCurrent = () => {
 
@@ -9,46 +10,18 @@ const TickerCurrent = () => {
   return (
     <div className="flex-row m-flex-row-15">
 
-    <div >
-      <span className="ticker-label">Bitcoin:</span>
-      <span className="ticker-value">
-        {currentTicker && toDollars(currentTicker.btc)}
-        <TickerPct symbol={"btc"} />
-      </span>
-    </div>
-
-    <div className="d-margin-left-15">
-      <span className="ticker-label">Ethereum:</span>
-      <span className="ticker-value">
-        {currentTicker && toDollars(currentTicker.eth)}
-        <TickerPct symbol={"eth"} />
-      </span>
-    </div>
-
-    <div className="d-margin-left-15">
-      <span className="ticker-label">Bitcoin Cash:</span>
-      <span className="ticker-value">
-        {currentTicker && toDollars(currentTicker.bch)}
-        <TickerPct symbol={"bch"} />
-      </span>
-    </div>
-
-    <div className="d-margin-left-15">
-      <span className="ticker-label">Litecoin:</span>
-      <span className="ticker-value">
-        {currentTicker && toDollars(currentTicker.ltc)}
-        <TickerPct symbol={"ltc"} />
-      </span>
-    </div>
-
-    <div className="d-margin-left-15">
-      <span className="ticker-label">Binance:</span>
-      <span className="ticker-value">
-        {currentTicker && toDollars(currentTicker.bnb)}
-        <TickerPct symbol={"bnb"} />
-      </span>
-    </div>
-
+    {
+      tickerList.map( ticker => 
+        (
+          <div key={ticker.symbol}>
+            <span className="ticker-label">{ticker.label}:</span>
+            <span className="ticker-value">
+              {currentTicker && toDollars(currentTicker[ticker.symbol])}
+              <TickerPct symbol={ticker.symbol} />
+            </span>
+          </div>
+        ))
+    }
     </div>
   );
 }

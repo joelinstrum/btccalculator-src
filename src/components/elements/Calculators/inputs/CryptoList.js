@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../../elements/AppContext";
 
-const getCryptoName = symbol => {
+export const getCryptoName = symbol => {
   switch (symbol) {
     case "eth":
       return "Ethereum";
@@ -12,8 +12,8 @@ const getCryptoName = symbol => {
     case "bch":
       return "Bitcoin cash";
 
-    case "ltc":
-      return "Litecoin";
+    case "uni":
+      return "Uni-Swap";
 
     case "bnb":
       return "Binance"
