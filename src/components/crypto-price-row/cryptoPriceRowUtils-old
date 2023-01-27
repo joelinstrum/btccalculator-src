@@ -1,0 +1,79 @@
+// import { useEffect, useState, useMemo } from "react";
+// import { cryptoCurrencies } from "../../models/cryptos";
+// import useWebSocket from "react-use-websocket";
+// import { constants } from "../../utils/constants";
+// import api from "../../utils/api";
+
+// const filterSelectedCryptos = (
+//   cryptosSelectedTickers: Array<string>
+// ): ICryptoList => {
+//   return cryptosSelectedTickers.reduce((acc: any, ticker: string) => {
+//     return {
+//       ...acc,
+//       ...{ [ticker.toUpperCase()]: cryptoCurrencies[ticker] },
+//     };
+//   }, {});
+// };
+
+// export const useCryptoRowList = () => {
+//   const [rawData, setRawData] = useState<any>(null);
+//   let cryptosSelectedTickers = useMemo(
+//     () => ["ETH", "BTC", "XRP", "ADA", "BNB"],
+//     []
+//   );
+//   const [data, setData] = useState(
+//     filterSelectedCryptos(cryptosSelectedTickers)
+//   );
+
+//   useMemo(async () => {
+//     const dataSet = await api.get(cryptosSelectedTickers);
+//     setData((currentObject) => {
+//       Object.keys(dataSet.RAW).forEach((ticker: string) => {
+//         currentObject[ticker].currentPrice = dataSet.RAW[ticker].USD.PRICE;
+//       });
+//       return currentObject;
+//     });
+//   }, [cryptosSelectedTickers, setData]);
+
+//   const { sendMessage } = useWebSocket(constants.WEBSOCKET_API_CONNECT, {
+//     onOpen: () => {
+//       // console.log("WebSocket connection established.");
+//     },
+//     onMessage: (msg) => {
+//       setRawData(msg.data);
+//     },
+//   });
+
+//   useEffect(() => {
+//     sendMessage(
+//       JSON.stringify({
+//         action: "SubAdd",
+//         subs: cryptosSelectedTickers.map(
+//           (ticker) =>
+//             `2~${cryptoCurrencies[ticker]?.exchange}~${ticker}~${cryptoCurrencies[ticker]?.toSymbol}`
+//         ),
+//       })
+//     );
+//   }, [cryptosSelectedTickers, sendMessage]);
+
+//   useEffect(() => {
+//     if (rawData) {
+//       const dataObj = JSON.parse(rawData);
+//       if (dataObj.hasOwnProperty("FROMSYMBOL")) {
+//         const tickerKey = dataObj["FROMSYMBOL"];
+//         setData((currentObject) => {
+//           if (dataObj?.PRICE) {
+//             currentObject[tickerKey].currentPrice = dataObj?.PRICE;
+//           }
+//           return currentObject;
+//         });
+//       }
+//     }
+//   }, [rawData, setData]);
+
+//   return data;
+// };
+
+// interface IRawData<T> {
+//   [key: string]: T;
+// }
