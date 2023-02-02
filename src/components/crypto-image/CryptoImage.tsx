@@ -38,7 +38,9 @@ const CryptoImage: React.FC<CryptoImageProps> = ({ crypto, size }) => {
   return (
     <CryptoImageStyled size={width}>
       <img
-        src={`${process.env.PUBLIC_URL}/images/crypto-icons/${crypto?.ticker}.png`}
+        src={`${
+          process.env.PUBLIC_URL
+        }/images/crypto-icons/${crypto?.ticker.toLowerCase()}.png`}
         alt={crypto?.fullName || "ticker image"}
         className="crypto__image"
       />
