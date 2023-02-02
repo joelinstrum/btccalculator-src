@@ -1,5 +1,6 @@
 {
   "name": "btcprojection-src",
+  "homepage": "https://bitcoinprojection.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
