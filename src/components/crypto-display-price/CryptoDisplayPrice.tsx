@@ -10,16 +10,12 @@ interface CryptoDisplayPriceProps {
 const CryptoDisplayPrice: React.FC<CryptoDisplayPriceProps> = ({
   cryptoObject,
 }) => {
-  const [propPrice, setPropPrice] = useState(cryptoObject?.currentPrice);
-  const [price, setPrice] = useState<string | number | null>();
+  const [propPrice] = useState(cryptoObject?.currentPrice);
+  const [, setPrice] = useState<string | number | null>();
   useEffect(() => {
-    console.log("Setting the new price: ", propPrice);
     setPrice(propPrice);
   }, [propPrice, setPrice]);
 
-  useEffect(() => {
-    console.log("Item initialized");
-  }, []);
   return (
     <div key={cryptoObject?.ticker}>
       <Typography>

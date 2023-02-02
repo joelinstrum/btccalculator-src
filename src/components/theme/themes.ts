@@ -17,6 +17,7 @@ export const dark = {
     text: {
       primary: "#ffffff",
       modalPrimary: "#333",
+      label: "#bbb",
     },
     modal: {
       background: "#fff",
@@ -31,6 +32,32 @@ export const dark = {
       background: "rgba(255, 255, 255, .9)",
       color: "#333",
       hoverBackground: "#d1e1e8",
+    },
+    primaryButton: {
+      background: "#d66711",
+      color: "#fff",
+      "&:disabled": {
+        background: "#8c7868",
+        color: "rgba(255, 255, 255, .5)",
+      },
+    },
+    alertButton: {
+      background: "#db3b3b",
+      color: "#fff",
+      "&:hover": {
+        background: "#a31d1d",
+      },
+      "&:disabled": {
+        background: "#c96f6f",
+        color: "rgba(255, 255, 255, .5)",
+      },
+    },
+    successButton: {
+      background: "#0da858",
+      color: "#fff",
+      "&:hover": {
+        background: "#046332",
+      },
     },
   },
   typography: {

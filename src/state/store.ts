@@ -3,7 +3,7 @@ import counterReducer from "../pages/app/features/counter/counterSlice";
 import { apiSlice } from "./features/apiSlice";
 import modalReducer from "./features/modalSlice";
 import cryptoReducer from "./features/selectedCryptosSlice";
-import roiCardsReducer from "./features/cardSlice";
+import { roiCardsSlice } from "./features/cardSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     modal: modalReducer,
     cryptoReducer,
-    roiCardsReducer,
+    roiCardsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

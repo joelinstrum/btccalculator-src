@@ -1,67 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ClickAwayListener } from "@mui/base";
-import { styled } from "@mui/system";
-
-interface InputTextProps {
-  updatetextvalue: () => void;
-  ariaLabel?: string;
-  size: "x-small" | "small" | "medium" | "large";
-  options?: { [key: string]: string };
-  value?: string | number | null | undefined;
-}
-
-const InputTextStyled = styled("div", {
-  shouldForwardProp: (prop) => prop !== "updatetextvalue",
-})<InputTextProps>(({ theme, size, options }) => ({
-  fontSize: 13,
-  position: "relative",
-  "& span:nth-of-type(1)": {
-    visibility: options ? "visible" : "hidden",
-    cursor: options ? "pointer" : "default",
-  },
-  "& div:nth-of-type(1)": {
-    position: "absolute",
-    top: "22px",
-    left: "6px",
-    padding: "2px",
-    zIndex: 500,
-    minWidth: "200px",
-    background: theme.palette.dropDown.background,
-    color: theme.palette.dropDown.color,
-    "& ul": {
-      listStyleType: "none",
-      padding: 0,
-      margin: 0,
-      "& li": {
-        cursor: "pointer",
-        "&:hover": {
-          background: theme.palette.dropDown.hoverBackground,
-        },
-      },
-    },
-  },
-  "& input": {
-    marginLeft: "6px",
-    textAlign: "right",
-    "&:focus": {
-      outline: "none",
-    },
-    maxWidth: (function (): string {
-      switch (size) {
-        case "x-small":
-          return "20px";
-        case "small":
-          return "50px";
-        case "medium":
-          return "100px";
-        case "large":
-          return "200px";
-        default:
-          return "80px";
-      }
-    })(),
-  },
-}));
+import { InputTextProps } from "./interfaces";
+import InputTextStyled from "./InputTextStyled";
 
 const InputText: React.FC<InputTextProps> = ({
   updatetextvalue: updateTextValue,
@@ -69,21 +9,43 @@ const InputText: React.FC<InputTextProps> = ({
   size,
   options,
   value,
+  optionsChangeHandler,
+  onBlur,
+  disabled,
+  onChange,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [textValue, setTextValue] = useState(value || "");
 
+  useEffect(() => {
+    setTextValue(value || "");
+  }, [value]);
+
   const showOptionsHandler = () => {
+    if (disabled) {
+      return;
+    }
     setShowOptions(!showOptions);
   };
 
-  const optionsClickHandler = (key: string) => {
-    console.log(key);
+  const optionsClick = (key: string, value: string) => {
     showOptionsHandler();
+    if (optionsChangeHandler) {
+      optionsChangeHandler(key, value);
+    }
   };
 
   const updateInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextValue(e.currentTarget.value);
+    if (onChange) {
+      onChange(e.currentTarget.value);
+    }
+  };
+
+  const updateOnBlur = () => {
+    if (onBlur) {
+      onBlur(textValue);
+    }
   };
 
   return (
@@ -97,6 +59,8 @@ const InputText: React.FC<InputTextProps> = ({
         aria-label={ariaLabel || ""}
         value={textValue}
         onChange={updateInputText}
+        onBlur={updateOnBlur}
+        disabled={disabled}
       />
       <span onClick={showOptionsHandler}>
         {showOptions ? <>&#9650;</> : <>&#9660;</>}
@@ -107,7 +71,7 @@ const InputText: React.FC<InputTextProps> = ({
             <ul>
               {options &&
                 Object.keys(options).map((key) => (
-                  <li onClick={() => optionsClickHandler(key)} key={key}>
+                  <li onClick={() => optionsClick(key, options[key])} key={key}>
                     {options[key]}
                   </li>
                 ))}

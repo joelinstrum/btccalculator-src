@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 const ContainerInnerStyled = styled("div")(({ theme }) => ({
   width: "100%",
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("md")]: {
     maxWidth: "900px",
     margin: "0 auto",
   },

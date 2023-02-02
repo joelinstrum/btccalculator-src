@@ -1,10 +1,12 @@
 import { styled } from "@mui/system";
+import CSS from "csstype";
 
 interface FormRowProps {
   children?: React.ReactNode;
   label: string | React.ReactNode;
   width?: string;
   align?: string;
+  sx?: CSS.Properties;
 }
 
 const FormRowStyled = styled("div", {

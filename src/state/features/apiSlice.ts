@@ -17,8 +17,14 @@ export const apiSlice = createApi({
         params: { ...args },
       }),
     }),
+    getHistoricalPrice: builder.query({
+      query: (args) => ({
+        url: `/pricehistorical`,
+        params: { ...args },
+      }),
+    }),
   }),
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetTickersQuery } = apiSlice;
+export const { useGetTickersQuery, useGetHistoricalPriceQuery } = apiSlice;

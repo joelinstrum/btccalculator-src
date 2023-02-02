@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../state/store";
 
 interface PortalProps {
   children: React.ReactNode;

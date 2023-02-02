@@ -1,11 +1,21 @@
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../state/store";
-import { Box } from "@mui/material";
-import CardStyled from "./CardStyled";
-import SelectPrice from "./SelectPrice";
-import { FormRow } from "../../forms";
-import { InputText } from "../../forms";
+import {
+  BoxStyled,
+  CardContainerStyled,
+  CardCalculationsContainer,
+} from "./CardStyled";
+import CardSelectPrice from "./CardSelectPrice";
 import { cryptoCurrencies } from "../../../models/cryptos";
+import CardInvestment from "./CardInvestment";
+import CardSelectedCrypto from "./CardSelectedCrypto";
+import CardSellPrice from "./CardSellPrice";
+import CardSave from "./CardSave";
+import CardCalculations from "./CardCalculations";
+import CardHeader from "./CardHeader";
+import { saveRoiCards } from "../../../state/features/cardSlice";
+import { updateCardProperty } from "../../../state/features/cardSlice";
 
 interface CardProps {
   card: IRoiCard;
@@ -13,8 +23,84 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ card, index }) => {
-  const investmentOnchange = () => {};
-  const selectedCryptoChange = () => {};
+  const [cryptoTextValue, setCryptoTextValue] = useState(card.fullName);
+  const [investmentAmount, setInvestmentAmount] = useState(
+    card.investment as string
+  );
+  const [purchasePrice, setPurchasePrice] = useState(
+    card.purchasePrice as string
+  );
+  const [sellPrice, setSellPrice] = useState(card.sellPrice as string);
+  const [saveDisabled, setSaveDisabled] = useState(true);
+  const [ticker, setTicker] = useState(card.ticker.toUpperCase());
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (firstUpdate.current) {
+  //     firstUpdate.current = false;
+  //   }
+  //   // eslint-disable-next-line
+  //   updateSaveDisabled();
+  //   // eslint-disable-next-line
+  // }, [card]);
+
+  const selectedCryptoChange = (key: string, value: string | number) => {
+    setCryptoTextValue(value.toString());
+    updateSaveDisabled();
+    setTicker(key);
+  };
+  const investmentOnBlur = (value: string) => {
+    if (value !== investmentAmount) {
+      setInvestmentAmount(value);
+      updateSaveDisabled();
+      dispatch(
+        updateCardProperty({
+          property: "investment",
+          value,
+          index,
+        })
+      );
+    }
+  };
+  const purchasePriceOnBlur = (value: string) => {
+    if (value !== purchasePrice) {
+      setPurchasePrice(value);
+      updateSaveDisabled();
+    }
+  };
+  const sellPriceOnBlur = (value: string) => {
+    if (value !== sellPrice) {
+      setSellPrice(value);
+      updateSaveDisabled();
+    }
+  };
+
+  useEffect(() => {
+    if (!saveDisabled) {
+      dispatch(
+        updateCardProperty({
+          property: "purchasePrice",
+          value: purchasePrice,
+          index,
+        })
+      );
+    }
+    //eslint-disable-next-line
+  }, [purchasePrice]);
+
+  useEffect(() => {
+    if (!saveDisabled) {
+      dispatch(
+        updateCardProperty({
+          property: "sellPrice",
+          value: sellPrice,
+          index,
+        })
+      );
+    }
+    //eslint-disable-next-line
+  }, [sellPrice]);
+
   const { selectedCryptos } = useSelector(
     (store: RootState) => store.cryptoReducer
   );
@@ -29,39 +115,50 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
     {}
   );
 
+  const saveHandler = () => {
+    setSaveDisabled(true);
+    dispatch(saveRoiCards());
+  };
+
+  const updateSaveDisabled = () => {
+    if (saveDisabled) {
+      setSaveDisabled(false);
+    }
+  };
+
   return (
-    <CardStyled>
-      {card.title}
-      <Box>
-        <form>
-          <FormRow label="Investment Amount" width="33%" align="right">
-            <InputText
-              size="medium"
-              ariaLabel="investment amount"
-              updatetextvalue={investmentOnchange}
-            />
-          </FormRow>
-          <FormRow label="Crypto" width="33%" align="right">
-            <InputText
-              size="medium"
-              ariaLabel="crypto"
-              updatetextvalue={selectedCryptoChange}
-              options={selectedCryptosList}
-            />
-          </FormRow>
-          <FormRow label="Purchase price" width="33%" align="right">
-            <SelectPrice />
-          </FormRow>
-          <FormRow label="Sell price" width="33%" align="right">
-            <InputText
-              size="medium"
-              ariaLabel="sell price"
-              updatetextvalue={investmentOnchange}
-            />
-          </FormRow>
-        </form>
-      </Box>
-    </CardStyled>
+    <BoxStyled>
+      <CardHeader title={card.title} index={index} />
+      <CardContainerStyled>
+        <div>
+          <CardInvestment
+            investmentOnBlur={investmentOnBlur}
+            investmentAmount={investmentAmount}
+          />
+          <CardSelectedCrypto
+            selectedCryptoChange={selectedCryptoChange}
+            selectedCryptosList={selectedCryptosList}
+            cryptoTextValue={cryptoTextValue}
+          />
+          <CardSelectPrice
+            purchasePriceOnBlur={purchasePriceOnBlur}
+            purchasePrice={purchasePrice}
+            ticker={ticker}
+            index={index}
+          />
+          <CardSellPrice
+            sellPriceOnBlur={sellPriceOnBlur}
+            sellPrice={sellPrice}
+            ticker={ticker}
+            index={index}
+          />
+          <CardSave saveDisabled={saveDisabled} saveHandler={saveHandler} />
+        </div>
+        <CardCalculationsContainer>
+          <CardCalculations card={card} />
+        </CardCalculationsContainer>
+      </CardContainerStyled>
+    </BoxStyled>
   );
 };
 
