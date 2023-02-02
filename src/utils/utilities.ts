@@ -40,6 +40,7 @@ export const getDateFrom = (from: string | undefined = ""): string => {
   var d = new Date();
   d.setDate(d.getDate() - daysAgo(from));
   let newDate = d.toLocaleDateString();
+  // this is a dummy comment
   return newDate;
 };
 
