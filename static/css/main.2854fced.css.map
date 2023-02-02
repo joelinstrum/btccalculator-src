@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.2854fced.css","mappings":"AAAA,WACE,gBACA","sources":["components/theme/style.scss"],"sourcesContent":["@font-face {\n  font-family: \"tex\";\n  src: url(./fonts/tex/texgyreadventor-regular.otf);\n}\n"],"names":[],"sourceRoot":""}
