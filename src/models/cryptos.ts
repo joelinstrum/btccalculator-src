@@ -7,6 +7,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2021,
   },
   ADA: {
     fullName: "Cardano",
@@ -16,6 +17,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2018,
   },
   ALGO: {
     fullName: "Algorand",
@@ -25,6 +27,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2020,
   },
   BNB: {
     fullName: "Binance",
@@ -34,6 +37,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2018,
   },
   BTC: {
     fullName: "Bitcoin",
@@ -43,6 +47,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Coinbase",
     toSymbol: "USD",
+    startYear: 2012,
   },
   BCH: {
     fullName: "Bitcoin Cash",
@@ -52,6 +57,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Coinbase",
     toSymbol: "USDT",
+    startYear: 2018,
   },
   DAI: {
     fullName: "Dai",
@@ -61,6 +67,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2018,
   },
   DOGE: {
     fullName: "Doge",
@@ -70,6 +77,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2014,
   },
   DOT: {
     fullName: "Polkadot",
@@ -79,6 +87,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2022,
   },
   ETH: {
     fullName: "Ethereum",
@@ -88,6 +97,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Coinbase",
     toSymbol: "USD",
+    startYear: 2016,
   },
   LUNA: {
     fullName: "Terra Classic",
@@ -97,6 +107,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2022,
   },
   LINK: {
     fullName: "Chainlink",
@@ -106,6 +117,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2018,
   },
   LTC: {
     fullName: "Litecoin",
@@ -115,6 +127,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2014,
   },
   MATIC: {
     fullName: "Polygon",
@@ -133,6 +146,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2021,
   },
   SOL: {
     fullName: "Solana",
@@ -142,6 +156,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2021,
   },
   UNI: {
     fullName: "Uniswap",
@@ -151,6 +166,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2021,
   },
   XLM: {
     fullName: "Stellar Lumens",
@@ -160,6 +176,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2015,
   },
   XRP: {
     fullName: "XRP",
@@ -169,6 +186,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Binance",
     toSymbol: "USDT",
+    startYear: 2015,
   },
   XTZ: {
     fullName: "Tezos",
@@ -178,6 +196,7 @@ export const cryptoCurrencies: ICryptoList = {
     change: null,
     exchange: "Coinbase",
     toSymbol: "USDT",
+    startYear: 2019,
   },
 };
 

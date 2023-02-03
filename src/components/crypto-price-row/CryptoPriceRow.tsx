@@ -19,15 +19,16 @@ const CryptoPriceRow = () => {
     data: cryptoList,
     isSuccess,
     error,
-    refetch,
-  } = useGetTickersQuery({
-    fsyms: selectedCryptos.join(","),
-    tsyms: "USD",
-    extraParams: constants.API_PARAM_NAME,
-  });
+  } = useGetTickersQuery(
+    {
+      fsyms: selectedCryptos.join(","),
+      tsyms: "USD",
+      extraParams: constants.API_PARAM_NAME,
+    },
+    { pollingInterval: 30000 }
+  );
 
   const [dataFiltered, setDataFiltered] = useState<ICryptoList>();
-  const fetchTimerId = useRef<number>();
 
   useEffect(() => {
     if (isSuccess) {
@@ -36,14 +37,6 @@ const CryptoPriceRow = () => {
       console.log("ERROR: ", error);
     }
   }, [isSuccess, cryptoList, error, setDataFiltered]);
-
-  useEffect(() => {
-    const setTimer = async () => {
-      fetchTimerId.current = await window.setInterval(() => refetch(), 30000);
-    };
-    setTimer();
-    return () => clearInterval(fetchTimerId.current);
-  });
 
   const selectClick = () => {
     dispatch(openModal(""));

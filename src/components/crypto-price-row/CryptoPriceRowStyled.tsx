@@ -1,6 +1,7 @@
 import { styled } from "@mui/system";
 
 const CryptoPriceRowStyled = styled("div")(({ theme }) => ({
+  minHeight: "50px",
   "& .MuiTypography-root": {
     fontSize: 14,
     "& span:nth-of-type(3)": {

@@ -26,14 +26,14 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
 }) => {
   const [sellPriceDisplay, setSellPriceDisplay] = useState(sellPrice);
   const [disabled, setDisabled] = useState(false);
-  const [fromTimestamp, setFromTimestamp] = useState(getTimestamp());
+  const [fromTimestamp, setFromTimestamp] = useState<number>(getTimestamp());
   const [skip, setSkip] = useState(true);
   const dispatch = useDispatch();
   const firstUpdate = useRef(true);
 
   const optionsChangeHandler = (key: string, value?: string) => {
-    const _fromDate = getDateFrom(value).toString() || null;
-    setSellPriceDisplay(`fetching ${ticker} from ${fromTimestamp}`);
+    const _fromDate = getDateFrom(key).toString();
+    setSellPriceDisplay(`fetching ${ticker} from ${getTimestamp(_fromDate)}`);
     if (typeof _fromDate !== "undefined" && _fromDate) {
       setFromTimestamp(getTimestamp(_fromDate));
     }

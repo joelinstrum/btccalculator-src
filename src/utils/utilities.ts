@@ -1,4 +1,5 @@
 import { cryptos } from "../models";
+import { constants } from "./constants";
 
 export const formatPrice = (price: string | number) => {
   try {
@@ -49,34 +50,28 @@ export const dateFromTimestamp = (timestamp: number) => {
   return d.toLocaleDateString();
 };
 
-export const daysAgo = (from: string): number => {
-  switch (from) {
-    case "1 month ago":
-      return 30;
-    case "3 months ago":
-      return 92;
-    case "6 months ago":
-      return 123;
-    case "9 months ago":
-      return 182;
-    case "1 year ago":
-      return 365;
-    case "1 year and a half ago":
-      return 547;
-    case "2 years ago":
-      return 730;
-    case "3 years ago":
-      return 1095;
-    case "4 years ago":
-      return 1460;
-    case "5 years ago":
-      return 1825;
-    default:
-      return 0;
+export const cryptoFromDateOptions = (
+  startYear: number
+): { [key: string]: string } => {
+  let fromString = JSON.stringify(constants.DATE_FROM);
+  let from = JSON.parse(fromString);
+  let currentYear = new Date().getFullYear();
+  const n = currentYear - startYear;
+  for (let i = 2; i <= n; i++) {
+    from = {
+      ...from,
+      ...{ [`H${i}`]: `${i} years ago (${currentYear - i})` },
+    };
   }
+  return from;
 };
 
-export const getTimestamp = (from?: string) => {
+export const daysAgo = (from: string): number => {
+  let _from = from.replace(/[^0-9.]/gm, "");
+  return 365 * parseFloat(_from);
+};
+
+export const getTimestamp = (from?: string): number => {
   if (!from) {
     return Math.floor(Date.now() / 1000);
   }
@@ -84,6 +79,7 @@ export const getTimestamp = (from?: string) => {
     const datum = Date.parse(from);
     return datum / 1000;
   }
+  return Math.floor(Date.now() / 1000);
 };
 
 export const extractPriceFromData = (data: any): string => {

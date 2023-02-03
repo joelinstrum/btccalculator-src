@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { FormRow, InputText } from "../../forms";
 import {
@@ -6,10 +6,12 @@ import {
   getTimestamp,
   extractPriceFromData,
   dateFromTimestamp,
+  cryptoFromDateOptions,
 } from "../../../utils/utilities";
 import { constants } from "../../../utils/constants";
 import { useGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
 import { updateCardProperties } from "../../../state/features/cardSlice";
+import { cryptos } from "../../../models";
 
 interface CardSelectPriceProps {
   purchasePriceOnBlur?: (selectPrice: string) => void;
@@ -30,6 +32,9 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   const [fromTimestamp, setFromTimestamp] = useState(getTimestamp());
   const [skip, setSkip] = useState(true);
   const firstUpdate = useRef(true);
+  const [fromDateOptions, setFromDateOptions] = useState<{
+    [key: string]: string;
+  }>({ ["0"]: "Current" });
 
   const { data, refetch } = useGetHistoricalPriceQuery(
     {
@@ -42,12 +47,11 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   );
 
   const optionsChangeHandler = (key: string, value?: string) => {
-    const _fromDate = getDateFrom(value).toString() || null;
+    const _fromDate = getDateFrom(key).toString() || null;
     setInvestmentPrice(`fetching ${ticker} from ${fromTimestamp}`);
     if (typeof _fromDate !== "undefined" && _fromDate) {
       setFromTimestamp(getTimestamp(_fromDate));
     }
-
     setDisabled(true);
   };
 
@@ -92,6 +96,14 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
     fromTimestamp,
   ]);
 
+  useMemo(() => {
+    setFromDateOptions(
+      cryptoFromDateOptions(
+        cryptos[ticker ?? "BTC"]?.startYear || new Date().getFullYear()
+      )
+    );
+  }, [ticker]);
+
   return (
     <FormRow label="Purchase price" align="right">
       <InputText
@@ -101,7 +113,7 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
         onBlur={purchasePriceOnBlur}
         optionsChangeHandler={optionsChangeHandler}
         disabled={disabled}
-        options={constants.DATE_FROM}
+        options={fromDateOptions}
       />
     </FormRow>
   );

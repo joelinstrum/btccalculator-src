@@ -6,6 +6,7 @@ interface ICrypto {
   change?: string | number | null;
   exchange?: string;
   toSymbol?: string;
+  startYear?: number;
 }
 
 interface ICryptoList {
