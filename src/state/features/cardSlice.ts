@@ -1,14 +1,17 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
+import { getCurrentDate } from "../../utils/utilities";
 
 const defaultRoiCard1: IRoiCard = {
-  title: "Ethereum Roi Calculator",
-  ticker: "eth",
-  fullName: "Ethereum",
-  investment: "$34,000",
-  purchasePrice: null,
-  purchasePriceWhen: null,
-  sellPrice: null,
-  sellPriceWhen: null,
+  title: "Bitcoin Roi Calculator",
+  ticker: "btc",
+  fullName: "Bitcoin",
+  investment: "1",
+  purchasePrice: 25000,
+  purchasePriceWhen: getCurrentDate(),
+  sellPrice: 30000,
+  sellPriceWhen: getCurrentDate(),
+  useCurrentPricePurchase: "false",
+  useCurrentPriceSell: "true",
 };
 
 const defaultRoiCard2: IRoiCard = {
@@ -16,8 +19,8 @@ const defaultRoiCard2: IRoiCard = {
   ticker: "btc",
   fullName: "Bitcoin",
   investment: 6,
-  purchasePrice: null,
-  sellPrice: null,
+  purchasePrice: 0,
+  sellPrice: 0,
 };
 
 const initialState = {

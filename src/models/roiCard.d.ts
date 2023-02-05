@@ -3,8 +3,10 @@ interface IRoiCard {
   ticker: string;
   fullName?: string;
   investment: number | string | undefined | null;
-  purchasePrice: number | string | undefined | null;
+  purchasePrice: number | string;
   purchasePriceWhen?: number | string | null;
-  sellPrice: number | string | undefined | null;
-  sellPriceWhen?: number | string | null;
+  sellPrice: number | string;
+  sellPriceWhen?: number | string;
+  useCurrentPricePurchase?: string;
+  useCurrentPriceSell?: string;
 }

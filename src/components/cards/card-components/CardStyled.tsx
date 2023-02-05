@@ -50,6 +50,9 @@ export const CardCalculationsContainer = styled("div")(({ theme }) => ({
 
 export const CardCalculationsStyled = styled("div")(({ theme }) => ({
   fontSize: "13px",
+  "& .MuiTypography-root": {
+    fontSize: "13px",
+  },
   "& > div": {
     display: "flex",
     "& > div:nth-of-type(1)": {
@@ -61,6 +64,45 @@ export const CardCalculationsStyled = styled("div")(({ theme }) => ({
     },
     "& > div:nth-of-type(2)": {
       // border: "1px solid green",
+    },
+  },
+}));
+
+export const CalculatedResultsStyled = styled("section", {
+  shouldForwardProp: (prop) => prop !== "netReturn",
+})<{ netReturn: number }>(({ theme, netReturn }) => ({
+  fontSize: "13px",
+  "& .MuiTypography-root": {
+    fontSize: "13px",
+  },
+  "& > div": {
+    display: "flex",
+    "& > div:nth-of-type(1)": {
+      marginRight: "5px",
+      alignSelf: "right",
+      textAlign: "right",
+      minWidth: "100px",
+      color: theme.palette.text.label,
+    },
+  },
+  "& > div:nth-of-type(2)": {
+    "& > div:nth-of-type(2)": {
+      "& .MuiTypography-root": {
+        color: theme.palette.investments.neutral.color,
+        fontWeight: "700",
+        borderBottom: "1px solid rgba(255, 255, 255, .25)",
+        marginBottom: "3px",
+      },
+    },
+  },
+  "& > div:nth-of-type(3)": {
+    "& > div:nth-of-type(2)": {
+      "& .MuiTypography-root": {
+        color:
+          netReturn >= 0
+            ? theme.palette.investments.profit.color
+            : theme.palette.investments.loss.color,
+      },
     },
   },
 }));

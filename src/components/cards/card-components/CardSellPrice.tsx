@@ -9,7 +9,10 @@ import {
 import { FormRow, InputText } from "../../forms";
 import { constants } from "../../../utils/constants";
 import { useGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
-import { updateCardProperties } from "../../../state/features/cardSlice";
+import {
+  updateCardProperties,
+  updateCardProperty,
+} from "../../../state/features/cardSlice";
 
 interface CardSellPriceProps {
   sellPrice?: string;
@@ -32,6 +35,15 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   const firstUpdate = useRef(true);
 
   const optionsChangeHandler = (key: string, value?: string) => {
+    if (value === "Current Price") {
+      dispatch(
+        updateCardProperty({
+          property: "useCurrentPricePurchase",
+          value: "true",
+          index: index,
+        })
+      );
+    }
     const _fromDate = getDateFrom(key).toString();
     setSellPriceDisplay(`fetching ${ticker} from ${getTimestamp(_fromDate)}`);
     if (typeof _fromDate !== "undefined" && _fromDate) {

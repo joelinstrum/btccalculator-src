@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { Link } from "@mui/material";
@@ -6,8 +6,9 @@ import { CryptoDisplayPrice, Modal, CryptoList } from "../";
 import CryptoPriceRowStyled from "./CryptoPriceRowStyled";
 import { useGetTickersQuery } from "../../state/features/apiSlice";
 import { constants } from "../../utils/constants";
-import { filterApiData } from "./cryptoPriceRowUtils";
+import { filterApiData, setTickerPrices } from "./cryptoPriceRowUtils";
 import { openModal } from "../../state/features/modalSlice";
+import { tickerPrices, TickerPrices } from "../../state/features/tickerSlice";
 
 const CryptoPriceRow = () => {
   const dispatch = useDispatch();
@@ -15,17 +16,13 @@ const CryptoPriceRow = () => {
   const { selectedCryptos } = useSelector(
     (store: RootState) => store.cryptoReducer
   );
-  const {
-    data: cryptoList,
-    isSuccess,
-    error,
-  } = useGetTickersQuery(
+  const { data: cryptoList, isSuccess } = useGetTickersQuery(
     {
       fsyms: selectedCryptos.join(","),
       tsyms: "USD",
       extraParams: constants.API_PARAM_NAME,
     },
-    { pollingInterval: 30000 }
+    { pollingInterval: 300000 }
   );
 
   const [dataFiltered, setDataFiltered] = useState<ICryptoList>();
@@ -33,10 +30,14 @@ const CryptoPriceRow = () => {
   useEffect(() => {
     if (isSuccess) {
       setDataFiltered(filterApiData(cryptoList));
-    } else {
-      console.log("ERROR: ", error);
     }
-  }, [isSuccess, cryptoList, error, setDataFiltered]);
+  }, [isSuccess, cryptoList]);
+
+  useMemo(() => {
+    const tickersObject: TickerPrices = setTickerPrices(dataFiltered);
+    dispatch(tickerPrices({ value: tickersObject }));
+    /* eslint-disable-next-line */
+  }, [dataFiltered]);
 
   const selectClick = () => {
     dispatch(openModal(""));

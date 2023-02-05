@@ -41,6 +41,17 @@ export const dark = {
         color: "rgba(255, 255, 255, .5)",
       },
     },
+    investments: {
+      profit: {
+        color: "#46db6e",
+      },
+      loss: {
+        color: "#eb5b5b",
+      },
+      neutral: {
+        color: "#fcc930",
+      },
+    },
     alertButton: {
       background: "#db3b3b",
       color: "#fff",

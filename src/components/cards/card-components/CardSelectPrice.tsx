@@ -10,13 +10,16 @@ import {
 } from "../../../utils/utilities";
 import { constants } from "../../../utils/constants";
 import { useGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
-import { updateCardProperties } from "../../../state/features/cardSlice";
+import {
+  updateCardProperties,
+  updateCardProperty,
+} from "../../../state/features/cardSlice";
 import { cryptos } from "../../../models";
 
 interface CardSelectPriceProps {
   purchasePriceOnBlur?: (selectPrice: string) => void;
   purchasePrice?: string;
-  ticker?: string;
+  ticker: string;
   index: number | string;
 }
 
@@ -34,6 +37,7 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   const firstUpdate = useRef(true);
   const [fromDateOptions, setFromDateOptions] = useState<{
     [key: string]: string;
+    //eslint-disable-next-line
   }>({ ["0"]: "Current" });
 
   const { data, refetch } = useGetHistoricalPriceQuery(
@@ -47,6 +51,16 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   );
 
   const optionsChangeHandler = (key: string, value?: string) => {
+    if (value === "Current Price") {
+      dispatch(
+        updateCardProperty({
+          property: "useCurrentPricePurchase",
+          value: "true",
+          index: index,
+        })
+      );
+    }
+
     const _fromDate = getDateFrom(key).toString() || null;
     setInvestmentPrice(`fetching ${ticker} from ${fromTimestamp}`);
     if (typeof _fromDate !== "undefined" && _fromDate) {

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { CardCalculationsStyled } from "./CardStyled";
+import CalculatedResults from "./CalculatedResults";
 import {
   getAmountDollarsInvested,
   getCoins,
   getTotalReturn,
-  getNetReturn,
   parseNumber,
+  formatCurrency,
 } from "../../../utils/utilities";
 
 interface CardCalculationsProps {
@@ -25,10 +26,6 @@ const CardCalculations: React.FC<CardCalculationsProps> = ({ card }) => {
     getTotalReturn(numberOfCoins, card.sellPrice)
   );
 
-  const [netReturn, setNetReturn] = useState(
-    getNetReturn(amountDollarsInvested, totalReturn)
-  );
-
   useEffect(() => {
     let numberOfCoins = getCoins(card.investment, card.purchasePrice);
     let totalReturn = getTotalReturn(numberOfCoins, card.sellPrice);
@@ -36,22 +33,18 @@ const CardCalculations: React.FC<CardCalculationsProps> = ({ card }) => {
       card.investment,
       card.purchasePrice
     );
-    let netReturn = getNetReturn(amountInvested, totalReturn);
     setAmountDollarsInvested(amountInvested);
     setNumberOfCoins(numberOfCoins);
     setTotalReturn(totalReturn);
-    setNetReturn(netReturn);
   }, [card.investment, card.purchasePrice, card.sellPrice]);
 
   return (
     <CardCalculationsStyled>
       <div>
-        <div>$ Invested</div>
-        <div>{amountDollarsInvested}</div>
-      </div>
-      <div>
         <div># coins</div>
-        <div>{numberOfCoins}</div>
+        <div>
+          {numberOfCoins} @{formatCurrency(parseNumber(card.purchasePrice))}
+        </div>
       </div>
       <div>
         <div>Purchased date</div>
@@ -62,14 +55,10 @@ const CardCalculations: React.FC<CardCalculationsProps> = ({ card }) => {
         <div>{card.sellPriceWhen}</div>
       </div>
       <div>{"\u00A0"}</div>
-      <div>
-        <div>Total</div>
-        <div>{totalReturn}</div>
-      </div>
-      <div>
-        <div>Net</div>
-        <div>{netReturn}</div>
-      </div>
+      <CalculatedResults
+        totalInvestment={parseNumber(amountDollarsInvested)}
+        totalReturn={parseNumber(totalReturn)}
+      />
     </CardCalculationsStyled>
   );
 };

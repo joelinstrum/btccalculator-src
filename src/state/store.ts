@@ -4,6 +4,8 @@ import { apiSlice } from "./features/apiSlice";
 import modalReducer from "./features/modalSlice";
 import cryptoReducer from "./features/selectedCryptosSlice";
 import { roiCardsSlice } from "./features/cardSlice";
+import { cardTotalsSlice } from "./features/cardTotalsSlice";
+import { tickerPriceSlice } from "./features/tickerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ export const store = configureStore({
     modal: modalReducer,
     cryptoReducer,
     roiCardsSlice,
+    cardTotalsSlice,
+    tickerPriceSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

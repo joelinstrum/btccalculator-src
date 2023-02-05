@@ -1,6 +1,10 @@
 import { cryptos } from "../models";
 import { constants } from "./constants";
 
+export const getCurrentDate = () => {
+  return new Date().toLocaleDateString("en-US");
+};
+
 export const formatPrice = (price: string | number) => {
   try {
     let _price = price.toString().replace(/$|\s/, "");
@@ -123,15 +127,15 @@ export const getCoins = (
   if (investedAmount && purchasePrice) {
     if (isCurrency(investedAmount)) {
       investedAmountNumber = parseNumber(investedAmount);
-      return (investedAmountNumber / purchasePriceNumber).toString();
+      return (investedAmountNumber / purchasePriceNumber).toFixed(5);
     }
   }
   return "";
 };
 
 export const getTotalReturn = (
-  coins: string | number | null | undefined,
-  sellPrice: string | number | null | undefined
+  coins: string | number,
+  sellPrice: string | number
 ): string => {
   if (coins && sellPrice) {
     let coinsNumber = parseNumber(coins);
@@ -157,7 +161,7 @@ export const parseNumber = (item?: string | number): number => {
   if (typeof item === "number") {
     return item;
   }
-  return item ? parseInt(item.replace(/[^0-9.]/gm, ""), 10) : 0;
+  return item ? parseFloat(item.replace(/[^0-9.-]/gm, "")) : 0;
 };
 
 const isCurrency = (item?: string | number): boolean => {
