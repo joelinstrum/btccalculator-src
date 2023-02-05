@@ -17,7 +17,7 @@ import {
 import { cryptos } from "../../../models";
 
 interface CardSelectPriceProps {
-  purchasePriceOnBlur?: (selectPrice: string) => void;
+  purchasePriceOnBlur?: (selectPrice?: string) => void;
   purchasePrice?: string;
   ticker: string;
   index: number | string;
@@ -98,8 +98,10 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
       );
       setTimeout(() => {
         setDisabled(false);
+        purchasePriceOnBlur && purchasePriceOnBlur();
       }, 250);
     }
+    /* eslint-disable-next-line */
   }, [
     data,
     disabled,

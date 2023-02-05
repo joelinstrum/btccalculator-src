@@ -4,7 +4,9 @@ export const constants = {
   API_PARAM_NAME: "CryptoCalculator",
   WEBSOCKET_URL: "wss://streamer.cryptocompare.com/v2",
   WEBSOCKET_API_CONNECT: `wss://streamer.cryptocompare.com/v2?api_key=99aaa4bb27142e523129deada04160b07969ece51d99f154f9b1dc1befaa73c9`,
+  MAX_CRYPTOS: 6,
   DATE_FROM: {
+    /* eslint-disable */
     ["a-0"]: "Current Price",
     ["b-.1"]: "1 month ago",
     ["c-.25"]: "3 months ago",

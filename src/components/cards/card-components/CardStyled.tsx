@@ -2,16 +2,16 @@ import { styled } from "@mui/system";
 
 export const BoxStyled = styled("div")(({ theme }) => ({
   // border: theme.palette.card.border,
+  width: "100%",
   background: theme.palette.card.background,
   borderRadius: 2,
   padding: theme.spacing(0.5),
   display: "flex",
   flexDirection: "column",
-  maxWidth: "900px",
+  maxWidth: "870px",
   justifyContent: "center",
+  alignSelf: "center",
   fontSize: 13,
-  marginLeft: "3%",
-  marginRight: "3%",
   marginBottom: theme.spacing(1),
   [theme.breakpoints.up("md")]: {
     marginLeft: "0",
@@ -19,7 +19,6 @@ export const BoxStyled = styled("div")(({ theme }) => ({
 }));
 
 export const CardContainerStyled = styled("div")(({ theme }) => ({
-  width: "100%",
   display: "flex",
   flexDirection: "column",
   "& > div:nth-of-type(1)": {
@@ -36,7 +35,14 @@ export const CardContainerStyled = styled("div")(({ theme }) => ({
   },
   [theme.breakpoints.up("lg")]: {
     "& > div:nth-of-type(1)": {
-      marginRight: "2%",
+      [theme.breakpoints.up("md")]: {
+        marginRight: "10%",
+      },
+    },
+  },
+  [theme.breakpoints.down("md")]: {
+    "& > div:nth-of-type(2)": {
+      marginTop: "15px",
     },
   },
 }));
@@ -71,6 +77,9 @@ export const CardCalculationsStyled = styled("div")(({ theme }) => ({
 export const CalculatedResultsStyled = styled("section", {
   shouldForwardProp: (prop) => prop !== "netReturn",
 })<{ netReturn: number }>(({ theme, netReturn }) => ({
+  [theme.breakpoints.up("md")]: {
+    marginLeft: "15px",
+  },
   fontSize: "13px",
   "& .MuiTypography-root": {
     fontSize: "13px",
@@ -84,6 +93,10 @@ export const CalculatedResultsStyled = styled("section", {
       minWidth: "100px",
       color: theme.palette.text.label,
     },
+    "& > div:nth-of-type(2)": {
+      minWidth: "100px",
+      textAlign: "right",
+    },
   },
   "& > div:nth-of-type(2)": {
     "& > div:nth-of-type(2)": {
@@ -92,12 +105,16 @@ export const CalculatedResultsStyled = styled("section", {
         fontWeight: "700",
         borderBottom: "1px solid rgba(255, 255, 255, .25)",
         marginBottom: "3px",
+        textAlign: "right",
+        minWidth: "100px",
       },
     },
   },
   "& > div:nth-of-type(3)": {
     "& > div:nth-of-type(2)": {
       "& .MuiTypography-root": {
+        textAlign: "right",
+        minWidth: "100px",
         color:
           netReturn >= 0
             ? theme.palette.investments.profit.color

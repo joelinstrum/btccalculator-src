@@ -23,6 +23,7 @@ const ModalStyledInner = styled("div")(({ theme }) => ({
   transform: "translate(-50%, -25%)",
   position: "fixed",
   background: theme.palette.background.modalInner,
+  borderRadius: "5px",
 }));
 
 const ModalStyled: React.FC<ModalStyledProps> = ({ children }) => (

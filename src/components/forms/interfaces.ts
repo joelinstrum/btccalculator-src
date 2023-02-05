@@ -8,6 +8,8 @@ export interface InputTextProps {
   optionsChangeHandler?: (key: string, value: string) => void;
   onBlur?: (value: string) => void;
   disabled?: boolean;
+  ref?: HTMLInputElement;
+  autoFocus?: boolean;
 }
 
 export interface ButtonProps {

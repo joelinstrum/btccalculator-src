@@ -3,7 +3,8 @@ export const dark = {
     background: {
       default: "#1a2639",
       modalOuter: "rgba(0, 0, 0, .25)",
-      modalInner: "#fff",
+      modalInner:
+        "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(175,179,201,1) 100%);",
     },
     primary: {
       main: "#54C1F7",
@@ -20,7 +21,6 @@ export const dark = {
       label: "#bbb",
     },
     modal: {
-      background: "#fff",
       text: "#eee",
       backgroundHover: "#eee",
     },

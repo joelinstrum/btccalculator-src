@@ -62,15 +62,19 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
       );
     }
   };
-  const purchasePriceOnBlur = (value: string) => {
-    if (value !== purchasePrice) {
+  const purchasePriceOnBlur = (value?: string) => {
+    if (value && value !== purchasePrice) {
       setPurchasePrice(value);
+      updateSaveDisabled();
+    } else {
       updateSaveDisabled();
     }
   };
-  const sellPriceOnBlur = (value: string) => {
-    if (value !== sellPrice) {
+  const sellPriceOnBlur = (value?: string) => {
+    if (value && value !== sellPrice) {
       setSellPrice(value);
+      updateSaveDisabled();
+    } else {
       updateSaveDisabled();
     }
   };
@@ -126,9 +130,19 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
     }
   };
 
+  const onTitleChange = () => {
+    if (saveDisabled) {
+      setSaveDisabled(false);
+    }
+  };
+
   return (
     <BoxStyled>
-      <CardHeader title={card.title} index={index} />
+      <CardHeader
+        title={card.title}
+        index={index}
+        onTitleChange={onTitleChange}
+      />
       <CardContainerStyled>
         <div>
           <CardInvestment

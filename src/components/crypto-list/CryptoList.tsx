@@ -5,6 +5,7 @@ import CryptoItem from "./CryptoItem";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../state/store";
 import { setSelectedCryptos } from "../../state/features/selectedCryptosSlice";
+import { constants } from "../../utils/constants";
 
 const CryptoList = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const CryptoList = () => {
     <CryptoListStyled>
       <div>
         <Typography variant="h4">
-          Choose up to 5 crypto currencies to follow
+          Choose up to ${constants.MAX_CRYPTOS} crypto currencies to follow
         </Typography>
         {Object.keys(cryptoCurrencies).map((key) => {
           return (
@@ -36,7 +37,7 @@ const CryptoList = () => {
               cryptoItem={cryptoCurrencies[key]}
               selectedCryptos={selectedCryptos}
               checkClickHandler={() => checkClickHandler(key)}
-              disabled={selectedCryptos.length >= 5}
+              disabled={selectedCryptos.length >= constants.MAX_CRYPTOS}
               key={key}
             />
           );

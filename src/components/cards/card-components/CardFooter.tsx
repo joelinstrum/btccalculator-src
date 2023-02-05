@@ -3,8 +3,12 @@ import { styled } from "@mui/system";
 import { Button } from "../../forms";
 import { addCard } from "../../../state/features/cardSlice";
 
-const CardFooterStyled = styled("div")(() => ({
+const CardFooterStyled = styled("div")(({ theme }) => ({
   marginLeft: "4px",
+  maxWidth: "870px",
+  [theme.breakpoints.up("md")]: {
+    marginLeft: "15px",
+  },
 }));
 
 const CardFooter = () => {

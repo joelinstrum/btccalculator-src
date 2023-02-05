@@ -52,7 +52,7 @@ const CryptoPriceRow = () => {
       )}
       <CryptoPriceRowStyled>
         <Link onClick={selectClick} underline="hover">
-          Select
+          Choose cryptos
         </Link>
         <div>
           {isSuccess &&

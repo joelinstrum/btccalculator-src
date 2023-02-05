@@ -9,6 +9,7 @@ import { updateCardProperty } from "../../../state/features/cardSlice";
 interface CardHeaderProps {
   title: string;
   index: number;
+  onTitleChange: () => void;
 }
 
 const CardHeaderStyled = styled("div")(() => ({
@@ -16,7 +17,11 @@ const CardHeaderStyled = styled("div")(() => ({
   justifyContent: "space-between",
 }));
 
-const CardHeader: React.FC<CardHeaderProps> = ({ title, index }) => {
+const CardHeader: React.FC<CardHeaderProps> = ({
+  title,
+  index,
+  onTitleChange,
+}) => {
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState(false);
 
@@ -28,15 +33,20 @@ const CardHeader: React.FC<CardHeaderProps> = ({ title, index }) => {
     setInEditMode(true);
   };
 
-  const saveEdit = (value: string) => {
+  const saveEdit = (title: string) => {
     setInEditMode(false);
     dispatch(
       updateCardProperty({
         property: "title",
-        value,
+        value: title,
         index,
       })
     );
+  };
+
+  const updateSaveEdit = (title: string) => {
+    saveEdit(title);
+    onTitleChange();
   };
 
   return (
@@ -46,7 +56,8 @@ const CardHeader: React.FC<CardHeaderProps> = ({ title, index }) => {
           <InputText
             value={title}
             size="large"
-            onBlur={(value: string) => saveEdit(value)}
+            onBlur={(value: string) => updateSaveEdit(value)}
+            autoFocus={true}
           />
         )}
         {!inEditMode && (

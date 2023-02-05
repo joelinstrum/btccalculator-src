@@ -16,7 +16,7 @@ import {
 
 interface CardSellPriceProps {
   sellPrice?: string;
-  sellPriceOnBlur?: (key: string) => void;
+  sellPriceOnBlur?: (key?: string) => void;
   ticker: string;
   index: string | number;
 }
@@ -50,6 +50,7 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
       setFromTimestamp(getTimestamp(_fromDate));
     }
     setDisabled(true);
+    sellPriceOnBlur && sellPriceOnBlur();
   };
 
   const { data, refetch } = useGetHistoricalPriceQuery(
