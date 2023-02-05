@@ -14,6 +14,7 @@ const InputText: React.FC<InputTextProps> = ({
   disabled,
   onChange,
   autoFocus,
+  placeHolder,
   ref,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -64,6 +65,7 @@ const InputText: React.FC<InputTextProps> = ({
         onBlur={updateOnBlur}
         disabled={disabled}
         autoFocus={autoFocus}
+        placeholder={placeHolder}
       />
       <span onClick={showOptionsHandler}>
         {showOptions ? <>&#9650;</> : <>&#9660;</>}

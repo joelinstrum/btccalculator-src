@@ -10,6 +10,7 @@ export interface InputTextProps {
   disabled?: boolean;
   ref?: HTMLInputElement;
   autoFocus?: boolean;
+  placeHolder?: string;
 }
 
 export interface ButtonProps {

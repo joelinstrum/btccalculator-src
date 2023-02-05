@@ -22,6 +22,7 @@ const CardInvestment: React.FC<CardInvestmentProps> = ({
         size="medium"
         ariaLabel="investment amount"
         onChange={onChange}
+        placeHolder="# of coins or $"
         onBlur={() =>
           investmentOnBlur
             ? investmentOnBlur(stateInvestmentAmount || "")

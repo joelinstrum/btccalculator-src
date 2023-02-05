@@ -5,7 +5,7 @@ const defaultRoiCard1: IRoiCard = {
   title: "Bitcoin Roi Calculator",
   ticker: "btc",
   fullName: "Bitcoin",
-  investment: "1",
+  investment: "",
   purchasePrice: 25000,
   purchasePriceWhen: getCurrentDate(),
   sellPrice: 30000,
@@ -18,7 +18,7 @@ const defaultRoiCard2: IRoiCard = {
   title: "Bitcoin Roi Calculator",
   ticker: "btc",
   fullName: "Bitcoin",
-  investment: 6,
+  investment: "",
   purchasePrice: 0,
   sellPrice: 0,
 };
