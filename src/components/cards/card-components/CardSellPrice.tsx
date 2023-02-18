@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   getDateFrom,
@@ -8,7 +8,7 @@ import {
 } from "../../../utils/utilities";
 import { FormRow, InputText } from "../../forms";
 import { constants } from "../../../utils/constants";
-import { useGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
+import { useLazyGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
 import {
   updateCardProperties,
   updateCardProperty,
@@ -34,9 +34,7 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   const [fromTimestamp, setFromTimestamp] = useState<number>(
     getTimestamp(sellPriceWhen || "")
   );
-  const [skip, setSkip] = useState(true);
   const dispatch = useDispatch();
-  const firstUpdate = useRef(true);
   const [prevTicker, setPrevTicker] = useState(ticker);
 
   const optionsChangeHandler = (key: string, value?: string) => {
@@ -58,32 +56,33 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
     sellPriceOnBlur && sellPriceOnBlur();
   };
 
-  const { data, refetch } = useGetHistoricalPriceQuery(
-    {
-      fsym: ticker,
-      tsyms: "USD",
-      extraParams: constants.API_PARAM_NAME,
-      ts: fromTimestamp,
-    },
-    { skip }
-  );
-
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    setSkip(false);
-  }, [fromTimestamp, refetch]);
+  const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
 
   useEffect(() => {
     if (ticker !== prevTicker) {
-      refetch();
+      updatePrice();
       setPrevTicker(ticker);
       setDisabled(true);
     }
     /* eslint-disable-next-line */
   }, [ticker, prevTicker]);
+
+  useEffect(() => {
+    updatePrice();
+    /* eslint-disable-next-line */
+  }, [fromTimestamp]);
+
+  const updatePrice = () => {
+    getHistoricalPrice(
+      {
+        fsym: ticker,
+        tsyms: "USD",
+        extraParams: constants.API_PARAM_NAME,
+        ts: fromTimestamp,
+      },
+      true
+    );
+  };
 
   useEffect(() => {
     if (disabled && fromTimestamp) {

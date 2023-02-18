@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { FormRow, InputText } from "../../forms";
 import {
@@ -9,7 +9,7 @@ import {
   cryptoFromDateOptions,
 } from "../../../utils/utilities";
 import { constants } from "../../../utils/constants";
-import { useGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
+import { useLazyGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
 import {
   updateCardProperties,
   updateCardProperty,
@@ -37,23 +37,14 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   const [fromTimestamp, setFromTimestamp] = useState(
     getTimestamp(purchasePriceWhen || "")
   );
-  const [skip, setSkip] = useState(true);
-  const firstUpdate = useRef(true);
+
   const [prevTicker, setPrevTicker] = useState(ticker);
   const [fromDateOptions, setFromDateOptions] = useState<{
     [key: string]: string;
     //eslint-disable-next-line
   }>({ ["0"]: "Current" });
 
-  const { data, refetch } = useGetHistoricalPriceQuery(
-    {
-      fsym: ticker,
-      tsyms: "USD",
-      extraParams: constants.API_PARAM_NAME,
-      ts: fromTimestamp,
-    },
-    { skip }
-  );
+  const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
 
   const optionsChangeHandler = (key: string, value?: string) => {
     if (value === "Current Price") {
@@ -74,23 +65,31 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
     setDisabled(true);
   };
 
-  // refetch the data
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    setSkip(false);
-  }, [fromTimestamp, refetch]);
-
   useEffect(() => {
     if (ticker !== prevTicker) {
-      refetch();
+      updatePrice();
       setPrevTicker(ticker);
       setDisabled(true);
     }
     /* eslint-disable-next-line */
   }, [ticker, prevTicker]);
+
+  useEffect(() => {
+    updatePrice();
+    /* eslint-disable-next-line */
+  }, [fromTimestamp]);
+
+  const updatePrice = () => {
+    getHistoricalPrice(
+      {
+        fsym: ticker,
+        tsyms: "USD",
+        extraParams: constants.API_PARAM_NAME,
+        ts: fromTimestamp,
+      },
+      true
+    );
+  };
 
   useEffect(() => {
     if (disabled && typeof fromTimestamp === "number") {
