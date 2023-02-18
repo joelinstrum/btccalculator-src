@@ -39,6 +39,7 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   );
 
   const [prevTicker, setPrevTicker] = useState(ticker);
+  const [prevFromTimestamp, setPrevFromTimestamp] = useState(fromTimestamp);
   const [fromDateOptions, setFromDateOptions] = useState<{
     [key: string]: string;
     //eslint-disable-next-line
@@ -75,9 +76,13 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   }, [ticker, prevTicker]);
 
   useEffect(() => {
-    updatePrice();
+    if (fromTimestamp !== prevFromTimestamp) {
+      setDisabled(true);
+      updatePrice();
+      setPrevFromTimestamp(fromTimestamp);
+    }
     /* eslint-disable-next-line */
-  }, [fromTimestamp]);
+  }, [fromTimestamp, prevFromTimestamp]);
 
   const updatePrice = () => {
     getHistoricalPrice(

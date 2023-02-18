@@ -36,6 +36,7 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   );
   const dispatch = useDispatch();
   const [prevTicker, setPrevTicker] = useState(ticker);
+  const [prevFromTimestamp, setPrevFromTimestamp] = useState(fromTimestamp);
 
   const optionsChangeHandler = (key: string, value?: string) => {
     if (value === "Current Price") {
@@ -68,11 +69,16 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   }, [ticker, prevTicker]);
 
   useEffect(() => {
-    updatePrice();
+    if (fromTimestamp !== prevFromTimestamp) {
+      setDisabled(true);
+      updatePrice();
+      setPrevFromTimestamp(fromTimestamp);
+    }
     /* eslint-disable-next-line */
-  }, [fromTimestamp]);
+  }, [fromTimestamp, prevFromTimestamp]);
 
   const updatePrice = () => {
+    console.log("UPDATE PRICE!");
     getHistoricalPrice(
       {
         fsym: ticker,
