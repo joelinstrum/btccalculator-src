@@ -49,6 +49,7 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
     updateSaveDisabled();
     setTicker(key);
   };
+
   const investmentOnBlur = (value: string) => {
     if (value !== investmentAmount) {
       setInvestmentAmount(value);
@@ -157,12 +158,14 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
           <CardSelectPrice
             purchasePriceOnBlur={purchasePriceOnBlur}
             purchasePrice={purchasePrice}
+            purchasePriceWhen={card.purchasePriceWhen}
             ticker={ticker}
             index={index}
           />
           <CardSellPrice
             sellPriceOnBlur={sellPriceOnBlur}
             sellPrice={sellPrice}
+            sellPriceWhen={card.sellPriceWhen}
             ticker={ticker}
             index={index}
           />

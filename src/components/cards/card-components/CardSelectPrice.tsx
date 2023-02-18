@@ -19,12 +19,14 @@ import { cryptos } from "../../../models";
 interface CardSelectPriceProps {
   purchasePriceOnBlur?: (selectPrice?: string) => void;
   purchasePrice?: string;
+  purchasePriceWhen?: any;
   ticker: string;
   index: number | string;
 }
 
 const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   purchasePrice,
+  purchasePriceWhen,
   purchasePriceOnBlur,
   ticker,
   index,
@@ -32,9 +34,12 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   const dispatch = useDispatch();
   const [investmentPrice, setInvestmentPrice] = useState(purchasePrice);
   const [disabled, setDisabled] = useState(false);
-  const [fromTimestamp, setFromTimestamp] = useState(getTimestamp());
+  const [fromTimestamp, setFromTimestamp] = useState(
+    getTimestamp(purchasePriceWhen || "")
+  );
   const [skip, setSkip] = useState(true);
   const firstUpdate = useRef(true);
+  const [prevTicker, setPrevTicker] = useState(ticker);
   const [fromDateOptions, setFromDateOptions] = useState<{
     [key: string]: string;
     //eslint-disable-next-line
@@ -77,6 +82,15 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
     }
     setSkip(false);
   }, [fromTimestamp, refetch]);
+
+  useEffect(() => {
+    if (ticker !== prevTicker) {
+      refetch();
+      setPrevTicker(ticker);
+      setDisabled(true);
+    }
+    /* eslint-disable-next-line */
+  }, [ticker, prevTicker]);
 
   useEffect(() => {
     if (disabled && typeof fromTimestamp === "number") {

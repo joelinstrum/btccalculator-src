@@ -43,6 +43,7 @@ export const updateCardProperties =
 
 export const saveRoiCards = createAction("saveRoiCards");
 export const removeRoiCard = createAction<{ index: number }>("removeCard");
+export const copyRoiCard = createAction<{ index: number }>("copyRoiCard");
 export const addCard = createAction("addCard");
 
 export const roiCardsSlice = createReducer(initialState, (builder) => {
@@ -74,5 +75,13 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
   });
   builder.addCase(addCard, (state) => {
     state.roiCards.push(defaultRoiCard1);
+  });
+  builder.addCase(copyRoiCard, (state, action) => {
+    const cardToCopy = state.roiCards[action.payload.index];
+    const newCard = {
+      ...cardToCopy,
+      ...{ title: `${cardToCopy.title} (copy)` },
+    };
+    state.roiCards.push(newCard);
   });
 });

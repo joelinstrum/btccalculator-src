@@ -17,6 +17,7 @@ import {
 interface CardSellPriceProps {
   sellPrice?: string;
   sellPriceOnBlur?: (key?: string) => void;
+  sellPriceWhen?: any;
   ticker: string;
   index: string | number;
 }
@@ -24,15 +25,19 @@ interface CardSellPriceProps {
 const CardSellPrice: React.FC<CardSellPriceProps> = ({
   sellPrice,
   sellPriceOnBlur,
+  sellPriceWhen,
   ticker,
   index,
 }) => {
   const [sellPriceDisplay, setSellPriceDisplay] = useState(sellPrice);
   const [disabled, setDisabled] = useState(false);
-  const [fromTimestamp, setFromTimestamp] = useState<number>(getTimestamp());
+  const [fromTimestamp, setFromTimestamp] = useState<number>(
+    getTimestamp(sellPriceWhen || "")
+  );
   const [skip, setSkip] = useState(true);
   const dispatch = useDispatch();
   const firstUpdate = useRef(true);
+  const [prevTicker, setPrevTicker] = useState(ticker);
 
   const optionsChangeHandler = (key: string, value?: string) => {
     if (value === "Current Price") {
@@ -70,6 +75,15 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
     }
     setSkip(false);
   }, [fromTimestamp, refetch]);
+
+  useEffect(() => {
+    if (ticker !== prevTicker) {
+      refetch();
+      setPrevTicker(ticker);
+      setDisabled(true);
+    }
+    /* eslint-disable-next-line */
+  }, [ticker, prevTicker]);
 
   useEffect(() => {
     if (disabled && fromTimestamp) {

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { styled } from "@mui/system";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, InputText } from "../../forms";
-import { removeRoiCard } from "../../../state/features/cardSlice";
+import { removeRoiCard, copyRoiCard } from "../../../state/features/cardSlice";
 import { updateCardProperty } from "../../../state/features/cardSlice";
 
 interface CardHeaderProps {
@@ -27,6 +27,10 @@ const CardHeader: React.FC<CardHeaderProps> = ({
 
   const removeHandler = () => {
     dispatch(removeRoiCard({ index }));
+  };
+
+  const copyHandler = () => {
+    dispatch(copyRoiCard({ index }));
   };
 
   const onEditClick = () => {
@@ -68,6 +72,10 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         )}
       </div>
       <div>
+        <Button variation="secondary" size="small" onClick={copyHandler}>
+          Copy
+        </Button>
+        &nbsp;
         <Button variation="alert" size="small" onClick={removeHandler}>
           Remove
         </Button>

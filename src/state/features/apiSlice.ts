@@ -9,9 +9,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: constants.API_URL }),
   // The "endpoints" represent operations and requests for this server
   endpoints: (builder) => ({
-    // The `getPosts` endpoint is a "query" operation that returns data
     getTickers: builder.query({
-      // The URL for the request is '/fakeApi/posts'
       query: (args) => ({
         url: "/pricemultifull",
         params: { ...args },
