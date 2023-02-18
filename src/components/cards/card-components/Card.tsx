@@ -15,7 +15,10 @@ import CardSave from "./CardSave";
 import CardCalculations from "./CardCalculations";
 import CardHeader from "./CardHeader";
 import { saveRoiCards } from "../../../state/features/cardSlice";
-import { updateCardProperty } from "../../../state/features/cardSlice";
+import {
+  updateCardProperty,
+  updateCardProperties,
+} from "../../../state/features/cardSlice";
 
 interface CardProps {
   card: IRoiCard;
@@ -45,6 +48,20 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
   // }, [card]);
 
   const selectedCryptoChange = (key: string, value: string | number) => {
+    dispatch(
+      updateCardProperties([
+        {
+          property: "ticker",
+          value: key,
+          index,
+        },
+        {
+          property: "fullName",
+          value: value.toString(),
+          index,
+        },
+      ])
+    );
     setCryptoTextValue(value.toString());
     updateSaveDisabled();
     setTicker(key);
