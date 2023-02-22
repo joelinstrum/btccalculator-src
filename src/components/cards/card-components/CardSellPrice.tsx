@@ -13,6 +13,7 @@ import {
   updateCardProperties,
   updateCardProperty,
 } from "../../../state/features/cardSlice";
+import { date, isToday } from "../../../utils/utilities";
 
 interface CardSellPriceProps {
   sellPrice?: string;
@@ -37,8 +38,11 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   const dispatch = useDispatch();
   const [prevTicker, setPrevTicker] = useState(ticker);
   const [prevFromTimestamp, setPrevFromTimestamp] = useState(fromTimestamp);
+  const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
 
   const optionsChangeHandler = (key: string, value?: string) => {
+    setDisabled(true);
+    let _fromDate;
     if (value === "Current Price") {
       dispatch(
         updateCardProperty({
@@ -47,17 +51,15 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
           index: index,
         })
       );
+      _fromDate = date();
+    } else {
+      _fromDate = getDateFrom(key).toString();
     }
-    const _fromDate = getDateFrom(key).toString();
-    setSellPriceDisplay(`fetching ${ticker} from ${getTimestamp(_fromDate)}`);
     if (typeof _fromDate !== "undefined" && _fromDate) {
       setFromTimestamp(getTimestamp(_fromDate));
     }
-    setDisabled(true);
     sellPriceOnBlur && sellPriceOnBlur();
   };
-
-  const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
 
   useEffect(() => {
     if (ticker !== prevTicker) {
@@ -69,7 +71,8 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   }, [ticker, prevTicker]);
 
   useEffect(() => {
-    if (fromTimestamp !== prevFromTimestamp) {
+    let doSet = fromTimestamp !== prevFromTimestamp || isToday(fromTimestamp);
+    if (doSet) {
       setDisabled(true);
       updatePrice();
       setPrevFromTimestamp(fromTimestamp);
@@ -123,6 +126,7 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
         onBlur={sellPriceOnBlur}
         optionsChangeHandler={optionsChangeHandler}
         options={constants.DATE_FROM}
+        align="right"
       />
     </FormRow>
   );

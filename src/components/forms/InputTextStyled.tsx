@@ -3,7 +3,7 @@ import { InputTextProps } from "./interfaces";
 
 const InputTextStyled = styled("div", {
   shouldForwardProp: (prop) => prop !== "updatetextvalue",
-})<InputTextProps>(({ theme, size, options }) => ({
+})<InputTextProps>(({ theme, size, options, align }) => ({
   fontSize: 13,
   position: "relative",
   "& span:nth-of-type(1)": {
@@ -33,7 +33,7 @@ const InputTextStyled = styled("div", {
   },
   "& input": {
     marginLeft: "6px",
-    textAlign: "right",
+    textAlign: align || "left",
     "&:focus": {
       outline: "none",
     },

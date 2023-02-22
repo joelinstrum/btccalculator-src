@@ -18,6 +18,7 @@ const CardSelectedCrypto: React.FC<CardSelectedCryptoProps> = ({
       options={selectedCryptosList}
       optionsChangeHandler={selectedCryptoChange}
       value={cryptoTextValue}
+      align="right"
     />
   </FormRow>
 );

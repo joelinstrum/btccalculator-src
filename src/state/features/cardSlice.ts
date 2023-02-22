@@ -12,6 +12,7 @@ const defaultRoiCard1: IRoiCard = {
   sellPriceWhen: getCurrentDate(),
   useCurrentPricePurchase: "false",
   useCurrentPriceSell: "true",
+  revertedDate: Date.now(),
 };
 
 const defaultRoiCard2: IRoiCard = {
@@ -21,6 +22,7 @@ const defaultRoiCard2: IRoiCard = {
   investment: "",
   purchasePrice: 0,
   sellPrice: 0,
+  revertedDate: Date.now(),
 };
 
 const initialState = {
@@ -42,6 +44,7 @@ export const updateCardProperties =
   createAction<IRoiCardSliceAction[]>("updateProperties");
 
 export const saveRoiCards = createAction("saveRoiCards");
+export const revertRoiCards = createAction("revertRoiCards");
 export const removeRoiCard = createAction<{ index: number }>("removeCard");
 export const copyRoiCard = createAction<{ index: number }>("copyRoiCard");
 export const addCard = createAction("addCard");
@@ -64,6 +67,13 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
       "storedRoiCards",
       JSON.stringify(state.roiCards)
     );
+  });
+  builder.addCase("revertRoiCards", (state) => {
+    const roiCards: IRoiCard[] = window.localStorage.getItem("storedRoiCards")
+      ? JSON.parse(window.localStorage.getItem("storedRoiCards") || "")
+      : ([defaultRoiCard1, defaultRoiCard2] as IRoiCard[]);
+    roiCards.forEach((card) => (card.revertedDate = Date.now()));
+    state.roiCards = roiCards;
   });
   builder.addCase(removeRoiCard, (state, action) => {
     const index = action.payload.index;

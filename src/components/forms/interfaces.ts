@@ -11,6 +11,7 @@ export interface InputTextProps {
   ref?: HTMLInputElement;
   autoFocus?: boolean;
   placeHolder?: string;
+  align?: "left" | "right" | "center";
 }
 
 export interface ButtonProps {

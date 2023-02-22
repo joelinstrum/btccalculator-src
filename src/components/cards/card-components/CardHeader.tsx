@@ -34,7 +34,9 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   };
 
   const onEditClick = () => {
-    setInEditMode(true);
+    if (!inEditMode) {
+      setInEditMode(true);
+    }
   };
 
   const saveEdit = (title: string) => {
@@ -55,19 +57,20 @@ const CardHeader: React.FC<CardHeaderProps> = ({
 
   return (
     <CardHeaderStyled>
-      <div>
+      <div onClick={onEditClick}>
         {inEditMode && (
           <InputText
             value={title}
             size="large"
             onBlur={(value: string) => updateSaveEdit(value)}
             autoFocus={true}
+            align={"left"}
           />
         )}
         {!inEditMode && (
           <>
             {title}
-            <EditIcon sx={{ maxHeight: "14px" }} onClick={onEditClick} />
+            <EditIcon sx={{ maxHeight: "14px" }} />
           </>
         )}
       </div>

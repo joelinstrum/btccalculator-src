@@ -15,6 +15,7 @@ import {
   updateCardProperty,
 } from "../../../state/features/cardSlice";
 import { cryptos } from "../../../models";
+import { date, isToday } from "../../../utils/utilities";
 
 interface CardSelectPriceProps {
   purchasePriceOnBlur?: (selectPrice?: string) => void;
@@ -76,7 +77,8 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
   }, [ticker, prevTicker]);
 
   useEffect(() => {
-    if (fromTimestamp !== prevFromTimestamp) {
+    let doSet = fromTimestamp !== prevFromTimestamp || isToday(fromTimestamp);
+    if (doSet) {
       setDisabled(true);
       updatePrice();
       setPrevFromTimestamp(fromTimestamp);
@@ -140,6 +142,7 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
         optionsChangeHandler={optionsChangeHandler}
         disabled={disabled}
         options={fromDateOptions}
+        align="right"
       />
     </FormRow>
   );

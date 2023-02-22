@@ -16,6 +16,7 @@ const InputText: React.FC<InputTextProps> = ({
   autoFocus,
   placeHolder,
   ref,
+  align,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [textValue, setTextValue] = useState(value || "");
@@ -56,6 +57,7 @@ const InputText: React.FC<InputTextProps> = ({
       size={size}
       updatetextvalue={updateTextValue}
       options={options}
+      align={align}
     >
       <input
         type="text"

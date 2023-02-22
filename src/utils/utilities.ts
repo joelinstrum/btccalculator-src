@@ -194,3 +194,14 @@ export const currency = new Intl.NumberFormat("en-US", {
   //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
   //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
+
+export const date = (d: Date = new Date()) => {
+  const day = d.getDay();
+  const month = d.getMonth() + 1;
+  const year = d.getFullYear();
+  return `${month}/${day}/${year}`;
+};
+
+export const isToday = (from: any) => {
+  return date() !== date(new Date(from));
+};

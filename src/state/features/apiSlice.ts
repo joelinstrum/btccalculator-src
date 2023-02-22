@@ -25,4 +25,8 @@ export const apiSlice = createApi({
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetTickersQuery, useLazyGetHistoricalPriceQuery } = apiSlice;
+export const {
+  useGetTickersQuery,
+  useLazyGetHistoricalPriceQuery,
+  useLazyGetTickersQuery,
+} = apiSlice;

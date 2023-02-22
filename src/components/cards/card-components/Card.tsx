@@ -14,7 +14,10 @@ import CardSellPrice from "./CardSellPrice";
 import CardSave from "./CardSave";
 import CardCalculations from "./CardCalculations";
 import CardHeader from "./CardHeader";
-import { saveRoiCards } from "../../../state/features/cardSlice";
+import {
+  saveRoiCards,
+  revertRoiCards,
+} from "../../../state/features/cardSlice";
 import {
   updateCardProperty,
   updateCardProperties,
@@ -37,15 +40,6 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
   const [saveDisabled, setSaveDisabled] = useState(true);
   const [ticker, setTicker] = useState(card.ticker.toUpperCase());
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (firstUpdate.current) {
-  //     firstUpdate.current = false;
-  //   }
-  //   // eslint-disable-next-line
-  //   updateSaveDisabled();
-  //   // eslint-disable-next-line
-  // }, [card]);
 
   const selectedCryptoChange = (key: string, value: string | number) => {
     dispatch(
@@ -137,9 +131,24 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
     {}
   );
 
+  useEffect(() => {
+    setInvestmentAmount(card.investment as string);
+    setTicker(card.ticker);
+    setSellPrice(card.sellPrice as string);
+    setPurchasePrice(card.purchasePrice as string);
+    setCryptoTextValue(card.fullName);
+    setSaveDisabled(true);
+    // eslint-disable-next-line
+  }, [card.revertedDate]);
+
   const saveHandler = () => {
     setSaveDisabled(true);
     dispatch(saveRoiCards());
+  };
+
+  const revertHandler = () => {
+    setSaveDisabled(true);
+    dispatch(revertRoiCards());
   };
 
   const updateSaveDisabled = () => {
@@ -186,7 +195,11 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
             ticker={ticker}
             index={index}
           />
-          <CardSave saveDisabled={saveDisabled} saveHandler={saveHandler} />
+          <CardSave
+            saveDisabled={saveDisabled}
+            saveHandler={saveHandler}
+            revertHandler={revertHandler}
+          />
         </div>
         <CardCalculationsContainer>
           <CardCalculations card={card} />
