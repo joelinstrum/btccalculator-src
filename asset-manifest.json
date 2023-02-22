@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.2854fced.css",
-    "main.js": "/static/js/main.f9a17f0a.js",
+    "main.js": "/static/js/main.da4fd6fa.js",
     "static/js/787.c41a5200.chunk.js": "/static/js/787.c41a5200.chunk.js",
     "static/media/texgyreadventor-regular.otf": "/static/media/texgyreadventor-regular.d0110fa536d525284c00.otf",
     "index.html": "/index.html",
     "main.2854fced.css.map": "/static/css/main.2854fced.css.map",
-    "main.f9a17f0a.js.map": "/static/js/main.f9a17f0a.js.map",
+    "main.da4fd6fa.js.map": "/static/js/main.da4fd6fa.js.map",
     "787.c41a5200.chunk.js.map": "/static/js/787.c41a5200.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2854fced.css",
-    "static/js/main.f9a17f0a.js"
+    "static/js/main.da4fd6fa.js"
   ]
 }
