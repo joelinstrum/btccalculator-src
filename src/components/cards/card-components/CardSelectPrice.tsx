@@ -120,15 +120,7 @@ const CardSelectPrice: React.FC<CardSelectPriceProps> = ({
       }, 250);
     }
     /* eslint-disable-next-line */
-  }, [
-    data,
-    disabled,
-    setInvestmentPrice,
-    setDisabled,
-    dispatch,
-    index,
-    fromTimestamp,
-  ]);
+  }, [data]);
 
   useMemo(() => {
     setFromDateOptions(

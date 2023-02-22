@@ -78,7 +78,6 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   }, [fromTimestamp, prevFromTimestamp]);
 
   const updatePrice = () => {
-    console.log("UPDATE PRICE!");
     getHistoricalPrice(
       {
         fsym: ticker,
@@ -113,7 +112,7 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
       }, 250);
     }
     // eslint-disable-next-line
-  }, [data, disabled, setSellPriceDisplay, setDisabled]);
+  }, [data]);
 
   return (
     <FormRow label="Sell price" align="right">
