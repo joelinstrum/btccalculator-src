@@ -30,3 +30,7 @@ export interface ButtonProps {
   type?: string;
   disabled?: boolean;
 }
+
+export interface KeyValuePair<T> {
+  [key: string]: T;
+}

@@ -1,132 +1,103 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  getDateFrom,
-  getTimestamp,
-  extractPriceFromData,
-  dateFromTimestamp,
-} from "../../../utils/utilities";
-import { FormRow, InputText } from "../../forms";
+import { FormRow, InputText } from "components";
 import { constants } from "../../../utils/constants";
-import { useLazyGetHistoricalPriceQuery } from "../../../state/features/apiSlice";
-import {
-  updateCardProperties,
-  updateCardProperty,
-} from "../../../state/features/cardSlice";
-import { date, isToday } from "../../../utils/utilities";
+import { usePrice } from "../card-hooks";
+import { getDateFrom, getTimestamp } from "utils/date";
+import { useDispatch } from "react-redux";
+import { updateCardProperties } from "state/features/cardSlice";
 
 interface CardSellPriceProps {
-  sellPrice?: string;
-  sellPriceOnBlur?: (key?: string) => void;
-  sellPriceWhen?: any;
+  card: IRoiCard;
+  priceOnblur: (value?: string) => void;
+  index: number;
+  currentPrice?: any;
   ticker: string;
-  index: string | number;
+  revertedDate: number | undefined;
 }
 
 const CardSellPrice: React.FC<CardSellPriceProps> = ({
-  sellPrice,
-  sellPriceOnBlur,
-  sellPriceWhen,
-  ticker,
+  card,
+  priceOnblur,
   index,
+  ticker,
+  revertedDate,
+  currentPrice,
 }) => {
-  const [sellPriceDisplay, setSellPriceDisplay] = useState(sellPrice);
-  const [disabled, setDisabled] = useState(false);
-  const [fromTimestamp, setFromTimestamp] = useState<number>(
-    getTimestamp(sellPriceWhen || "")
-  );
+  const [originalSellDate] = useState(card.sellPriceWhen);
+  const [originalPrice] = useState(card.sellPrice);
+
   const dispatch = useDispatch();
-  const [prevTicker, setPrevTicker] = useState(ticker);
-  const [prevFromTimestamp, setPrevFromTimestamp] = useState(fromTimestamp);
-  const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
+  const { price, setCustomPrice } = usePrice({
+    ticker,
+    fromTimestamp: getTimestamp(card.sellPriceWhen as string),
+    useCurrent: card.useCurrentPriceSell === "true",
+    useCustomPrice: card.useCustomPrice === "true",
+    revertedDate,
+    cardPrice: card.sellPrice,
+  });
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    setCustomPrice(card.sellPrice);
+    /* eslint-disable-next-line */
+  }, [card.useCustomPrice]);
+
+  useEffect(() => {
+    if (card.sellPriceWhen !== originalSellDate && price !== originalPrice) {
+      setDisabled(false);
+      priceOnblur();
+      dispatch(
+        updateCardProperties([{ property: "sellPrice", value: price, index }])
+      );
+    }
+    /* eslint-disable-next-line */
+  }, [card.sellPriceWhen, originalSellDate, originalPrice, price]);
 
   const optionsChangeHandler = (key: string, value?: string) => {
+    let current = value === "Current Price" ? "true" : "false";
     setDisabled(true);
-    let _fromDate;
-    if (value === "Current Price") {
-      dispatch(
-        updateCardProperty({
-          property: "useCurrentPricePurchase",
-          value: "true",
-          index: index,
-        })
-      );
-      _fromDate = date();
-    } else {
-      _fromDate = getDateFrom(key).toString();
-    }
-    if (typeof _fromDate !== "undefined" && _fromDate) {
-      setFromTimestamp(getTimestamp(_fromDate));
-    }
-    sellPriceOnBlur && sellPriceOnBlur();
-  };
-
-  useEffect(() => {
-    if (ticker !== prevTicker) {
-      updatePrice();
-      setPrevTicker(ticker);
-      setDisabled(true);
-    }
-    /* eslint-disable-next-line */
-  }, [ticker, prevTicker]);
-
-  useEffect(() => {
-    let doSet = fromTimestamp !== prevFromTimestamp || isToday(fromTimestamp);
-    if (doSet) {
-      setDisabled(true);
-      updatePrice();
-      setPrevFromTimestamp(fromTimestamp);
-    }
-    /* eslint-disable-next-line */
-  }, [fromTimestamp, prevFromTimestamp]);
-
-  const updatePrice = () => {
-    getHistoricalPrice(
-      {
-        fsym: ticker,
-        tsyms: "USD",
-        extraParams: constants.API_PARAM_NAME,
-        ts: fromTimestamp,
-      },
-      true
+    const dateFromDaysAgo = getDateFrom(key);
+    dispatch(
+      updateCardProperties([
+        { property: "useCurrentPriceSell", value: current, index },
+        { property: "useCustomPrice", value: "false", index },
+        {
+          property: "sellPriceWhen",
+          value: dateFromDaysAgo,
+          index,
+        },
+      ])
     );
   };
 
-  useEffect(() => {
-    if (disabled && fromTimestamp) {
-      const price = extractPriceFromData(data);
-      setSellPriceDisplay(price);
-      dispatch(
-        updateCardProperties([
-          {
-            property: "sellPrice",
-            value: price,
-            index: index,
-          },
-          {
-            property: "sellPriceWhen",
-            value: dateFromTimestamp(fromTimestamp),
-            index: index,
-          },
-        ])
-      );
-      setTimeout(() => {
-        setDisabled(false);
-      }, 250);
-    }
-    // eslint-disable-next-line
-  }, [data]);
+  const onBlur = (value: string) => {
+    dispatch(
+      updateCardProperties([
+        { property: "useCurrentPriceSell", value: "false", index },
+        { property: "useCustomPrice", value: "true", index },
+        {
+          property: "sellPrice",
+          value,
+          index,
+        },
+      ])
+    );
+    priceOnblur();
+  };
+
+  // const dateFrom = useOptionsChangeHandler();
 
   return (
-    <FormRow label="Sell price" align="right">
+    <FormRow label="Sell Price" align="right">
       <InputText
         size="medium"
-        ariaLabel="sell price"
-        value={sellPriceDisplay}
-        onBlur={sellPriceOnBlur}
+        ariaLabel="Sell Price"
+        value={price}
+        onBlur={onBlur}
         optionsChangeHandler={optionsChangeHandler}
         options={constants.DATE_FROM}
         align="right"
+        disabled={disabled}
       />
     </FormRow>
   );

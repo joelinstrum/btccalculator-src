@@ -29,7 +29,12 @@ const CardsContainer = () => {
     <CardsContainerStyled>
       {Array.isArray(roiCards) &&
         roiCards.map((card: IRoiCard, index: number) => (
-          <Card card={card} index={index} key={index} />
+          <Card
+            card={card}
+            index={index}
+            key={index}
+            revertedDate={card.revertedDate || undefined}
+          />
         ))}
       <CardFooter />
       <ReportCard />

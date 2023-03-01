@@ -26,6 +26,7 @@ import {
 interface CardProps {
   card: IRoiCard;
   index: number;
+  revertedDate: number | undefined;
 }
 
 const Card: React.FC<CardProps> = ({ card, index }) => {
@@ -42,6 +43,7 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
   const dispatch = useDispatch();
 
   const selectedCryptoChange = (key: string, value: string | number) => {
+    updateSaveDisabled();
     dispatch(
       updateCardProperties([
         {
@@ -57,7 +59,6 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
       ])
     );
     setCryptoTextValue(value.toString());
-    updateSaveDisabled();
     setTicker(key);
   };
 
@@ -90,19 +91,6 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
       updateSaveDisabled();
     }
   };
-
-  useEffect(() => {
-    if (!saveDisabled) {
-      dispatch(
-        updateCardProperty({
-          property: "purchasePrice",
-          value: purchasePrice,
-          index,
-        })
-      );
-    }
-    //eslint-disable-next-line
-  }, [purchasePrice]);
 
   useEffect(() => {
     if (!saveDisabled) {
@@ -182,18 +170,18 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
             cryptoTextValue={cryptoTextValue}
           />
           <CardSelectPrice
-            purchasePriceOnBlur={purchasePriceOnBlur}
-            purchasePrice={purchasePrice}
-            purchasePriceWhen={card.purchasePriceWhen}
-            ticker={ticker}
+            card={card}
             index={index}
+            priceOnblur={purchasePriceOnBlur}
+            ticker={ticker}
+            revertedDate={card.revertedDate || undefined}
           />
           <CardSellPrice
-            sellPriceOnBlur={sellPriceOnBlur}
-            sellPrice={sellPrice}
-            sellPriceWhen={card.sellPriceWhen}
+            card={card}
+            priceOnblur={sellPriceOnBlur}
             ticker={ticker}
             index={index}
+            revertedDate={card.revertedDate || undefined}
           />
           <CardSave
             saveDisabled={saveDisabled}
