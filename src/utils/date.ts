@@ -8,7 +8,7 @@ export const date = (d: Date = new Date()) => {
 };
 
 export const isToday = (from: any) => {
-  return date() !== date(new Date(from));
+  return date() === date(new Date(from));
 };
 
 export const getDateFrom = (from: string | undefined = ""): string => {

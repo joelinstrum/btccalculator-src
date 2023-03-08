@@ -3,7 +3,7 @@ export interface InputTextProps {
   ariaLabel?: string;
   size: "x-small" | "small" | "medium" | "large";
   options?: { [key: string]: string };
-  value?: string;
+  value?: string | undefined;
   onChange?: (value: string) => void;
   optionsChangeHandler?: (key: string, value: string) => void;
   onBlur?: (value: string) => void;

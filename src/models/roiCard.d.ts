@@ -10,5 +10,6 @@ interface IRoiCard {
   useCurrentPricePurchase?: string;
   useCurrentPriceSell?: string;
   useCustomPrice?: string;
+  useCustomSell?: string;
   revertedDate?: number;
 }

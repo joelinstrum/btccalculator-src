@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 
-export const BoxStyled = styled("div")(({ theme }) => ({
+export const CardStyled = styled("div")(({ theme }) => ({
   // border: theme.palette.card.border,
   width: "100%",
   background: theme.palette.card.background,
@@ -47,32 +47,9 @@ export const CardContainerStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-export const CardCalculationsContainer = styled("div")(({ theme }) => ({
-  [theme.breakpoints.down("md")]: {
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+export const CardLeft = styled("div")(() => ({}));
 
-export const CardCalculationsStyled = styled("div")(({ theme }) => ({
-  fontSize: "13px",
-  "& .MuiTypography-root": {
-    fontSize: "13px",
-  },
-  "& > div": {
-    display: "flex",
-    "& > div:nth-of-type(1)": {
-      marginRight: "5px",
-      alignSelf: "right",
-      textAlign: "right",
-      minWidth: "100px",
-      color: theme.palette.text.label,
-    },
-    "& > div:nth-of-type(2)": {
-      // border: "1px solid green",
-    },
-  },
-}));
+export const CardRight = styled("div")(() => ({}));
 
 export const CalculatedResultsStyled = styled("section", {
   shouldForwardProp: (prop) => prop !== "netReturn",
@@ -120,6 +97,56 @@ export const CalculatedResultsStyled = styled("section", {
             ? theme.palette.investments.profit.color
             : theme.palette.investments.loss.color,
       },
+    },
+  },
+}));
+
+export const ReportCardStyled = styled("div")(({ theme }) => ({
+  marginTop: "2%",
+  marginLeft: "5px",
+  marginRight: "5px",
+  fontSize: "13px",
+  "& .MuiTypography-root": {
+    fontSize: "13px",
+  },
+  "& > div": {
+    display: "flex",
+    "& > div:nth-of-type(1)": {
+      marginRight: "5px",
+      alignSelf: "right",
+      textAlign: "right",
+      minWidth: "150px",
+      color: theme.palette.text.label,
+    },
+    "& > div:nth-of-type(2)": {
+      // border: "1px solid green",
+    },
+  },
+}));
+
+export const CardCalculationsContainer = styled("div")(({ theme }) => ({
+  [theme.breakpoints.down("md")]: {
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
+
+export const CardCalculationsStyled = styled("div")(({ theme }) => ({
+  fontSize: "13px",
+  "& .MuiTypography-root": {
+    fontSize: "13px",
+  },
+  "& > div": {
+    display: "flex",
+    "& > div:nth-of-type(1)": {
+      marginRight: "5px",
+      alignSelf: "right",
+      textAlign: "right",
+      minWidth: "100px",
+      color: theme.palette.text.label,
+    },
+    "& > div:nth-of-type(2)": {
+      // border: "1px solid green",
     },
   },
 }));

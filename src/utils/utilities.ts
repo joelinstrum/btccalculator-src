@@ -1,4 +1,5 @@
 import { cryptos } from "../models";
+import { constants } from "utils/constants";
 
 export const getCurrentDate = () => {
   return new Date().toLocaleDateString("en-US");
@@ -146,3 +147,19 @@ export const currency = new Intl.NumberFormat("en-US", {
   //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
   //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
+
+export const cryptoFromDateOptions = (
+  startYear: number
+): { [key: string]: string } => {
+  let fromString = JSON.stringify(constants.DATE_FROM);
+  let from = JSON.parse(fromString);
+  let currentYear = new Date().getFullYear();
+  const n = currentYear - startYear;
+  for (let i = 2; i <= n; i++) {
+    from = {
+      ...from,
+      ...{ [`H${i}`]: `${i} years ago (${currentYear - i})` },
+    };
+  }
+  return from;
+};

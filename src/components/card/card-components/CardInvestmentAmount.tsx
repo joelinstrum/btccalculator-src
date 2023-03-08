@@ -1,19 +1,32 @@
 import { useState } from "react";
-import { FormRow, InputText } from "../../forms";
+import { FormRow, InputText } from "components/forms";
+import { useInvestmentUpdate } from "../card-hooks";
 
 interface CardInvestmentProps {
   investmentOnBlur?: (value: string) => void;
-  investmentAmount?: string;
+  investmentAmount?: string | number | null | undefined;
+  index: number;
 }
 
 const CardInvestment: React.FC<CardInvestmentProps> = ({
   investmentOnBlur,
   investmentAmount,
+  index,
 }) => {
-  const [stateInvestmentAmount, setStateInvestmentAmount] =
-    useState(investmentAmount);
+  const [stateInvestmentAmount, setStateInvestmentAmount] = useState(
+    investmentAmount as string
+  );
   const onChange = (value: string) => {
     setStateInvestmentAmount(value);
+  };
+
+  const update = useInvestmentUpdate(index);
+
+  const onBlur = () => {
+    update(stateInvestmentAmount as string);
+    if (investmentOnBlur) {
+      investmentOnBlur(stateInvestmentAmount);
+    }
   };
 
   return (
@@ -24,12 +37,8 @@ const CardInvestment: React.FC<CardInvestmentProps> = ({
         onChange={onChange}
         placeHolder="# of coins or $"
         align="right"
-        onBlur={() =>
-          investmentOnBlur
-            ? investmentOnBlur(stateInvestmentAmount || "")
-            : null
-        }
-        value={investmentAmount}
+        onBlur={onBlur}
+        value={stateInvestmentAmount}
       />
     </FormRow>
   );

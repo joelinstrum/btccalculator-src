@@ -1,9 +1,8 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+import { cryptoFromDateOptions } from "utils/utilities";
 import { cryptos } from "models";
-import { cryptoFromDateOptions } from "utils/date";
-import { KeyValuePair } from "components/forms/interfaces";
 
-const useFromDateOptions = (ticker: string): KeyValuePair<string> => {
+const useFromDateOptions = (ticker: string) => {
   const [fromDateOptions, setFromDateOptions] = useState<{
     [key: string]: string;
     //eslint-disable-next-line

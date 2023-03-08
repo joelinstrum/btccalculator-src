@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CardCalculationsStyled } from "./CardStyled";
+import { CardCalculationsStyled } from "../CardStyled";
 import CalculatedResults from "./CalculatedResults";
 import {
   getAmountDollarsInvested,

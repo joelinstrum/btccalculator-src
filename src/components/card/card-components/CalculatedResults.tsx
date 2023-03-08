@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
-import { CalculatedResultsStyled } from "./CardStyled";
-import { formatCurrency } from "../../../utils/utilities";
+import { CalculatedResultsStyled } from "../CardStyled";
+import { formatCurrency } from "utils/utilities";
 
 interface CalculatedResultsProps {
   totalInvestment: number;

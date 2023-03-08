@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { ReportCardStyled } from "../CardStyled";
 import { RootState } from "state/store";
-import ReportCardStyled from "./ReportCardStyled";
-import CalculatedResults from "components/card/card-components/CalculatedResults";
+import CalculatedResults from "./CalculatedResults";
 
 const ReportCard = () => {
   const { totalReturns, totalInvestments } = useSelector(
