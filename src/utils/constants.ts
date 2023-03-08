@@ -8,7 +8,7 @@ export const constants = {
   DATE_FROM: {
     /* eslint-disable */
     ["a-0"]: "Current Price",
-    ["b-.1"]: "1 month ago",
+    ["b-.085"]: "1 month ago",
     ["c-.25"]: "3 months ago",
     ["d-.5"]: "6 months ago",
     ["e-1"]: "1 year ago",

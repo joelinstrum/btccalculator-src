@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import { styled } from "@mui/system";
-import { Button } from "../../forms";
-import { addCard } from "../../../state/features/cardSlice";
+import { Button } from "components/forms";
+import { addCard } from "state/features/cardSlice";
 
-const CardFooterStyled = styled("div")(({ theme }) => ({
+const CardsFooterStyled = styled("div")(({ theme }) => ({
   marginLeft: "4px",
   maxWidth: "870px",
   [theme.breakpoints.up("md")]: {
@@ -11,7 +11,7 @@ const CardFooterStyled = styled("div")(({ theme }) => ({
   },
 }));
 
-const CardFooter = () => {
+const CardsFooter = () => {
   const dispatch = useDispatch();
 
   const addClickHandler = () => {
@@ -19,12 +19,12 @@ const CardFooter = () => {
   };
 
   return (
-    <CardFooterStyled>
+    <CardsFooterStyled>
       <Button variation="success" size="small" onClick={addClickHandler}>
         + Add
       </Button>
-    </CardFooterStyled>
+    </CardsFooterStyled>
   );
 };
 
-export default CardFooter;
+export default CardsFooter;

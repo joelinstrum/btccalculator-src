@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import {
   CardsContainer,
   ContainerOuter,
@@ -6,14 +7,18 @@ import {
   Header,
 } from "../../components";
 
+export const CardContext = createContext(null);
+
 const Home = () => (
-  <ContainerOuter>
-    <ContainerInner>
-      <Header />
-      <CryptoPriceRow />
-      <CardsContainer />
-    </ContainerInner>
-  </ContainerOuter>
+  <CardContext.Provider value={null}>
+    <ContainerOuter>
+      <ContainerInner>
+        <Header />
+        <CryptoPriceRow />
+        <CardsContainer />
+      </ContainerInner>
+    </ContainerOuter>
+  </CardContext.Provider>
 );
 
 export default Home;

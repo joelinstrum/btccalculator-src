@@ -3,21 +3,21 @@ import { getCurrentDate } from "../../utils/utilities";
 
 const defaultRoiCard1: IRoiCard = {
   title: "Bitcoin Roi Calculator",
-  ticker: "btc",
+  ticker: "BTC",
   fullName: "Bitcoin",
-  investment: "",
-  purchasePrice: 25000,
+  investment: "$10,000",
+  purchasePrice: "2500",
   purchasePriceWhen: getCurrentDate(),
-  sellPrice: 30000,
+  sellPrice: "3000",
   sellPriceWhen: getCurrentDate(),
   useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "true",
+  useCurrentPriceSell: "false",
   revertedDate: Date.now(),
 };
 
 const defaultRoiCard2: IRoiCard = {
   title: "Bitcoin Roi Calculator",
-  ticker: "btc",
+  ticker: "BTC",
   fullName: "Bitcoin",
   investment: "",
   purchasePrice: 0,

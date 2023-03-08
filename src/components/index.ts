@@ -1,11 +1,14 @@
 export { default as CardsContainer } from "./cards";
+export { default as CardsFooter } from "./cards-footer";
 export { default as ContainerOuter } from "./container-outer";
 export { default as ContainerInner } from "./container-inner";
 export { default as CryptoList } from "./crypto-list";
 export { default as CryptoPriceRow } from "./crypto-price-row";
 export { default as CryptoImage } from "./crypto-image";
 export { default as CryptoDisplayPrice } from "./crypto-display-price";
+export { default as FormRow } from "./forms/FormRow";
 export { default as Header } from "./header";
+export { default as InputText } from "./forms/InputText";
 export { default as Logo } from "./logo";
 export { default as Modal } from "./modal";
 export { default as Portal } from "./portal";

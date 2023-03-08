@@ -1,8 +1,8 @@
 import { FormRow, InputText } from "../../forms";
 
 interface CardSelectedCryptoProps {
-  selectedCryptosList: { [key: string]: string };
-  selectedCryptoChange: (key: string, value: string | number) => void;
+  selectedCryptosList?: { [key: string]: string };
+  selectedCryptoChange?: (key: string, value: string | number) => void;
   cryptoTextValue?: string;
 }
 
