@@ -11,6 +11,7 @@ export { default as Header } from "./header";
 export { default as InputText } from "./forms/InputText";
 export { default as Logo } from "./logo";
 export { default as Modal } from "./modal";
+export { default as NoCards } from "./no-cards/NoCards";
 export { default as Portal } from "./portal";
 export { default as Theme } from "./theme";
 export { default as ReportCard } from "./report-card";

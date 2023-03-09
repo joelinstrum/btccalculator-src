@@ -2,26 +2,30 @@ import { createReducer, createAction } from "@reduxjs/toolkit";
 import { getCurrentDate } from "../../utils/utilities";
 
 const defaultRoiCard1: IRoiCard = {
-  title: "Bitcoin Roi Calculator",
+  title: "Sample Bitcoin Roi Calculator",
   ticker: "BTC",
   fullName: "Bitcoin",
   investment: "$10,000",
-  purchasePrice: "2500",
-  purchasePriceWhen: getCurrentDate(),
-  sellPrice: "3000",
+  purchasePrice: "8057",
+  purchasePriceWhen: "10/20/2000",
+  sellPrice: "...loading",
   sellPriceWhen: getCurrentDate(),
   useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "false",
+  useCurrentPriceSell: "true",
   revertedDate: Date.now(),
 };
 
 const defaultRoiCard2: IRoiCard = {
-  title: "Bitcoin Roi Calculator",
-  ticker: "BTC",
-  fullName: "Bitcoin",
-  investment: "",
-  purchasePrice: 0,
-  sellPrice: 0,
+  title: "Sample Ethereum Roi Calculator",
+  ticker: "ETH",
+  fullName: "Ethereum",
+  investment: "$10,000",
+  purchasePrice: "200",
+  purchasePriceWhen: "10/20/2000",
+  sellPrice: "...loading",
+  sellPriceWhen: getCurrentDate(),
+  useCurrentPricePurchase: "false",
+  useCurrentPriceSell: "true",
   revertedDate: Date.now(),
 };
 
@@ -48,6 +52,7 @@ export const revertRoiCards = createAction("revertRoiCards");
 export const removeRoiCard = createAction<{ index: number }>("removeCard");
 export const copyRoiCard = createAction<{ index: number }>("copyRoiCard");
 export const addCard = createAction("addCard");
+export const addSampleCards = createAction("addSampleCards");
 
 export const roiCardsSlice = createReducer(initialState, (builder) => {
   builder.addCase(updateCardProperty, (state, action) => {
@@ -85,6 +90,10 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
   });
   builder.addCase(addCard, (state) => {
     state.roiCards.push(defaultRoiCard1);
+  });
+  builder.addCase(addSampleCards, (state) => {
+    state.roiCards.push(defaultRoiCard1);
+    state.roiCards.push(defaultRoiCard2);
   });
   builder.addCase(copyRoiCard, (state, action) => {
     const cardToCopy = state.roiCards[action.payload.index];

@@ -17,6 +17,7 @@ export const dark = {
     },
     text: {
       primary: "#ffffff",
+      secondary: "#cecece",
       modalPrimary: "#333",
       label: "#bbb",
     },

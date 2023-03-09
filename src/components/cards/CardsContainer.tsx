@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "state/store";
 import { styled } from "@mui/system";
-import Card from "../card/Card";
+import Card from "components/card/Card";
+import CardsFooter from "components/cards-footer";
+import { ReportCard, NoCards } from "../";
 import { updateCardTotals } from "state/features/cardTotalsSlice";
-import { CardsFooter, ReportCard } from "components";
 
 const CardsContainerStyled = styled("div")(({ theme }) => ({
   display: "flex",
@@ -15,7 +16,6 @@ const CardsContainerStyled = styled("div")(({ theme }) => ({
 
 const CardsContainer = () => {
   const { roiCards } = useSelector((state: RootState) => state.roiCardsSlice);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,12 +27,17 @@ const CardsContainer = () => {
 
   return (
     <CardsContainerStyled>
-      {Array.isArray(roiCards) &&
-        roiCards.map((card: IRoiCard, index: number) => (
-          <Card card={card} index={index} key={index} />
-        ))}
-      <ReportCard />
-      <CardsFooter />
+      {Array.isArray(roiCards) && roiCards.length > 0 ? (
+        <>
+          {roiCards.map((card: IRoiCard, index: number) => (
+            <Card card={card} index={index} key={index} />
+          ))}
+          <CardsFooter />
+          <ReportCard />
+        </>
+      ) : (
+        <NoCards />
+      )}
     </CardsContainerStyled>
   );
 };

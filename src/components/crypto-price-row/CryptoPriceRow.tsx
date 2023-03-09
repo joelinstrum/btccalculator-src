@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppContext from "pages/app/AppContext";
 import { RootState } from "state/store";
@@ -7,7 +7,7 @@ import { CryptoDisplayPrice, Modal, CryptoList } from "../";
 import CryptoPriceRowStyled from "./CryptoPriceRowStyled";
 import { useGetTickersQuery } from "../../state/features/apiSlice";
 import { constants } from "../../utils/constants";
-import { filterApiData, setTickerPrices } from "./cryptoPriceRowUtils";
+import { filterApiData } from "./cryptoPriceRowUtils";
 import { openModal } from "../../state/features/modalSlice";
 import { IContext } from "pages/app/AppContext";
 import { KeyValuePair } from "components/forms/interfaces";
@@ -36,6 +36,7 @@ const CryptoPriceRow = () => {
       setDataFiltered(_dataFiltered);
       setTickers(_dataFiltered as unknown as KeyValuePair<ICrypto>);
     }
+    /* eslint-disable-next-line */
   }, [isSuccess, cryptoList]);
 
   const selectClick = () => {
