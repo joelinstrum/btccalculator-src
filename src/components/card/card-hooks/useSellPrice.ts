@@ -3,6 +3,8 @@ import { useLazyGetHistoricalPriceQuery } from "state/features/apiSellSlice";
 import { isToday, getTimestamp } from "utils/date";
 import { constants } from "utils/constants";
 import { useSellDispatch } from "./";
+import { date } from "utils/date";
+
 interface PriceProps {
   card: IRoiCard;
   currentPrice: string;
@@ -21,7 +23,7 @@ const useSellPrice: FT<PriceProps> = ({ card, currentPrice, index }) => {
   useEffect(() => {
     if (card.useCurrentPriceSell === "true") {
       setStateSellPrice(currentPrice);
-      sellDispatch(currentPrice, card.sellPriceWhen as string, index, false);
+      sellDispatch(currentPrice, date() as string, index, false);
     }
     /* eslint-disable-next-line */
   }, [card, currentPrice]);

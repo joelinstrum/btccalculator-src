@@ -8,10 +8,10 @@ const defaultRoiCard1: IRoiCard = {
   investment: "$10,000",
   purchasePrice: "8057",
   purchasePriceWhen: "10/20/2000",
-  sellPrice: "...loading",
-  sellPriceWhen: getCurrentDate(),
+  sellPrice: "16837.85",
+  sellPriceWhen: "10/20/2022",
   useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "true",
+  useCurrentPriceSell: "false",
   revertedDate: Date.now(),
 };
 
@@ -22,10 +22,10 @@ const defaultRoiCard2: IRoiCard = {
   investment: "$10,000",
   purchasePrice: "200",
   purchasePriceWhen: "10/20/2000",
-  sellPrice: "...loading",
-  sellPriceWhen: getCurrentDate(),
+  sellPrice: "1231.35",
+  sellPriceWhen: "10/20/2022",
   useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "true",
+  useCurrentPriceSell: "false",
   revertedDate: Date.now(),
 };
 

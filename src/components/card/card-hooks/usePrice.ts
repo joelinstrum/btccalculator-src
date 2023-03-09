@@ -3,6 +3,8 @@ import { useLazyGetHistoricalPriceQuery } from "state/features/apiSlice";
 import { isToday, getTimestamp } from "utils/date";
 import { constants } from "utils/constants";
 import { usePurchaseDispatch } from "./";
+import { date } from "utils/date";
+
 interface PriceProps {
   card: IRoiCard;
   currentPrice: string;
@@ -23,6 +25,7 @@ const usePrice: FT<PriceProps> = ({ card, currentPrice, index }) => {
   useEffect(() => {
     if (card.useCurrentPricePurchase === "true") {
       setStatePurchasePrice(currentPrice);
+      dispatch(currentPrice, date() as string, index, false);
     }
   }, [card, currentPrice, card.revertedDate]);
 
