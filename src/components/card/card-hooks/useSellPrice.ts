@@ -3,7 +3,7 @@ import { useLazyGetHistoricalPriceQuery } from "state/features/apiSellSlice";
 import { isToday, getTimestamp } from "utils/date";
 import { constants } from "utils/constants";
 import { useSellDispatch } from "./";
-import { date } from "utils/date";
+import { toBool } from "utils/utilities";
 
 interface PriceProps {
   card: IRoiCard;
@@ -12,38 +12,56 @@ interface PriceProps {
 }
 
 const useSellPrice: FT<PriceProps> = ({ card, currentPrice, index }) => {
-  const [stateSellPrice, setStateSellPrice] = useState(card.sellPrice);
-  const [stateFromDate, setStateFromDate] = useState(card.sellPriceWhen);
   const [priceLoading, setPriceLoading] = useState(false);
+  const [price, setPrice] = useState("");
+  const {
+    setCustomPrice,
+    setSellPriceFromADate,
+    updatePriceFromData,
+    setSellPriceAsCurrent,
+  } = useSellDispatch();
   const [getHistoricalPrice, { data }] = useLazyGetHistoricalPriceQuery();
-  const [currentTicker, setCurrentTicker] = useState(card.ticker);
-  const sellDispatch = useSellDispatch();
+  let stateFromDate = card.sellPriceWhen || "01/01/2000";
 
-  /* set the price based on current price */
-  useEffect(() => {
-    if (card.useCurrentPriceSell === "true") {
-      setStateSellPrice(currentPrice);
-      sellDispatch(currentPrice, date() as string, index, false);
-    }
-    /* eslint-disable-next-line */
-  }, [card, currentPrice]);
-
-  /* set the price based on a date */
-  const setPriceFromDate = (fromDate: string) => {
-    if (fromDate && isToday(fromDate)) {
-      setStateSellPrice(currentPrice);
-      setPriceLoading(false);
-      setStateFromDate(fromDate);
-      sellDispatch(currentPrice, fromDate, index, false);
-    } else {
-      setStateFromDate(fromDate);
-      sellDispatch("", fromDate, index, false);
+  const onUpdateCustom = (value: string) => {
+    if (value !== price) {
       setPriceLoading(true);
-      setPriceFromHistoricalDate(fromDate);
+      setTimeout(() => {
+        setCustomPrice(value, index);
+        setPriceLoading(false);
+      }, 250);
     }
   };
 
-  const setPriceFromHistoricalDate = (fromDate: string) => {
+  const onUpdateUseCurrent = () => {
+    setTimeout(() => {
+      setPriceLoading(false);
+      setSellPriceAsCurrent(index, currentPrice);
+    }, 250);
+  };
+
+  const onUpdateFromDate = (value: string) => {
+    setPriceLoading(true);
+    stateFromDate = value;
+    if (isToday(value)) {
+      onUpdateUseCurrent();
+    } else {
+      setSellPriceFromADate(value, index);
+      activateHistoricalSellPrice(value);
+    }
+  };
+
+  /* ticker has changed, we need to update our price */
+  useEffect(() => {
+    if (toBool(card.useCustomSell) || toBool(card.useCurrentPriceSell)) {
+      return;
+    } else if (card.sellPriceWhen) {
+      activateHistoricalSellPrice(card.sellPriceWhen.toString());
+    }
+    /* eslint-disable-next-line */
+  }, [card.ticker]);
+
+  const activateHistoricalSellPrice = (fromDate: string) => {
     getHistoricalPrice(
       {
         fsym: card.ticker,
@@ -56,39 +74,28 @@ const useSellPrice: FT<PriceProps> = ({ card, currentPrice, index }) => {
   };
 
   useEffect(() => {
-    if (data && data[card.ticker] && data[card.ticker].USD) {
-      setStateSellPrice(data[card.ticker].USD);
-      sellDispatch(
+    if (toBool(card.useCustomSell)) {
+      return;
+    } else if (toBool(card.useCurrentPriceSell)) {
+      updatePriceFromData(currentPrice, stateFromDate.toString(), index);
+    } else if (data && data.hasOwnProperty(card.ticker)) {
+      setPriceLoading(false);
+      updatePriceFromData(
         data[card.ticker].USD,
-        stateFromDate as string,
-        index,
-        false
+        stateFromDate.toString(),
+        index
       );
-      setPriceLoading(false);
-    } else if (data && data[card.ticker]) {
-      setStateSellPrice("N/A");
-      sellDispatch("0", stateFromDate as string, index, false);
-      setPriceLoading(false);
-    } else if (card.ticker !== currentTicker) {
-      setCurrentTicker(card.ticker);
-      if (card.useCustomPrice === "true") {
-        return;
-      } else if (card.useCurrentPriceSell === "true") {
-        setStateSellPrice(currentPrice);
-      } else if (card.sellPrice) {
-        setPriceLoading(true);
-        setPriceFromDate(card.sellPriceWhen as string);
-      }
     }
-    // eslint-disable-next-line
-  }, [data, card.ticker, card]);
+    /* eslint-disable-next-line */
+  }, [data, currentPrice]);
 
   return {
-    price: stateSellPrice,
+    onUpdateUseCurrent,
     setPriceLoading,
-    setPrice: setStateSellPrice,
+    setPrice,
     priceLoading,
-    setPriceFromDate,
+    onUpdateFromDate,
+    onUpdateCustom,
   };
 };
 

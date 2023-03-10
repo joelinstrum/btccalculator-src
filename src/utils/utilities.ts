@@ -163,3 +163,10 @@ export const cryptoFromDateOptions = (
   }
   return from;
 };
+
+export const toBool = (item: string | undefined) => {
+  if (item === "false") {
+    return false;
+  }
+  return Boolean(item);
+};

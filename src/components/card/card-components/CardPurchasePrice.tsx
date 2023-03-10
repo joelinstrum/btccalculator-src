@@ -1,10 +1,6 @@
-import { useState } from "react";
 import { FormRow, InputText } from "components/forms";
-import {
-  usePrice,
-  usePurchaseDispatch,
-  useFromDateOptions,
-} from "../card-hooks";
+import { constants } from "utils/constants";
+import { usePrice } from "../card-hooks";
 import { getDateFrom } from "utils/date";
 
 interface CardPurchasePriceProps {
@@ -18,26 +14,16 @@ const CardPurchasePrice: React.FC<CardPurchasePriceProps> = ({
   index,
   currentPrice,
 }) => {
-  const [disabled, setDisabled] = useState(false);
-  const fromDateOptions = useFromDateOptions(card.ticker);
-  const { price, priceLoading, setPriceLoading, setPriceFromDate } = usePrice({
-    card,
-    currentPrice,
-    index,
-  });
-  const dispatch = usePurchaseDispatch();
+  const { priceLoading, setPriceLoading, onUpdateFromDate, onUpdateCustom } =
+    usePrice({
+      card,
+      currentPrice,
+      index,
+    });
 
   const optionsChangeHandler = (key: any, value: any) => {
-    setDisabled(true);
     setPriceLoading(true);
-    setPriceFromDate(getDateFrom(key));
-    setDisabled(false);
-  };
-
-  const onBlur = (value: string) => {
-    if (value !== price) {
-      dispatch(value, "1/1/2000", index, true);
-    }
+    onUpdateFromDate(getDateFrom(key));
   };
 
   return (
@@ -45,12 +31,12 @@ const CardPurchasePrice: React.FC<CardPurchasePriceProps> = ({
       <InputText
         size="medium"
         ariaLabel="Purchase Price"
-        value={priceLoading ? "...loading" : price}
-        onBlur={onBlur}
+        value={priceLoading ? "...updating" : card.purchasePrice.toString()}
+        onBlur={onUpdateCustom}
         optionsChangeHandler={optionsChangeHandler}
-        options={fromDateOptions}
+        options={constants.DATE_FROM}
         align="right"
-        disabled={disabled}
+        disabled={priceLoading || false}
       />
     </FormRow>
   );

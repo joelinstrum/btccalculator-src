@@ -1,54 +1,107 @@
 import { useDispatch } from "react-redux";
 import { updateCardProperties } from "state/features/cardSlice";
-import { isToday } from "utils/date";
 
-const useCardDispatch = () => {
-  const dispatchPrice = useDispatch();
-  const dispatch = (
-    price: string,
-    dateFrom: string,
-    index: number,
-    useCustom: boolean
-  ) => {
-    if (useCustom) {
-      dispatchPrice(
-        updateCardProperties([
-          {
-            property: "useCurrentPricePurchase",
-            value: isToday(dateFrom).toString(),
-            index,
-          },
-          { property: "useCustomPrice", value: "true", index },
-          { property: "useCurrentPricePurchase", value: "false", index },
-          { property: "purchasePrice", value: price, index },
-          {
-            property: "purchasePriceWhen",
-            value: dateFrom,
-            index,
-          },
-        ])
-      );
-    } else {
-      dispatchPrice(
-        updateCardProperties([
-          { property: "purchasePrice", value: price, index },
-          {
-            property: "useCurrentPricePurchase",
-            value: isToday(dateFrom).toString(),
-            index,
-          },
-          { property: "useCustomPrice", value: "false", index },
-          {
-            property: "purchasePriceWhen",
-            value: dateFrom,
-            index,
-          },
-        ])
-      );
-    }
+const usePurchaseDispatch = () => {
+  const dispatch = useDispatch();
+
+  const setCustomPrice = (value: string, index: number) => {
+    dispatch(
+      updateCardProperties([
+        {
+          property: "useCustomPrice",
+          value: "true",
+          index,
+        },
+        {
+          property: "purchasePrice",
+          value,
+          index,
+        },
+        {
+          property: "useCurrentPricePurchase",
+          value: "false",
+          index,
+        },
+      ])
+    );
   };
 
-  return dispatch;
+  const setPurchasePriceFromADate = (value: string, index: number) => {
+    dispatch(
+      updateCardProperties([
+        {
+          property: "useCustomPrice",
+          value: "false",
+          index,
+        },
+        {
+          property: "purchasePriceWhen",
+          value,
+          index,
+        },
+        {
+          property: "useCurrentPricePurchase",
+          value: "false",
+          index,
+        },
+      ])
+    );
+  };
+
+  const setPurchasePriceAsCurrent = (index: number, currentPrice: string) => {
+    dispatch(
+      updateCardProperties([
+        {
+          property: "useCustomPrice",
+          value: "false",
+          index,
+        },
+        {
+          property: "purchasePriceWhen",
+          value: "01/01/2000",
+          index,
+        },
+        {
+          property: "useCurrentPricePurchase",
+          value: "true",
+          index,
+        },
+        {
+          property: "purchasePrice",
+          value: currentPrice,
+          index,
+        },
+      ])
+    );
+  };
+
+  const updatePriceFromData = (
+    price: string,
+    fromDate: string,
+    index: number
+  ) => {
+    dispatch(
+      updateCardProperties([
+        {
+          property: "purchasePrice",
+          value: price,
+          index,
+        },
+        {
+          property: "purchasePriceWhen",
+          value: fromDate,
+          index,
+        },
+      ])
+    );
+  };
+
+  return {
+    setCustomPrice,
+    setPurchasePriceFromADate,
+    updatePriceFromData,
+    setPurchasePriceAsCurrent,
+  };
 };
 
-export default useCardDispatch;
+export default usePurchaseDispatch;

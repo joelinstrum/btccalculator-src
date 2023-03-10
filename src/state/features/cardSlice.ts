@@ -1,5 +1,4 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
-import { getCurrentDate } from "../../utils/utilities";
 
 const defaultRoiCard1: IRoiCard = {
   title: "Sample Bitcoin Roi Calculator",

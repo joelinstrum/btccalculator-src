@@ -20,7 +20,7 @@ export const store = configureStore({
     tickerPriceSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware, apiSellSlice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

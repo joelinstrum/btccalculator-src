@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { FormRow, InputText } from "components/forms";
 import { constants } from "utils/constants";
-import { useSellPrice, useSellDispatch } from "../card-hooks";
+import { useSellPrice } from "../card-hooks";
 import { getDateFrom } from "utils/date";
 
 interface CardSellPriceProps {
@@ -15,26 +14,16 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
   index,
   currentPrice,
 }) => {
-  const [disabled, setDisabled] = useState(false);
-  const { price, priceLoading, setPriceLoading, setPriceFromDate } =
+  const { priceLoading, setPriceLoading, onUpdateFromDate, onUpdateCustom } =
     useSellPrice({
       card,
       currentPrice,
       index,
     });
-  const dispatch = useSellDispatch();
 
   const optionsChangeHandler = (key: any, value: any) => {
-    setDisabled(true);
     setPriceLoading(true);
-    setPriceFromDate(getDateFrom(key));
-    setDisabled(false);
-  };
-
-  const onBlur = (value: string) => {
-    if (value !== price) {
-      dispatch(value, "1/1/2000", index, true);
-    }
+    onUpdateFromDate(getDateFrom(key));
   };
 
   return (
@@ -42,12 +31,12 @@ const CardSellPrice: React.FC<CardSellPriceProps> = ({
       <InputText
         size="medium"
         ariaLabel="Sell Price"
-        value={priceLoading ? "...loading" : price}
-        onBlur={onBlur}
+        value={priceLoading ? "...updating" : card.sellPrice.toString()}
+        onBlur={onUpdateCustom}
         optionsChangeHandler={optionsChangeHandler}
         options={constants.DATE_FROM}
         align="right"
-        disabled={disabled}
+        disabled={priceLoading || false}
       />
     </FormRow>
   );
