@@ -1,6 +1,5 @@
 import { FormRow, InputText } from "components/forms";
-import { constants } from "utils/constants";
-import { usePrice } from "../card-hooks";
+import { usePrice, useFromDateOptions } from "../card-hooks";
 import { getDateFrom } from "utils/date";
 
 interface CardPurchasePriceProps {
@@ -21,6 +20,8 @@ const CardPurchasePrice: React.FC<CardPurchasePriceProps> = ({
       index,
     });
 
+  const fromDateOptions = useFromDateOptions(card.ticker);
+
   const optionsChangeHandler = (key: any, value: any) => {
     setPriceLoading(true);
     onUpdateFromDate(getDateFrom(key));
@@ -34,7 +35,7 @@ const CardPurchasePrice: React.FC<CardPurchasePriceProps> = ({
         value={priceLoading ? "...updating" : card.purchasePrice.toString()}
         onBlur={onUpdateCustom}
         optionsChangeHandler={optionsChangeHandler}
-        options={constants.DATE_FROM}
+        options={fromDateOptions}
         align="right"
         disabled={priceLoading || false}
       />
