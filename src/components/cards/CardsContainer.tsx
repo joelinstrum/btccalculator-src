@@ -4,7 +4,7 @@ import { RootState } from "state/store";
 import { styled } from "@mui/system";
 import Card from "components/card/Card";
 import CardsFooter from "components/cards-footer";
-import { ReportCard, NoCards } from "../";
+import { ReportCard, NoCards, CardsShare } from "../";
 import { updateCardTotals } from "state/features/cardTotalsSlice";
 
 const CardsContainerStyled = styled("div")(({ theme }) => ({
@@ -34,6 +34,7 @@ const CardsContainer = () => {
           ))}
           <CardsFooter />
           <ReportCard />
+          <CardsShare roiCards={roiCards} />
         </>
       ) : (
         <NoCards />

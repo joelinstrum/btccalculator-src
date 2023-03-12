@@ -170,3 +170,48 @@ export const toBool = (item: string | undefined) => {
   }
   return Boolean(item);
 };
+
+export const getInitialCards = () => {
+  let cards = getQueryStringCards();
+  if (cards) {
+    return cards;
+  }
+  if (window.localStorage.getItem("storedRoiCards")) {
+    return JSON.parse(window.localStorage.getItem("storedRoiCards") || "[]");
+  }
+  return [];
+};
+
+export const getQueryStringCards = (): IRoiCard[] => {
+  const params = new URLSearchParams(window.location.search);
+  if (params && params.get("roiCards")) {
+    const cards = params.get("roiCards");
+    if (!cards) {
+      return [];
+    } else {
+      try {
+        console.log(decodeURI(cards));
+        return JSON.parse(decodeURI(cards));
+      } catch (e) {
+        console.error(e);
+        return [];
+      }
+    }
+  }
+  return [];
+};
+
+export const getShareUrl = (str: any) => {
+  const port = window.location.port;
+  let domain = window.location.protocol + "//" + window.location.hostname;
+  if (port !== "80") {
+    domain += ":" + port;
+  }
+
+  let queryString = "?roiCards=";
+  if (str) {
+    queryString += JSON.stringify(str);
+    return encodeURI(domain + queryString);
+  }
+  return domain.toString();
+};

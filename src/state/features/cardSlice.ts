@@ -1,37 +1,9 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
-
-const defaultRoiCard1: IRoiCard = {
-  title: "Sample Bitcoin Roi Calculator",
-  ticker: "BTC",
-  fullName: "Bitcoin",
-  investment: "$10,000",
-  purchasePrice: "8057",
-  purchasePriceWhen: "10/20/2000",
-  sellPrice: "16837.85",
-  sellPriceWhen: "10/20/2022",
-  useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "false",
-  revertedDate: Date.now(),
-};
-
-const defaultRoiCard2: IRoiCard = {
-  title: "Sample Ethereum Roi Calculator",
-  ticker: "ETH",
-  fullName: "Ethereum",
-  investment: "$10,000",
-  purchasePrice: "200",
-  purchasePriceWhen: "10/20/2000",
-  sellPrice: "1231.35",
-  sellPriceWhen: "10/20/2022",
-  useCurrentPricePurchase: "false",
-  useCurrentPriceSell: "false",
-  revertedDate: Date.now(),
-};
+import defaultCards from "models/defaultCards";
+import { getInitialCards } from "utils/utilities";
 
 const initialState = {
-  roiCards: window.localStorage.getItem("storedRoiCards")
-    ? JSON.parse(window.localStorage.getItem("storedRoiCards") || "")
-    : ([defaultRoiCard1, defaultRoiCard2] as IRoiCard[]),
+  roiCards: getInitialCards(),
 };
 
 interface IRoiCardSliceAction {
@@ -52,6 +24,9 @@ export const removeRoiCard = createAction<{ index: number }>("removeCard");
 export const copyRoiCard = createAction<{ index: number }>("copyRoiCard");
 export const addCard = createAction("addCard");
 export const addSampleCards = createAction("addSampleCards");
+export const addCardsFromQueryString = createAction<IRoiCard[] | any>(
+  "addCardsFromQueryString"
+);
 
 export const roiCardsSlice = createReducer(initialState, (builder) => {
   builder.addCase(updateCardProperty, (state, action) => {
@@ -75,7 +50,10 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
   builder.addCase("revertRoiCards", (state) => {
     const roiCards: IRoiCard[] = window.localStorage.getItem("storedRoiCards")
       ? JSON.parse(window.localStorage.getItem("storedRoiCards") || "")
-      : ([defaultRoiCard1, defaultRoiCard2] as IRoiCard[]);
+      : ([
+          defaultCards.defaultRoiCard1,
+          defaultCards.defaultRoiCard2,
+        ] as IRoiCard[]);
     roiCards.forEach((card) => (card.revertedDate = Date.now()));
     state.roiCards = roiCards;
   });
@@ -88,11 +66,11 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
     window.localStorage.setItem("storedRoiCards", JSON.stringify(cards));
   });
   builder.addCase(addCard, (state) => {
-    state.roiCards.push(defaultRoiCard1);
+    state.roiCards.push(defaultCards.defaultRoiCard1);
   });
   builder.addCase(addSampleCards, (state) => {
-    state.roiCards.push(defaultRoiCard1);
-    state.roiCards.push(defaultRoiCard2);
+    state.roiCards.push(defaultCards.defaultRoiCard1);
+    state.roiCards.push(defaultCards.defaultRoiCard2);
   });
   builder.addCase(copyRoiCard, (state, action) => {
     const cardToCopy = state.roiCards[action.payload.index];
@@ -101,5 +79,8 @@ export const roiCardsSlice = createReducer(initialState, (builder) => {
       ...{ title: `${cardToCopy.title} (copy)` },
     };
     state.roiCards.push(newCard);
+  });
+  builder.addCase(addCardsFromQueryString, (state, action) => {
+    console.log(action.payload);
   });
 });

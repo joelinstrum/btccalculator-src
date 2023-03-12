@@ -1,5 +1,6 @@
 export { default as CardsContainer } from "./cards";
 export { default as CardsFooter } from "./cards-footer";
+export { default as CardsShare } from "./cards-share";
 export { default as ContainerOuter } from "./container-outer";
 export { default as ContainerInner } from "./container-inner";
 export { default as CryptoList } from "./crypto-list";
