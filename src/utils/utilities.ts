@@ -173,7 +173,7 @@ export const toBool = (item: string | undefined) => {
 
 export const getInitialCards = () => {
   let cards = getQueryStringCards();
-  if (cards) {
+  if (cards && cards.length) {
     return cards;
   }
   if (window.localStorage.getItem("storedRoiCards")) {
